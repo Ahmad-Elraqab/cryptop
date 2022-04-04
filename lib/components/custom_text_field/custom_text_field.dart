@@ -35,6 +35,7 @@ class CustomerTextField extends StatelessWidget {
       maxLines: lines!,
       controller: controller,
       style: TextStyle(color: color!),
+      textDirection: TextDirection.ltr,
       decoration: InputDecoration(
         errorText: validate! ? error! : null,
         errorStyle: const TextStyle(color: Colors.white),

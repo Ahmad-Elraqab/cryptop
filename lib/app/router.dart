@@ -6,6 +6,7 @@ import 'package:cryptop/views/language_view/language_view.dart';
 import 'package:cryptop/views/notification_view/notification_view.dart';
 import 'package:cryptop/views/payment_view/payment_view.dart';
 import 'package:cryptop/views/profile_view/profile_view.dart';
+import 'package:cryptop/views/search_view/search_view.dart';
 import 'package:cryptop/views/signup_view/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +47,9 @@ class RouteManager {
         break;
       case rPayment:
         builder = (BuildContext context) => const PaymentView();
+        break;
+      case rSearch:
+        builder = (BuildContext context) => const SearchView();
         break;
 
       default:
