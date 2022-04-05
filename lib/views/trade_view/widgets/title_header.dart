@@ -1,5 +1,6 @@
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TitleHeader extends StatelessWidget {
   const TitleHeader({
@@ -11,7 +12,7 @@ class TitleHeader extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
             onPressed: () => {},
@@ -21,7 +22,6 @@ class TitleHeader extends StatelessWidget {
               color: Colors.amber,
             ),
           ),
-          const SizedBox(width: 70.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -50,6 +50,21 @@ class TitleHeader extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(50.0),
                 ),
+              ),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.alarm,
+                color: Colors.white,
+                size: 26.0,
+              ),
+              SizedBox(width: 15.0),
+              Icon(
+                Icons.star,
+                color: Colors.white,
+                size: 26.0,
               ),
             ],
           ),

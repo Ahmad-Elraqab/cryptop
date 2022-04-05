@@ -2,6 +2,7 @@ import 'package:cryptop/app/const.dart';
 import 'package:cryptop/views/account_information_view/account_information_view.dart';
 import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
 import 'package:cryptop/views/address_view/address_view.dart';
+import 'package:cryptop/views/coin_view/coin_view.dart';
 import 'package:cryptop/views/language_view/language_view.dart';
 import 'package:cryptop/views/notification_view/notification_view.dart';
 import 'package:cryptop/views/payment_view/payment_view.dart';
@@ -50,6 +51,9 @@ class RouteManager {
         break;
       case rSearch:
         builder = (BuildContext context) => const SearchView();
+        break;
+      case rCoin:
+        builder = (BuildContext context) => const CoinView();
         break;
 
       default:

@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 class HomeLineChart extends StatelessWidget {
   const HomeLineChart({
     Key? key,
+    this.padding = 50.0,
   }) : super(key: key);
 
+  final double? padding;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        padding: const EdgeInsets.all(50.0),
+        padding: EdgeInsets.all(padding!),
         child: LineChart(
           LineChartData(
             titlesData: FlTitlesData(

@@ -214,6 +214,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
+  k_chart:
+    dependency: "direct main"
+    description:
+      name: k_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0"
   lints:
     dependency: transitive
     description:

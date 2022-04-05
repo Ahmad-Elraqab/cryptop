@@ -46,6 +46,7 @@ dependencies:
   rive_splash_screen: ^0.1.0
   rive: ^0.8.4
   candlesticks: ^2.1.0
+  k_chart: ^0.6.0
   
   
 dev_dependencies:

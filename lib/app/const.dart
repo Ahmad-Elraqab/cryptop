@@ -10,3 +10,4 @@ const rAddress = "/Address";
 const rPayment = "/Payment";
 const rHome = "/home";
 const rSearch = "/Search";
+const rCoin = "/Coin";
