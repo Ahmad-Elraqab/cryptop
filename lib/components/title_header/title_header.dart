@@ -1,6 +1,5 @@
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TitleHeader extends StatelessWidget {
   const TitleHeader({

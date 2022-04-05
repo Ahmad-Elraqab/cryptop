@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cryptop/components/text_component/text_component.dart';
-import 'package:cryptop/views/home_view/widgets/home_line_chart.dart';
+import 'package:cryptop/components/line_chart/home_line_chart.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_details.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_slider.dart';
 import 'package:flutter/material.dart';

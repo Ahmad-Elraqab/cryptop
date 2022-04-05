@@ -1,6 +1,6 @@
-import 'package:cryptop/views/trade_view/widgets/coin_detail.dart';
-import 'package:cryptop/views/trade_view/widgets/title_header.dart';
-import 'package:cryptop/views/trade_view/widgets/trade_action_button.dart';
+import 'package:cryptop/components/coin_details/coin_detail.dart';
+import 'package:cryptop/components/title_header/title_header.dart';
+import 'package:cryptop/components/trade_action_button/trade_action_button.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_controller.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_type.dart';
 import 'package:flutter/material.dart';

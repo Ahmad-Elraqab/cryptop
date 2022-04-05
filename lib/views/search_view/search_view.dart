@@ -17,6 +17,7 @@ class _SearchViewState extends State<SearchView> {
           extentOffset: value.length,
         )
       });
+  // ignore: avoid_print
   onTap(index) => setState(() => print(index));
   @override
   Widget build(BuildContext context) {
