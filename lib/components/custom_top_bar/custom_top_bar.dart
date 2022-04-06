@@ -8,7 +8,7 @@ class CustomTopBar extends StatefulWidget {
   const CustomTopBar({
     Key? key,
     this.background = Colors.white,
-    this.buttonColor = const Color.fromRGBO(36, 36, 43, 1),
+    this.buttonColor = const Color.fromRGBO(55, 61, 76, 1),
   }) : super(key: key);
   @override
   _CustomTopBarState createState() => _CustomTopBarState();

@@ -29,7 +29,7 @@ class RegisterationButton extends StatelessWidget {
           imageUrl: 'https://pngimg.com/uploads/google/google_PNG19635.png',
           hasImage: true,
           buttonTextColor: Colors.white,
-          buttonColor: const Color.fromRGBO(36, 36, 43, 1),
+          buttonColor: const Color.fromRGBO(55, 61, 76, 1),
           onTap: onclick,
         ),
         const SizedBox(

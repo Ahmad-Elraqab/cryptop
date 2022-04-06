@@ -38,7 +38,7 @@ class AddressLine extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
-          color: const Color.fromRGBO(36, 36, 43, 1),
+          color: const Color.fromRGBO(55, 61, 76, 1),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

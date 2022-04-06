@@ -20,7 +20,7 @@ class _ProfileViewState extends State<ProfileView> {
             Container(
               height: widget.height,
               decoration: const BoxDecoration(
-                color: Color(0xFF24242B),
+                color: Color.fromRGBO(55, 61, 76, 1),
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(40.0),
                   bottomLeft: Radius.circular(40.0),

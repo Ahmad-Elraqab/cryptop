@@ -10,7 +10,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(36, 36, 43, 1),
+      color: const Color.fromRGBO(55, 61, 76, 1),
       height: 100.0,
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Row(

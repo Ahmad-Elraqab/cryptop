@@ -35,7 +35,7 @@ class HomeBody extends StatelessWidget {
         Search(searchController: searchController, search: search),
         Container(
           height: 50,
-          color: const Color.fromRGBO(36, 36, 43, 1),
+          color: const Color.fromRGBO(55, 61, 76, 1),
           child: null,
         ),
         GestureDetector(

@@ -16,7 +16,7 @@ class _PaymentViewState extends State<PaymentView> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          color: const Color.fromRGBO(36, 36, 43, 1),
+          color: const Color.fromRGBO(55, 61, 76, 1),
           height: MediaQuery.of(context).size.height,
           child: PaymentBody(
             switchState: _switch,

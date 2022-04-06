@@ -79,7 +79,7 @@ class CustomDrawer extends StatelessWidget {
                               align: TextAlign.center,
                               fontSize: 9,
                               line: 1,
-                              textColor: const Color(0xFF24242B),
+                              textColor: const Color.fromRGBO(55, 61, 76, 1),
                               title: items[i]['title'],
                               weight: FontWeight.w600,
                             )
@@ -116,7 +116,7 @@ class CustomDrawer extends StatelessWidget {
                       align: TextAlign.center,
                       fontSize: 9,
                       line: 1,
-                      textColor: Color(0xFF24242B),
+                      textColor: Color.fromRGBO(55, 61, 76, 1),
                       title: 'Logout',
                       weight: FontWeight.w600,
                     )

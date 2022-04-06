@@ -25,7 +25,7 @@ class _SearchViewState extends State<SearchView> {
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
-          color: const Color(0xFF24242B),
+          color: const Color.fromRGBO(55, 61, 76, 1),
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
           child: SearchBody(
             searchController: searchController,

@@ -79,7 +79,7 @@ class _TradeViewState extends State<TradeView> {
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height - 75,
-        color: const Color.fromARGB(255, 36, 36, 43),
+        color: const Color.fromRGBO(55, 61, 76, 1),
         child: SingleChildScrollView(
           child: TradeBody(
             activeIndexList: activeIndexList,

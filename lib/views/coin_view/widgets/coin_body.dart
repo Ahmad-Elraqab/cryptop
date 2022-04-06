@@ -17,7 +17,10 @@ class CoinBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 10.0),
-        const TitleHeader(),
+        const TitleHeader(
+          isTitle: false,
+          title: 'BTCUSDT',
+        ),
         const Divider(
           color: Colors.white,
           height: 20,

@@ -45,7 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(36, 36, 43, 1),
+      color: const Color.fromRGBO(55, 61, 76, 1),
       height: 75,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

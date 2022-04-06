@@ -54,13 +54,13 @@ class _AppViewState extends State<AppView> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Colors.pink,
-          backgroundColor: const Color(0xFF24242B),
+          backgroundColor: const Color.fromRGBO(55, 61, 76, 1),
           textTheme: const TextTheme(
             bodyText1: TextStyle(color: Colors.black),
           ),
         ),
         onGenerateRoute: RouteManager.generateRoute,
-        initialRoute: rCoin,
+        initialRoute: rWallet,
       ),
     );
   }

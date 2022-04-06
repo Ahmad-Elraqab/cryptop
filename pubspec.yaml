@@ -47,6 +47,7 @@ dependencies:
   rive: ^0.8.4
   candlesticks: ^2.1.0
   k_chart: ^0.6.0
+  syncfusion_flutter_charts: ^20.1.47+1
   
   
 dev_dependencies:

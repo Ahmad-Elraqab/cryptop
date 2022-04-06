@@ -5,12 +5,13 @@ import 'package:cryptop/views/address_view/address_view.dart';
 import 'package:cryptop/views/coin_view/coin_view.dart';
 import 'package:cryptop/views/language_view/language_view.dart';
 import 'package:cryptop/views/notification_view/notification_view.dart';
+import 'package:cryptop/views/orderbook_view/orderbook_view.dart';
 import 'package:cryptop/views/payment_view/payment_view.dart';
 import 'package:cryptop/views/profile_view/profile_view.dart';
 import 'package:cryptop/views/search_view/search_view.dart';
 import 'package:cryptop/views/signup_view/register_screen.dart';
+import 'package:cryptop/views/wallet_view/wallet_view.dart';
 import 'package:flutter/material.dart';
-
 import '../app.dart';
 import '../views/login_view/login_view.dart';
 
@@ -21,6 +22,9 @@ class RouteManager {
     switch (settings.name) {
       case rLanding:
         builder = (BuildContext context) => App();
+        break;
+      case rTrade:
+        builder = (BuildContext context) => App(currentIndex: '2');
         break;
       case rLoginScreen:
         builder = (BuildContext context) => const LoginView();
@@ -54,6 +58,12 @@ class RouteManager {
         break;
       case rCoin:
         builder = (BuildContext context) => const CoinView();
+        break;
+      case rOrderbook:
+        builder = (BuildContext context) => const OrderbookView();
+        break;
+      case rWallet:
+        builder = (BuildContext context) => const WalletView();
         break;
 
       default:

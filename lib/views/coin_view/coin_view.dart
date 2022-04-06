@@ -43,7 +43,7 @@ class _CoinViewState extends State<CoinView> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: const Color(0xFF24242B),
+          color: const Color.fromRGBO(55, 61, 76, 1),
           child: CoinBody(
             candles: candles,
             setTradeType: setTradeType,

@@ -33,7 +33,7 @@ class _AccountPasswordViewState extends State<AccountPasswordView> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 0.0),
           height: MediaQuery.of(context).size.height,
-          color: const Color.fromRGBO(36, 36, 43, 1),
+          color: const Color.fromRGBO(55, 61, 76, 1),
           child: AccountPasswordBody(
             onSecure: onSecure,
             onClick: onClick,

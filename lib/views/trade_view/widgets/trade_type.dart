@@ -16,7 +16,7 @@ class TradeType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(36, 36, 43, 1),
+      color: const Color.fromRGBO(55, 61, 76, 1),
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
       child: Row(

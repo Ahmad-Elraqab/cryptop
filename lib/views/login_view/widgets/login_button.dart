@@ -29,7 +29,7 @@ class LoginButton extends StatelessWidget {
           imageUrl: null,
           hasImage: false,
           buttonTextColor: Colors.white,
-          buttonColor: const Color.fromRGBO(36, 36, 43, 1),
+          buttonColor: const Color.fromRGBO(55, 61, 76, 1),
           onTap: onclick,
         ),
         const SizedBox(

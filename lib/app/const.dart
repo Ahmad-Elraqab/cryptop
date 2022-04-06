@@ -11,3 +11,6 @@ const rPayment = "/Payment";
 const rHome = "/home";
 const rSearch = "/Search";
 const rCoin = "/Coin";
+const rOrderbook = "/Orderbook";
+const rTrade = "/trade";
+const rWallet = "/wallet";

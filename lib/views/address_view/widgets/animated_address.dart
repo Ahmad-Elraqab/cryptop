@@ -95,7 +95,7 @@ class AnimatedAddress extends StatelessWidget {
                       ),
                     ),
                   },
-                  backgroundColor: const Color.fromRGBO(36, 36, 43, 1),
+                  backgroundColor: const Color.fromRGBO(55, 61, 76, 1),
                   child: const Icon(
                     // ignore: deprecated_member_use
                     FontAwesomeIcons.add,

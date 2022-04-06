@@ -55,7 +55,7 @@ class PairBoard extends StatelessWidget {
         ),
         Container(
           height: 200.0,
-          color: const Color.fromRGBO(36, 36, 43, 1),
+          color: const Color.fromRGBO(55, 61, 76, 1),
           child: AnimatedOpacity(
             duration: const Duration(milliseconds: 300),
             opacity: opacity_!,
