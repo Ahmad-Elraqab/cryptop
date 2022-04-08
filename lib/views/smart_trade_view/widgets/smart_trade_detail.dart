@@ -4,8 +4,8 @@ import 'package:cryptop/components/title_header/title_header.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_table/custom_table.dart';
 
-class BacktestResult extends StatelessWidget {
-  const BacktestResult({Key? key}) : super(key: key);
+class SmartTradeDetail extends StatelessWidget {
+  const SmartTradeDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class BacktestResult extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 30.0),
-                const TitleHeader(isTitle: true, title: 'Backtest'),
+                const TitleHeader(isTitle: true, title: 'Smart Trade'),
                 const SizedBox(height: 30.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),

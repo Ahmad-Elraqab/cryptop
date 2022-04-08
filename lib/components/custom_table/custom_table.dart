@@ -10,7 +10,9 @@ class CustomTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return DataTable(
       horizontalMargin: 50,
-      border: TableBorder.all(color: Colors.white, width: 2),
+      border: const TableBorder(
+        horizontalInside: BorderSide(color: Colors.white, width: 2),
+      ),
       columns: const [
         DataColumn(label: Text('')),
         DataColumn(

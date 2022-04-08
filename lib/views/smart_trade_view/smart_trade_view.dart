@@ -1,21 +1,23 @@
 import 'package:cryptop/components/title_header/title_header.dart';
-import 'package:cryptop/views/orderbook_view/widgets/order_list.dart';
+import 'package:cryptop/views/smart_trade_view/widgets/smart_trade_header.dart';
+import 'package:cryptop/views/smart_trade_view/widgets/smart_trade_list.dart';
 import 'package:flutter/material.dart';
-import 'widgets/order_header_filter.dart';
 
-class OrderbookView extends StatefulWidget {
-  const OrderbookView({Key? key}) : super(key: key);
+class SmartTradeView extends StatefulWidget {
+  const SmartTradeView({Key? key}) : super(key: key);
 
   @override
-  State<OrderbookView> createState() => _OrderbookViewState();
+  State<SmartTradeView> createState() => _SmartTradeViewState();
 }
 
-class _OrderbookViewState extends State<OrderbookView> {
+class _SmartTradeViewState extends State<SmartTradeView> {
   int? activeIndex;
   setIndex(value) => setState(() => {activeIndex = value});
-  track() => {};
-  close() => {};
-  filter() => {};
+  create() => {};
+  edit() => {};
+  delete() => {};
+  status() => {};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,20 +34,16 @@ class _OrderbookViewState extends State<OrderbookView> {
               ),
               const TitleHeader(
                 isTitle: true,
-                title: 'Open Orders',
-              ),
-              const Divider(
-                color: Colors.white,
-                height: 10.0,
-                thickness: 1,
+                title: 'Smart Trade List',
               ),
               const SizedBox(height: 20.0),
-              OrderHeaderFilter(filter: filter),
-              OrderList(
+              SmartTradeHeader(filter: create),
+              SmartTradeList(
                 activeIndex: activeIndex,
                 setIndex: setIndex,
-                close: close,
-                track: track,
+                edit: edit,
+                delete: delete,
+                status: status,
               ),
             ],
           ),

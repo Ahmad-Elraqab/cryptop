@@ -12,6 +12,7 @@ import 'package:cryptop/views/payment_view/payment_view.dart';
 import 'package:cryptop/views/profile_view/profile_view.dart';
 import 'package:cryptop/views/search_view/search_view.dart';
 import 'package:cryptop/views/signup_view/register_screen.dart';
+import 'package:cryptop/views/smart_trade_view/smart_trade_view.dart';
 import 'package:cryptop/views/wallet_view/wallet_view.dart';
 import 'package:flutter/material.dart';
 import '../app.dart';
@@ -72,6 +73,9 @@ class RouteManager {
         break;
       case rBacktestResults:
         builder = (BuildContext context) => const BacktestResult();
+        break;
+      case rSmartTrade:
+        builder = (BuildContext context) => const SmartTradeView();
         break;
 
       default:

@@ -10,7 +10,7 @@ class BacktestView extends StatefulWidget {
 
 class _BacktestViewState extends State<BacktestView> {
   int? activeIndex;
-  setIndex(value) => setState(() => {activeIndex = value, print(value)});
+  setIndex(value) => setState(() => {activeIndex = value});
 
   List<int> selected = [];
 

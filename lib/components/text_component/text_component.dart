@@ -24,6 +24,7 @@ class TextComponent extends StatelessWidget {
       title!,
       maxLines: line!,
       textAlign: align!,
+      overflow: TextOverflow.ellipsis,
       style: GoogleFonts.openSans(
         textStyle: TextStyle(
           color: textColor!,

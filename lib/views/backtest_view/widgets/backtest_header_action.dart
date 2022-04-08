@@ -156,7 +156,7 @@ class BacktestHeaderAction extends StatelessWidget {
                               PageRouteBuilder(
                                 pageBuilder:
                                     (context, animation, secondaryAnimation) =>
-                                        BacktestResult(),
+                                        const BacktestResult(),
                               ),
                             ),
                           ),

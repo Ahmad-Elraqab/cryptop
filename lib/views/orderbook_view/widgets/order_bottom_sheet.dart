@@ -13,7 +13,7 @@ class OrderBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       height: 200.0,
       decoration: const BoxDecoration(
-        color: const Color.fromRGBO(55, 61, 76, 1),
+        color: Color.fromRGBO(55, 61, 76, 1),
         boxShadow: [
           BoxShadow(
             color: Color.fromARGB(138, 0, 0, 0),
