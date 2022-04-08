@@ -5,14 +5,17 @@ class HomeLineChart extends StatelessWidget {
   const HomeLineChart({
     Key? key,
     this.padding = 50.0,
+    this.color = Colors.transparent,
   }) : super(key: key);
 
   final double? padding;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
       child: Container(
+        color: color,
         padding: EdgeInsets.all(padding!),
         child: LineChart(
           LineChartData(

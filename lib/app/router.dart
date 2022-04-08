@@ -2,6 +2,8 @@ import 'package:cryptop/app/const.dart';
 import 'package:cryptop/views/account_information_view/account_information_view.dart';
 import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
 import 'package:cryptop/views/address_view/address_view.dart';
+import 'package:cryptop/views/backtest_view/backtest_view.dart';
+import 'package:cryptop/views/backtest_view/widgets/backtest_result.dart';
 import 'package:cryptop/views/coin_view/coin_view.dart';
 import 'package:cryptop/views/language_view/language_view.dart';
 import 'package:cryptop/views/notification_view/notification_view.dart';
@@ -64,6 +66,12 @@ class RouteManager {
         break;
       case rWallet:
         builder = (BuildContext context) => const WalletView();
+        break;
+      case rBacktest:
+        builder = (BuildContext context) => const BacktestView();
+        break;
+      case rBacktestResults:
+        builder = (BuildContext context) => const BacktestResult();
         break;
 
       default:

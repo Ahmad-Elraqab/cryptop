@@ -14,3 +14,5 @@ const rCoin = "/Coin";
 const rOrderbook = "/Orderbook";
 const rTrade = "/trade";
 const rWallet = "/wallet";
+const rBacktest = "/backtest";
+const rBacktestResults = "/backtest_results";
