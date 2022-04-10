@@ -1,10 +1,10 @@
 import 'package:cryptop/components/title_header/title_header.dart';
-import 'package:cryptop/views/smart_trade_view/widgets/smart_trade_header.dart';
-import 'package:cryptop/views/smart_trade_view/widgets/smart_trade_list.dart';
+import 'package:cryptop/views/alert_view/widgets/alert_header.dart';
+import 'package:cryptop/views/alert_view/widgets/alert_list.dart';
 import 'package:flutter/material.dart';
 
-class SmartTradeBody extends StatelessWidget {
-  const SmartTradeBody(
+class AlertBody extends StatelessWidget {
+  const AlertBody(
       {Key? key,
       this.activeIndex,
       this.setIndex,
@@ -28,11 +28,11 @@ class SmartTradeBody extends StatelessWidget {
         ),
         const TitleHeader(
           isTitle: true,
-          title: 'Smart Trade List',
+          title: 'Alerts',
         ),
         const SizedBox(height: 20.0),
-        SmartTradeHeader(filter: create),
-        SmartTradeList(
+        AlertHeader(filter: create),
+        AlertList(
           activeIndex: activeIndex,
           setIndex: setIndex,
           edit: edit,

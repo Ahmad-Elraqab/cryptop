@@ -35,7 +35,7 @@ class SmartTradeList extends StatelessWidget {
             child: Column(
               children: [
                 activeIndex == index
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,

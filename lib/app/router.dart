@@ -2,6 +2,7 @@ import 'package:cryptop/app/const.dart';
 import 'package:cryptop/views/account_information_view/account_information_view.dart';
 import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
 import 'package:cryptop/views/address_view/address_view.dart';
+import 'package:cryptop/views/alert_view/alert_view.dart';
 import 'package:cryptop/views/backtest_view/backtest_view.dart';
 import 'package:cryptop/views/backtest_view/widgets/backtest_result.dart';
 import 'package:cryptop/views/coin_view/coin_view.dart';
@@ -13,6 +14,7 @@ import 'package:cryptop/views/profile_view/profile_view.dart';
 import 'package:cryptop/views/search_view/search_view.dart';
 import 'package:cryptop/views/signup_view/register_screen.dart';
 import 'package:cryptop/views/smart_trade_view/smart_trade_view.dart';
+import 'package:cryptop/views/subscription_view/subscription_view.dart';
 import 'package:cryptop/views/wallet_view/wallet_view.dart';
 import 'package:flutter/material.dart';
 import '../app.dart';
@@ -76,6 +78,12 @@ class RouteManager {
         break;
       case rSmartTrade:
         builder = (BuildContext context) => const SmartTradeView();
+        break;
+      case rAlert:
+        builder = (BuildContext context) => const AlertView();
+        break;
+      case rSubscriptions:
+        builder = (BuildContext context) => const SubscriptionView();
         break;
 
       default:

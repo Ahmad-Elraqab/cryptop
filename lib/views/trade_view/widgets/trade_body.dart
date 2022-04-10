@@ -44,11 +44,6 @@ class TradeBody extends StatelessWidget {
           height: 10.0,
         ),
         const TitleHeader(isTitle: true, title: 'BTCUSDT'),
-        const Divider(
-          color: Colors.white,
-          height: 20,
-          thickness: 2,
-        ),
         const SizedBox(
           height: 10.0,
         ),

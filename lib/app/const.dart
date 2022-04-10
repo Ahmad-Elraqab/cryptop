@@ -17,3 +17,5 @@ const rWallet = "/wallet";
 const rBacktest = "/backtest";
 const rBacktestResults = "/backtest_results";
 const rSmartTrade = "/smart_trade";
+const rAlert = "/alerts";
+const rSubscriptions = "/subscription";

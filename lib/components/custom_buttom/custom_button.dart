@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomButtom extends StatelessWidget {
   //
   final double? height;
+  final double? width;
   final double? vertical;
   final double? horizontal;
   final double? fontSize;
@@ -25,6 +26,7 @@ class CustomButtom extends StatelessWidget {
     this.buttonTextColor,
     this.onTap,
     this.height = 60.0,
+    this.width = 150.0,
     this.vertical,
     this.horizontal,
     this.borderRadius = 32.0,
@@ -38,6 +40,7 @@ class CustomButtom extends StatelessWidget {
       onTap: () => onTap!(),
       child: Container(
         height: height,
+        width: width,
         padding:
             EdgeInsets.symmetric(horizontal: horizontal!, vertical: vertical!),
         child: Row(

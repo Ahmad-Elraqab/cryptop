@@ -48,6 +48,8 @@ dependencies:
   candlesticks: ^2.1.0
   k_chart: ^0.6.0
   syncfusion_flutter_charts: ^20.1.47+1
+  flutter_slidable: ^1.2.0
+  flip_card: ^0.6.0
   
   
 dev_dependencies:

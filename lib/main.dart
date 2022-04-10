@@ -60,7 +60,7 @@ class _AppViewState extends State<AppView> {
           ),
         ),
         onGenerateRoute: RouteManager.generateRoute,
-        initialRoute: rSmartTrade,
+        initialRoute: rSubscriptions,
       ),
     );
   }

@@ -1,14 +1,14 @@
-import 'package:cryptop/views/smart_trade_view/widgets/smart_trade_body.dart';
+import 'package:cryptop/views/alert_view/widgets/alert_body.dart';
 import 'package:flutter/material.dart';
 
-class SmartTradeView extends StatefulWidget {
-  const SmartTradeView({Key? key}) : super(key: key);
+class AlertView extends StatefulWidget {
+  const AlertView({Key? key}) : super(key: key);
 
   @override
-  State<SmartTradeView> createState() => _SmartTradeViewState();
+  State<AlertView> createState() => _AlertViewState();
 }
 
-class _SmartTradeViewState extends State<SmartTradeView> {
+class _AlertViewState extends State<AlertView> {
   int? activeIndex;
   setIndex(value) => setState(() => {activeIndex = value});
   create() => {};
@@ -25,7 +25,7 @@ class _SmartTradeViewState extends State<SmartTradeView> {
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           color: const Color.fromRGBO(55, 61, 76, 1),
-          child: SmartTradeBody(
+          child: AlertBody(
             activeIndex: activeIndex,
             create: create,
             delete: delete,
