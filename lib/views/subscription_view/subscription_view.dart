@@ -1,6 +1,4 @@
-import 'package:cryptop/components/title_header/title_header.dart';
-import 'package:cryptop/views/subscription_view/widgets/new_subscription.dart';
-import 'package:cryptop/views/subscription_view/widgets/subscription_package.dart';
+import 'package:cryptop/views/subscription_view/widgets/subscription_body.dart';
 import 'package:flutter/material.dart';
 
 class SubscriptionView extends StatefulWidget {
@@ -62,22 +60,13 @@ class SsubscriptionStateView extends State<SubscriptionView> {
           color: const Color.fromRGBO(55, 61, 76, 1),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              const SizedBox(height: 30.0),
-              const TitleHeader(isTitle: true, title: 'Subscriptions'),
-              const SizedBox(height: 30.0),
-              const NewSubscription(),
-              const SizedBox(height: 30.0),
-              for (var pack in packages)
-                SubscriptionPackage(
-                  color: pack['color'],
-                  onChoose: onChoose,
-                  package: pack,
-                  onUpgrade: onUpgrade,
-                  onCancel: onCancel,
-                ),
-            ],
+          child: SingleChildScrollView(
+            child: SubscriptionBody(
+              onCancel: onCancel,
+              onChoose: onChoose,
+              onUpgrade: onUpgrade,
+              packages: packages,
+            ),
           ),
         ),
       ),
