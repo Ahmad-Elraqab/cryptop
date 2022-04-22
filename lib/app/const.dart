@@ -1,3 +1,4 @@
+const rSplash = "/";
 const rLanding = "/landing";
 const rLoginScreen = "/login";
 const rRegisterScreen = "/signup";

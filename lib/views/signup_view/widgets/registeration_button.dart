@@ -22,7 +22,7 @@ class RegisterationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         CustomButtom(
           buttonText: 'Signup',

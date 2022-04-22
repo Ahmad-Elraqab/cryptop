@@ -22,11 +22,14 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         CustomButtom(
           buttonText: 'Login',
-          imageUrl: null,
+          borderColor: Colors.white,
+          fontSize: 14,
+          borderRadius: 30,
+          imageUrl: '',
           hasImage: false,
           buttonTextColor: Colors.white,
           buttonColor: const Color.fromRGBO(55, 61, 76, 1),

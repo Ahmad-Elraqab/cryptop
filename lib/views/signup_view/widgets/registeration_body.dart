@@ -29,6 +29,7 @@ class RegisterationBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Align(
           alignment: Alignment.bottomLeft,

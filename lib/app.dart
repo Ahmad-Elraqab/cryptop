@@ -23,7 +23,7 @@ class _AppState extends State<App> {
     });
   }
 
-  Widget callPage(index) {
+  callPage(index) {
     switch (index) {
       case "0":
         return const HomeView();
@@ -40,7 +40,6 @@ class _AppState extends State<App> {
       case "4":
         return const ProfileView();
     }
-    return Container();
   }
 
   @override

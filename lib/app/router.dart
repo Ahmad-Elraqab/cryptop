@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cryptop/app/const.dart';
 import 'package:cryptop/views/account_information_view/account_information_view.dart';
 import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
@@ -14,6 +16,7 @@ import 'package:cryptop/views/profile_view/profile_view.dart';
 import 'package:cryptop/views/search_view/search_view.dart';
 import 'package:cryptop/views/signup_view/register_screen.dart';
 import 'package:cryptop/views/smart_trade_view/smart_trade_view.dart';
+import 'package:cryptop/views/splash_view/splash_view.dart';
 import 'package:cryptop/views/subscription_view/subscription_view.dart';
 import 'package:cryptop/views/wallet_view/wallet_view.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +28,9 @@ class RouteManager {
     WidgetBuilder builder;
 
     switch (settings.name) {
+      case rSplash:
+        builder = (BuildContext context) => const SplashView();
+        break;
       case rLanding:
         builder = (BuildContext context) => App();
         break;
@@ -87,11 +93,8 @@ class RouteManager {
         break;
 
       default:
-        builder = (BuildContext context) => App(currentIndex: settings.name!);
-      // builder = (BuildContext context) => Container();
+        throw Exception('Invalid route: ${settings.name}');
     }
-
-    // throw Exception('Invalid route: ${settings.name}');
 
     return MaterialPageRoute(
       builder: builder,

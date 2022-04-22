@@ -7,38 +7,6 @@ void main() {
   runApp(const AppView());
 }
 
-// class SplashView extends StatefulWidget {
-//   const SplashView({Key? key}) : super(key: key);
-
-//   @override
-//   State<SplashView> createState() => _SplashViewState();
-// }
-
-// class _SplashViewState extends State<SplashView> {
-//   @override
-//   void initState() {
-//     Future.delayed(
-//       const Duration(seconds: 5),
-//       () async => setState(() => AppView()),
-//     );
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: Scaffold(
-//         body: Center(
-//           child: Container(
-//             child: const Text('hi'),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class AppView extends StatefulWidget {
   const AppView({Key? key}) : super(key: key);
 
@@ -60,7 +28,7 @@ class _AppViewState extends State<AppView> {
           ),
         ),
         onGenerateRoute: RouteManager.generateRoute,
-        initialRoute: rSubscriptions,
+        initialRoute: rSplash,
       ),
     );
   }
