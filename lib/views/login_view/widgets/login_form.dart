@@ -11,18 +11,20 @@ class LoginForm extends StatelessWidget {
   final Function? onclick;
   final String? selected;
   final Function? onselected;
+  final Function? onTextChange;
 
-  const LoginForm(
-      {Key? key,
-      this.labels,
-      this.controller,
-      this.validators,
-      this.checkBoxController,
-      this.onchanged,
-      this.onclick,
-      this.selected,
-      this.onselected})
-      : super(key: key);
+  const LoginForm({
+    Key? key,
+    this.labels,
+    this.controller,
+    this.validators,
+    this.checkBoxController,
+    this.onchanged,
+    this.onclick,
+    this.selected,
+    this.onselected,
+    this.onTextChange,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +34,12 @@ class LoginForm extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(bottom: 10.0),
             child: CustomerTextField(
+              secure: i == 1 ? true : false,
               readonly: false,
               borderColor: Colors.white,
               color: Colors.white,
               lines: 1,
-              onChanged: () => {},
+              onChanged: (value) => onTextChange!(i, value),
               controller: controller![i],
               labelText: labels![i],
               error: validators![i]['message'].toString(),

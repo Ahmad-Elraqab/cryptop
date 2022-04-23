@@ -9,15 +9,15 @@ class LoginButton extends StatelessWidget {
   final Function? onclick;
   final String? selected;
 
-  const LoginButton(
-      {Key? key,
-      this.labels,
-      this.controller,
-      this.validators,
-      this.checkBoxController,
-      this.onclick,
-      this.selected})
-      : super(key: key);
+  const LoginButton({
+    Key? key,
+    this.labels,
+    this.controller,
+    this.validators,
+    this.checkBoxController,
+    this.onclick,
+    this.selected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

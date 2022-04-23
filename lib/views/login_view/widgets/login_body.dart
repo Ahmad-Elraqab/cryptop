@@ -1,29 +1,35 @@
+import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/views/login_view/widgets/login_button.dart';
 import 'package:cryptop/views/login_view/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../components/loading/loading.dart';
 
 class LoginBody extends StatelessWidget {
   final List<String>? labels;
   final List<TextEditingController>? controller;
   final List<Map<String, Object>>? validators;
   final bool? checkBoxController;
+  final Function? onTextChange;
   final Function? onchanged;
   final Function? onclick;
   final Function? onselected;
   final String? selected;
+  final dynamic watch;
 
-  const LoginBody(
-      {Key? key,
-      this.labels,
-      this.controller,
-      this.validators,
-      this.checkBoxController,
-      this.onchanged,
-      this.onclick,
-      this.onselected,
-      this.selected})
-      : super(key: key);
+  const LoginBody({
+    Key? key,
+    this.labels,
+    this.controller,
+    this.validators,
+    this.checkBoxController,
+    this.onchanged,
+    this.onclick,
+    this.onselected,
+    this.selected,
+    this.onTextChange,
+    this.watch,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +53,17 @@ class LoginBody extends StatelessWidget {
           onclick: onclick,
           selected: selected,
           onselected: onselected,
+          onTextChange: onTextChange,
         ),
-        LoginButton(
-          onclick: onclick,
-          validators: validators,
-          controller: controller,
-          checkBoxController: checkBoxController,
-          selected: selected,
-        ),
+        watch == true
+            ? const LoadingView()
+            : LoginButton(
+                onclick: onclick,
+                validators: validators,
+                controller: controller,
+                checkBoxController: checkBoxController,
+                selected: selected,
+              ),
         Align(
           alignment: Alignment.bottomCenter,
           child: _buildLogin(context),
