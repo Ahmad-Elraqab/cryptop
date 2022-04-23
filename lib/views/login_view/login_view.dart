@@ -1,4 +1,4 @@
-import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/components/custom_snack_bar/custom_snack_bar.dart';
 import 'package:cryptop/models/user_model.dart';
 import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:cryptop/views/login_view/widgets/login_body.dart';
@@ -13,67 +13,31 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  var checkBoxController = false;
-
   final labels = [
     'Username Or Email',
     'Password',
   ];
-  final validators = [
-    {'value': false, 'message': ''},
-    {'value': false, 'message': ''},
-  ];
 
-  final List<TextEditingController> _controller =
-      List.generate(2, (i) => TextEditingController());
-  String? selected;
-
-  onTextChange(index, value) => setState(
-        () {
-          _controller[index].text = value;
-          _controller[index].selection = TextSelection(
-            baseOffset: value.length,
-            extentOffset: value.length,
-          );
-        },
-      );
-  onchanged(value) => setState(() => checkBoxController = value);
+  onchanged(value) => context.read(userViewmodel).setCheckbox(value);
   onclick() async {
-    final user = await context
-        .read(userViewmodel)
-        .login(_controller[0].text, _controller[1].text);
-    if (user is User) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(_snackBar('Logged in sucessfully!'));
+    final _userViewmodel = context.read(userViewmodel);
+    if (_userViewmodel.controllers[0].text.isEmpty) {
+      _userViewmodel.setValidator(0, true);
+    } else if (_userViewmodel.controllers[1].text.isEmpty) {
+      _userViewmodel.setValidator(1, true);
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(_snackBar('Invalid email or password!'));
+      final user = await context.read(userViewmodel).login();
+      if (user is User) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(snackBar('Logged in sucessfully!'));
+        Navigator.pushReplacementNamed(context, '/landing');
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(snackBar('Invalid email or password!'));
+      }
     }
   }
 
-  onselected(value) => setState(() => {selected = value});
-  _snackBar(value) => SnackBar(
-        content: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.0),
-            color: Colors.grey.withOpacity(0.3),
-          ),
-          height: 50.0,
-          margin: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Center(
-            child: TextComponent(
-              fontSize: 16,
-              align: TextAlign.center,
-              line: 1,
-              textColor: Colors.white,
-              weight: FontWeight.bold,
-              title: value.toString(),
-            ),
-          ),
-        ),
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-      );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,16 +50,13 @@ class _LoginViewState extends State<LoginView> {
             builder: (context, watch, child) {
               final loading = watch(userViewmodel).load;
               return LoginBody(
-                watch: loading,
                 labels: labels,
+                watch: loading,
+                controller: watch(userViewmodel).controllers,
+                validators: watch(userViewmodel).validators,
                 onchanged: onchanged,
-                onTextChange: onTextChange,
                 onclick: onclick,
-                controller: _controller,
-                validators: validators,
-                onselected: onselected,
-                selected: selected,
-                checkBoxController: checkBoxController,
+                checkBoxController: watch(userViewmodel).checkbox,
               );
             },
           ),

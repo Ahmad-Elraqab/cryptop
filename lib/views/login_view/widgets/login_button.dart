@@ -7,7 +7,6 @@ class LoginButton extends StatelessWidget {
   final List<Map<String, Object>>? validators;
   final bool? checkBoxController;
   final Function? onclick;
-  final String? selected;
 
   const LoginButton({
     Key? key,
@@ -16,7 +15,6 @@ class LoginButton extends StatelessWidget {
     this.validators,
     this.checkBoxController,
     this.onclick,
-    this.selected,
   }) : super(key: key);
 
   @override

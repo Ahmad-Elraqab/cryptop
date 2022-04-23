@@ -1,4 +1,3 @@
-import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/views/login_view/widgets/login_button.dart';
 import 'package:cryptop/views/login_view/widgets/login_form.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +12,6 @@ class LoginBody extends StatelessWidget {
   final Function? onTextChange;
   final Function? onchanged;
   final Function? onclick;
-  final Function? onselected;
-  final String? selected;
   final dynamic watch;
 
   const LoginBody({
@@ -25,8 +22,6 @@ class LoginBody extends StatelessWidget {
     this.checkBoxController,
     this.onchanged,
     this.onclick,
-    this.onselected,
-    this.selected,
     this.onTextChange,
     this.watch,
   }) : super(key: key);
@@ -51,9 +46,6 @@ class LoginBody extends StatelessWidget {
           checkBoxController: checkBoxController,
           onchanged: onchanged,
           onclick: onclick,
-          selected: selected,
-          onselected: onselected,
-          onTextChange: onTextChange,
         ),
         watch == true
             ? const LoadingView()
@@ -62,7 +54,6 @@ class LoginBody extends StatelessWidget {
                 validators: validators,
                 controller: controller,
                 checkBoxController: checkBoxController,
-                selected: selected,
               ),
         Align(
           alignment: Alignment.bottomCenter,

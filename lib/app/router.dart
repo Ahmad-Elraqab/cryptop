@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cryptop/app/const.dart';
 import 'package:cryptop/views/account_information_view/account_information_view.dart';
 import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
@@ -32,7 +30,7 @@ class RouteManager {
         builder = (BuildContext context) => const SplashView();
         break;
       case rLanding:
-        builder = (BuildContext context) => App();
+        builder = (BuildContext context) => App(currentIndex: '0');
         break;
       case rTrade:
         builder = (BuildContext context) => App(currentIndex: '2');

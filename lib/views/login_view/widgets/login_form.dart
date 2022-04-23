@@ -9,9 +9,6 @@ class LoginForm extends StatelessWidget {
   final bool? checkBoxController;
   final Function? onchanged;
   final Function? onclick;
-  final String? selected;
-  final Function? onselected;
-  final Function? onTextChange;
 
   const LoginForm({
     Key? key,
@@ -21,9 +18,6 @@ class LoginForm extends StatelessWidget {
     this.checkBoxController,
     this.onchanged,
     this.onclick,
-    this.selected,
-    this.onselected,
-    this.onTextChange,
   }) : super(key: key);
 
   @override
@@ -39,7 +33,7 @@ class LoginForm extends StatelessWidget {
               borderColor: Colors.white,
               color: Colors.white,
               lines: 1,
-              onChanged: (value) => onTextChange!(i, value),
+              onChanged: (value) => {},
               controller: controller![i],
               labelText: labels![i],
               error: validators![i]['message'].toString(),
