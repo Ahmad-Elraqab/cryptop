@@ -18,14 +18,12 @@ class _LoginViewState extends State<LoginView> {
     'Password',
   ];
 
-  onchanged(value) => context.read(userViewmodel).setCheckbox(value);
   onclick() async {
     final _userViewmodel = context.read(userViewmodel);
-    if (_userViewmodel.controllers[0].text.isEmpty) {
-      _userViewmodel.setValidator(0, true);
-    } else if (_userViewmodel.controllers[1].text.isEmpty) {
-      _userViewmodel.setValidator(1, true);
-    } else {
+
+    bool value = _userViewmodel.validateForm(0, 2);
+
+    if (value) {
       final user = await context.read(userViewmodel).login();
       if (user is User) {
         ScaffoldMessenger.of(context)
@@ -51,12 +49,8 @@ class _LoginViewState extends State<LoginView> {
               final loading = watch(userViewmodel).load;
               return LoginBody(
                 labels: labels,
-                watch: loading,
-                controller: watch(userViewmodel).controllers,
-                validators: watch(userViewmodel).validators,
-                onchanged: onchanged,
+                loading: loading,
                 onclick: onclick,
-                checkBoxController: watch(userViewmodel).checkbox,
               );
             },
           ),

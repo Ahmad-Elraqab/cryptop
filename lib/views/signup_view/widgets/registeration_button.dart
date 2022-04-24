@@ -2,22 +2,12 @@ import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class RegisterationButton extends StatelessWidget {
-  final List<String>? labels;
-  final List<TextEditingController>? controller;
-  final List<Map<String, Object>>? validators;
-  final bool? checkBoxController;
   final Function? onclick;
-  final String? selected;
 
-  const RegisterationButton(
-      {Key? key,
-      this.labels,
-      this.controller,
-      this.validators,
-      this.checkBoxController,
-      this.onclick,
-      this.selected})
-      : super(key: key);
+  const RegisterationButton({
+    Key? key,
+    this.onclick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

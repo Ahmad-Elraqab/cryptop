@@ -1,49 +1,48 @@
 import 'package:cryptop/components/custom_text_field/custom_text_field.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RegisterationForm extends StatelessWidget {
   final List<String>? labels;
-  final List<TextEditingController>? controller;
-  final List<Map<String, Object>>? validators;
-  final bool? checkBoxController;
-  final Function? onchanged;
   final Function? onclick;
-  final String? selected;
-  final Function? onselected;
 
-  const RegisterationForm(
-      {Key? key,
-      this.labels,
-      this.controller,
-      this.validators,
-      this.checkBoxController,
-      this.onchanged,
-      this.onclick,
-      this.selected,
-      this.onselected})
-      : super(key: key);
+  const RegisterationForm({
+    Key? key,
+    this.labels,
+    this.onclick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controllers = context
+        .read(userViewmodel)
+        .controllers
+        .sublist(2, context.read(userViewmodel).controllers.length);
+    final validators = context
+        .read(userViewmodel)
+        .validators
+        .sublist(2, context.read(userViewmodel).validators.length);
     return Column(
       children: [
         for (var i = 0; i < labels!.length; i++)
           Container(
             margin: const EdgeInsets.only(bottom: 10.0),
             child: CustomerTextField(
+              secure: i == 3 || i == 4 ? true : false,
               borderColor: Colors.white,
               readonly: false,
               color: Colors.white,
               lines: 1,
               onChanged: null,
-              controller: controller![i],
+              controller: controllers[i],
               labelText: labels![i],
-              error: validators![i]['message'].toString(),
-              validate:
-                  validators![i]['value'].toString().toLowerCase() == 'true'
-                      ? true
-                      : false,
+              error: context
+                  .read(userViewmodel)
+                  .validators[i]['message']
+                  .toString(),
+              validate: validators[i]['value'] as bool,
             ),
           ),
         const SizedBox(
@@ -62,8 +61,9 @@ class RegisterationForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   checkColor: Colors.black,
-                  onChanged: (value) => onchanged!(value),
-                  value: checkBoxController,
+                  onChanged: (value) =>
+                      context.read(userViewmodel).setCheckbox(value),
+                  value: context.read(userViewmodel).checkbox,
                 ),
                 data: ThemeData(
                   primarySwatch: Colors.blue,
@@ -72,13 +72,13 @@ class RegisterationForm extends StatelessWidget {
               ),
             ),
             const TextComponent(
-              title: "Remember me",
+              title: "Terms & Conditions",
               fontSize: 16,
               weight: FontWeight.w600,
               textColor: Colors.white,
               align: TextAlign.left,
               line: 1,
-            )
+            ),
           ],
         ),
         const SizedBox(

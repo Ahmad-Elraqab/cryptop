@@ -1,22 +1,16 @@
 import 'package:cryptop/components/custom_text_field/custom_text_field.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginForm extends StatelessWidget {
   final List<String>? labels;
-  final List<TextEditingController>? controller;
-  final List<Map<String, Object>>? validators;
-  final bool? checkBoxController;
-  final Function? onchanged;
   final Function? onclick;
 
   const LoginForm({
     Key? key,
     this.labels,
-    this.controller,
-    this.validators,
-    this.checkBoxController,
-    this.onchanged,
     this.onclick,
   }) : super(key: key);
 
@@ -34,13 +28,14 @@ class LoginForm extends StatelessWidget {
               color: Colors.white,
               lines: 1,
               onChanged: (value) => {},
-              controller: controller![i],
+              controller: context.read(userViewmodel).controllers[i],
               labelText: labels![i],
-              error: validators![i]['message'].toString(),
+              error: context
+                  .read(userViewmodel)
+                  .validators[i]['message']
+                  .toString(),
               validate:
-                  validators![i]['value'].toString().toLowerCase() == 'true'
-                      ? true
-                      : false,
+                  context.read(userViewmodel).validators[i]['value'] as bool,
             ),
           ),
         const SizedBox(
@@ -59,8 +54,9 @@ class LoginForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   checkColor: Colors.black,
-                  onChanged: (value) => onchanged!(value),
-                  value: checkBoxController,
+                  onChanged: (value) =>
+                      context.read(userViewmodel).setCheckbox(value),
+                  value: context.read(userViewmodel).checkbox,
                 ),
                 data: ThemeData(
                   primarySwatch: Colors.blue,
