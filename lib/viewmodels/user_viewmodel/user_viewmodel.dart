@@ -1,15 +1,20 @@
 import 'dart:async';
-
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/user_model.dart';
 import 'package:cryptop/services/user_service.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserViewmodel extends ChangeNotifier {
   User? user;
   UserService get rest => dependency();
+  SharedPreferences? _storage;
 
   bool loading = false;
+  bool checkbox = false;
+  bool get load => loading;
+  final List<TextEditingController> controllers =
+      List.generate(7, (i) => TextEditingController());
 
   final validators = [
     {'value': false, 'message': 'fill in email!'},
@@ -21,16 +26,55 @@ class UserViewmodel extends ChangeNotifier {
     {'value': false, 'message': 'repeat password'},
   ];
 
-  void resetForm() {
-    for (var i = 0; i < 7; i++) {
-      validators[i]['value'] = false;
-      controllers[i].text = '';
-    }
-    checkbox = false;
-    notifyListeners();
+  Future<bool> readToken() async {
+    _storage = await SharedPreferences.getInstance();
+
+    final token = _storage!.get('token');
+
+    if (token == null) return false;
+    return true;
   }
 
-  bool checkbox = false;
+  Future<void> deleteToken() async {
+    _storage = await SharedPreferences.getInstance();
+
+    await _storage!.remove('token');
+  }
+
+  Future<void> addToken(String token) async {
+    _storage = await SharedPreferences.getInstance();
+
+    await _storage!.setString('token', token);
+  }
+
+  Future<void> logout() async {
+    await deleteToken();
+  }
+
+  Future<User?> login() async {
+    load = true;
+    final value = await rest.login(
+        email: controllers[0].text, password: controllers[1].text);
+    resetForm();
+    load = false;
+    return value;
+  }
+
+  Future<User?> signup() async {
+    load = true;
+    Map<String, dynamic>? user = User(
+            name: controllers[2].text + ' ' + controllers[3].text,
+            email: controllers[3].text,
+            password: controllers[4].text)
+        .toJson();
+
+    final value = await rest.registerUser(data: user);
+    resetForm();
+    load = false;
+    user = null;
+
+    return value;
+  }
 
   setCheckbox(value) {
     checkbox = value;
@@ -38,12 +82,17 @@ class UserViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
-  final List<TextEditingController> controllers =
-      List.generate(7, (i) => TextEditingController());
-
-  bool get load => loading;
   set load(value) {
     loading = value;
+    notifyListeners();
+  }
+
+  void resetForm() {
+    for (var i = 0; i < 7; i++) {
+      validators[i]['value'] = false;
+      controllers[i].text = '';
+    }
+    checkbox = false;
     notifyListeners();
   }
 
@@ -60,31 +109,6 @@ class UserViewmodel extends ChangeNotifier {
       }
     }
     notifyListeners();
-    return value;
-  }
-
-  Future<User?> login() async {
-    validators.map((e) => e['value'] = false);
-    load = true;
-    final value = await rest.login(
-        email: controllers[0].text, password: controllers[1].text);
-    load = false;
-    return value;
-  }
-
-  Future<User?> signup() async {
-    validators.map((e) => e['value'] = false);
-    load = true;
-    Map<String, dynamic>? user = User(
-            name: controllers[2].text + ' ' + controllers[3].text,
-            email: controllers[3].text,
-            password: controllers[4].text)
-        .toJson();
-
-    final value = await rest.registerUser(data: user);
-    load = false;
-    user = null;
-
     return value;
   }
 }

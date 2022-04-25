@@ -31,6 +31,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (_userViewmodel.checkbox == true) {
         final user = await context.read(userViewmodel).signup();
         if (user is User) {
+          await _userViewmodel.addToken(user.token!);
+
           ScaffoldMessenger.of(context)
               .showSnackBar(snackBar('Registered sucessfully!'));
           Navigator.pushReplacementNamed(context, '/landing');

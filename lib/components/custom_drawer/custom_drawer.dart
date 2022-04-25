@@ -1,5 +1,7 @@
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -99,7 +101,11 @@ class CustomDrawer extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: InkWell(
-                onTap: () => {},
+                onTap: () async => {
+                  context.read(userViewmodel).deleteToken(),
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login', (Route<dynamic> route) => false)
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

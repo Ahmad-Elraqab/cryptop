@@ -19,13 +19,15 @@ class _HomeViewState extends State<HomeView> {
   Random? rnd = Random();
   int? min = 0;
   int? max = 5;
-  setOpacity(value) => setState(() => {
-        activeBoard =
-            opacity_ == 0 ? min! + rnd!.nextInt(max! - min!) : activeBoard,
-        opacity_ = double.parse(
-          value.toString(),
-        ),
-      });
+  setOpacity(value) {
+    setState(() => {
+          activeBoard =
+              opacity_ == 0 ? min! + rnd!.nextInt(max! - min!) : activeBoard,
+          opacity_ = double.parse(
+            value.toString(),
+          ),
+        });
+  }
 
   int? activeIndexList = 0;
   setIndexList(value) => setState(() => activeIndexList = value);
