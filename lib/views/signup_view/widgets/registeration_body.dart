@@ -1,3 +1,4 @@
+import 'package:cryptop/components/loading/loading.dart';
 import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:cryptop/views/signup_view/widgets/registeration_button.dart';
 import 'package:cryptop/views/signup_view/widgets/registeration_form.dart';
@@ -36,9 +37,11 @@ class RegisterationBody extends StatelessWidget {
           labels: labels,
           onclick: onclick,
         ),
-        RegisterationButton(
-          onclick: onclick,
-        ),
+        loading == true
+            ? const LoadingView()
+            : RegisterationButton(
+                onclick: onclick,
+              ),
         const SizedBox(
           height: 20.0,
         ),

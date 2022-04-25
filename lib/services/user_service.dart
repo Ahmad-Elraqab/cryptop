@@ -16,7 +16,7 @@ class UserService {
   }
 
   Future<User?> registerUser({Map<String, dynamic>? data}) async {
-    final json = await rest.post('users/signup/auth', data!);
+    final json = await rest.post('users/', data!);
     if (json == null || json.length == 0) return null;
 
     final _user = User.fromJson(json);
