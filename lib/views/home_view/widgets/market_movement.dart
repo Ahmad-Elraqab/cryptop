@@ -33,6 +33,7 @@ class MarketMovment extends StatelessWidget {
                     borderRadius: 7.0,
                     height: null,
                     horizontal: 8,
+                    width: 70.0,
                     vertical: 3,
                     buttonColor: i == activeIndexList
                         ? Colors.amber
@@ -77,6 +78,7 @@ class MarketMovment extends StatelessWidget {
                         borderRadius: 5.0,
                         height: null,
                         horizontal: 8,
+                        width: 70.0,
                         vertical: 3,
                         buttonColor:
                             index == 3 ? Colors.green[300] : Colors.red[300],

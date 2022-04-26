@@ -1,3 +1,4 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:flutter/material.dart';
@@ -12,34 +13,42 @@ class CustomDrawer extends StatelessWidget {
       {
         'icon': 'lib/assets/market-b.png',
         'title': 'Market',
+        'route': rSearch,
       },
       {
         'icon': 'lib/assets/trades-b.png',
         'title': 'Trade',
+        'route': rTrade,
       },
       {
         'icon': 'lib/assets/orderbook-b.png',
         'title': 'Orderbook',
+        'route': rOrderbook,
       },
       {
         'icon': 'lib/assets/wallet-b.png',
         'title': 'Wallet',
+        'route': rWallet,
       },
       {
         'icon': 'lib/assets/profile-b.png',
         'title': 'Profile',
+        'route': rProfileScreen,
       },
       {
         'icon': 'lib/assets/smart-b.png',
         'title': 'Smart Trade',
+        'route': rSmartTrade,
       },
       {
         'icon': 'lib/assets/backtest-b.png',
         'title': 'Backtest',
+        'route': rBacktest,
       },
       {
         'icon': 'lib/assets/alert-b.png',
         'title': 'Alert',
+        'route': rAlert,
       },
     ];
 
@@ -64,7 +73,10 @@ class CustomDrawer extends StatelessWidget {
                   children: [
                     for (var i = 0; i < items.length; i++)
                       InkWell(
-                        onTap: () => {},
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          items[i]['route'].toString(),
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

@@ -26,7 +26,7 @@ class CustomButtom extends StatelessWidget {
     this.buttonTextColor,
     this.onTap,
     this.height = 60.0,
-    this.width = 150.0,
+    this.width = double.minPositive,
     this.vertical = 4,
     this.horizontal = 4,
     this.borderRadius = 32.0,
@@ -40,7 +40,6 @@ class CustomButtom extends StatelessWidget {
       onTap: () => onTap!(),
       child: Container(
         height: height,
-        width: width,
         padding:
             EdgeInsets.symmetric(horizontal: horizontal!, vertical: vertical!),
         child: Row(

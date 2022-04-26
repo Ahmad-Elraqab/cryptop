@@ -78,7 +78,7 @@ class _TradeViewState extends State<TradeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height - 75,
+        height: MediaQuery.of(context).size.height,
         color: const Color.fromRGBO(55, 61, 76, 1),
         child: SingleChildScrollView(
           child: TradeBody(

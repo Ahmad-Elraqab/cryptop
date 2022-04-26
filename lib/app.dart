@@ -2,7 +2,9 @@ import 'package:cryptop/components/bottom_navigation/bottom_navigation.dart';
 import 'package:cryptop/components/custom_drawer/custom_drawer.dart';
 import 'package:cryptop/views/home_view/home_view.dart';
 import 'package:cryptop/views/profile_view/profile_view.dart';
+import 'package:cryptop/views/search_view/search_view.dart';
 import 'package:cryptop/views/trade_view/trade_view.dart';
+import 'package:cryptop/views/wallet_view/wallet_view.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -28,15 +30,11 @@ class _AppState extends State<App> {
       case "0":
         return const HomeView();
       case "1":
-        return Container(
-          color: Colors.yellow,
-        );
+        return const SearchView();
       case "2":
         return const TradeView();
       case "3":
-        return Container(
-          color: Colors.green,
-        );
+        return const WalletView();
       case "4":
         return const ProfileView();
     }

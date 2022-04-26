@@ -20,22 +20,25 @@ class TradeType extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           for (var i = 0; i < labels!.length; i++)
-            CustomButtom(
-              fontSize: 14,
-              borderColor: Colors.transparent,
-              borderRadius: 7.0,
-              height: null,
-              horizontal: 8,
-              vertical: 3,
-              buttonColor:
-                  i == activeIndexList ? Colors.amber : Colors.transparent,
-              buttonText: labels![i],
-              buttonTextColor: Colors.white,
-              hasImage: false,
-              imageUrl: '',
-              onTap: () => {setIndexList!(i)},
+            Expanded(
+              child: CustomButtom(
+                fontSize: 14,
+                borderColor: Colors.transparent,
+                borderRadius: 7.0,
+                height: null,
+                horizontal: 1,
+                vertical: 3,
+                buttonColor:
+                    i == activeIndexList ? Colors.amber : Colors.transparent,
+                buttonText: labels![i],
+                buttonTextColor: Colors.white,
+                hasImage: false,
+                imageUrl: '',
+                onTap: () => {setIndexList!(i)},
+              ),
             ),
         ],
       ),
