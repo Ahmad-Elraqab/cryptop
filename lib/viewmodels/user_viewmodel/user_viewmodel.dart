@@ -64,8 +64,8 @@ class UserViewmodel extends ChangeNotifier {
     load = true;
     Map<String, dynamic>? user = User(
             name: controllers[2].text + ' ' + controllers[3].text,
-            email: controllers[3].text,
-            password: controllers[4].text)
+            email: controllers[4].text,
+            password: controllers[5].text)
         .toJson();
 
     final value = await rest.registerUser(data: user);

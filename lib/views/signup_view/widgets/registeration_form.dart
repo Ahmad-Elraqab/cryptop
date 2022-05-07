@@ -16,17 +16,11 @@ class RegisterationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controllers = context
-        .read(userViewmodel)
-        .controllers
-        .sublist(2, context.read(userViewmodel).controllers.length);
-    final validators = context
-        .read(userViewmodel)
-        .validators
-        .sublist(2, context.read(userViewmodel).validators.length);
+    final controllers = context.read(userViewmodel).controllers;
+    final validators = context.read(userViewmodel).validators;
     return Column(
       children: [
-        for (var i = 0; i < labels!.length; i++)
+        for (var i = 0, j = 2; i < labels!.length; i++, j++)
           Container(
             margin: const EdgeInsets.only(bottom: 10.0),
             child: CustomerTextField(
@@ -36,13 +30,13 @@ class RegisterationForm extends StatelessWidget {
               color: Colors.white,
               lines: 1,
               onChanged: null,
-              controller: controllers[i],
+              controller: controllers[j],
               labelText: labels![i],
               error: context
                   .read(userViewmodel)
-                  .validators[i]['message']
+                  .validators[j]['message']
                   .toString(),
-              validate: validators[i]['value'] as bool,
+              validate: validators[j]['value'] as bool,
             ),
           ),
         const SizedBox(
