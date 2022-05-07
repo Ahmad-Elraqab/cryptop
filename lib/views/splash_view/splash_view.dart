@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:cryptop/app/const.dart';
+import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rive/rive.dart';
 
 class SplashView extends StatefulWidget {
@@ -17,7 +19,15 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context, rLoginScreen),
+      () async {
+        final token = await context.read(userViewmodel).readToken();
+        print(token);
+        if (token == false) {
+          Navigator.pushReplacementNamed(context, rLoginScreen);
+        } else {
+          Navigator.pushReplacementNamed(context, rLanding);
+        }
+      },
     );
   }
 
@@ -29,7 +39,7 @@ class _SplashViewState extends State<SplashView> {
         child: SizedBox(
           height: 150.0,
           width: 150.0,
-          child: RiveAnimation.asset('lib/assets/splash.riv'),
+          child: RiveAnimation.asset('lib/assets/loading.riv'),
         ),
       ),
     );

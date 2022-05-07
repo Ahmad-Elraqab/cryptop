@@ -26,13 +26,13 @@ class UserViewmodel extends ChangeNotifier {
     {'value': false, 'message': 'repeat password'},
   ];
 
-  Future<bool> readToken() async {
+  Future readToken() async {
     _storage = await SharedPreferences.getInstance();
 
     final token = _storage!.get('token');
 
     if (token == null) return false;
-    return true;
+    return token;
   }
 
   Future<void> deleteToken() async {

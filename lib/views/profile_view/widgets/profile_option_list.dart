@@ -57,42 +57,42 @@ class ProfileOptionList extends StatelessWidget {
         'screen': rNotifications
       },
     };
-    return Padding(
+    return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: [
-          for (var i in list)
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    width: 2,
-                    color: Colors.grey.withOpacity(0.3),
-                  ),
+      shrinkWrap: false,
+      children: [
+        for (var i in list)
+          Container(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  width: 2,
+                  color: Colors.grey.withOpacity(0.3),
                 ),
-              ),
-              child: ListTile(
-                leading: Icon(
-                  i["icon"] as IconData,
-                  color: Colors.black45,
-                ),
-                title: Text(
-                  i["value"].toString(),
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.w500),
-                ),
-                trailing: const Icon(
-                  FontAwesomeIcons.angleRight,
-                  size: 15,
-                  color: Colors.grey,
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, i['screen'].toString());
-                },
               ),
             ),
-        ],
-      ),
+            child: ListTile(
+              leading: Icon(
+                i["icon"] as IconData,
+                color: Colors.black45,
+              ),
+              title: Text(
+                i["value"].toString(),
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+              ),
+              trailing: const Icon(
+                FontAwesomeIcons.angleRight,
+                size: 15,
+                color: Colors.grey,
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, i['screen'].toString());
+              },
+            ),
+          ),
+      ],
     );
   }
 }

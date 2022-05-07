@@ -32,12 +32,8 @@ class HomeBody extends StatelessWidget {
     return Column(
       children: [
         const HomeAppBar(),
-        Search(searchController: searchController, search: search),
-        Container(
-          height: 50,
-          color: const Color.fromRGBO(55, 61, 76, 1),
-          child: null,
-        ),
+        // Search(searchController: searchController, search: search),
+        // const Divider(color: Colors.grey, thickness: 1),
         GestureDetector(
           onTap: () => setOpacity!(opacity_ == 1 ? 0 : 1),
           child: PairBoard(

@@ -104,7 +104,7 @@ class RouteManager {
       settings: settings,
       transitionsBuilder: (c, anim, a2, child) =>
           FadeTransition(opacity: anim, child: child),
-      transitionDuration: const Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 200),
     );
   }
 }

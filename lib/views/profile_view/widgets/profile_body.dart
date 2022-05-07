@@ -13,7 +13,7 @@ class ProfileBody extends StatelessWidget {
           height: 30.0,
         ),
         ProfileTopAction(),
-        ProfileOptionList(),
+        Expanded(child: ProfileOptionList()),
       ],
     );
   }

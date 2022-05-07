@@ -1,5 +1,4 @@
 import 'package:cryptop/components/custom_buttom/custom_button.dart';
-import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTopAction extends StatelessWidget {
@@ -12,12 +11,14 @@ class ProfileTopAction extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.all(40.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   color: Colors.amberAccent,

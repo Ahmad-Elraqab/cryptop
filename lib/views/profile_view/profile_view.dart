@@ -13,9 +13,7 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SingleChildScrollView(
-        child: ProfileBody(),
-      ),
+      body: ProfileBody(),
     );
   }
 }
