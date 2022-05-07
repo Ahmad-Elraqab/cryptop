@@ -12,24 +12,9 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              height: widget.height,
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(55, 61, 76, 1),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(40.0),
-                  bottomLeft: Radius.circular(40.0),
-                ),
-              ),
-            ),
-            const ProfileBody()
-          ],
-        ),
+        child: ProfileBody(),
       ),
     );
   }

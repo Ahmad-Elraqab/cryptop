@@ -1,5 +1,6 @@
+import 'package:cryptop/components/custom_buttom/custom_button.dart';
+import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileTopAction extends StatelessWidget {
   const ProfileTopAction({
@@ -8,65 +9,50 @@ class ProfileTopAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(30, 60, 20, 0),
-          child: Row(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: [
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                child: const SizedBox(
-                  width: 30.0,
-                  height: 30.0,
-                  child: Icon(
-                    // ignore: deprecated_member_use
-                    FontAwesomeIcons.edit,
-                    color: Colors.white,
-                  ),
+              Container(
+                padding: const EdgeInsets.all(24.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: Colors.amberAccent,
                 ),
-                onTap: () => {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Container();
-                    },
-                  )
-                },
               ),
-              InkWell(
-                child: const SizedBox(
-                  width: 30.0,
-                  height: 30.0,
-                  child: Icon(
-                    FontAwesomeIcons.bell,
-                    color: Colors.white,
-                  ),
-                ),
+              CustomButtom(
+                borderColor: Colors.transparent,
+                borderRadius: 5.0,
+                buttonColor: Colors.amberAccent,
+                buttonText: 'Generate Key',
+                buttonTextColor: Colors.black,
+                fontSize: 12,
+                hasImage: false,
+                vertical: 0,
+                height: 40.0,
+                horizontal: 8.0,
+                imageUrl: '',
                 onTap: () => {},
-              ),
+              )
             ],
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CircleAvatar(
-              radius: 40,
-              backgroundImage: NetworkImage(''),
-            ),
-          ],
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(50, 15, 50, 30),
-          child: const Text(
-            "dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.",
-            style: TextStyle(
-                color: Colors.white, fontSize: 10, fontWeight: FontWeight.w500),
-            textAlign: TextAlign.center,
+          const SizedBox(
+            height: 20.0,
           ),
-        ),
-      ],
+          // const TextComponent(
+          //   align: TextAlign.center,
+          //   fontSize: 12,
+          //   line: 3,
+          //   textColor: Colors.black,
+          //   title:
+          //       'xXsjdndfmxzxXsjdndfmxzxXsjdndfmxzxXsjdndfmxzxXsjdndfmxzxXsjdndfmxzxXsjdndfmxzxXsjdndfmxz',
+          //   weight: FontWeight.w700,
+          // )
+        ],
+      ),
     );
   }
 }

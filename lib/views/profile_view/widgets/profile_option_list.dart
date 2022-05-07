@@ -11,6 +11,16 @@ class ProfileOptionList extends StatelessWidget {
   Widget build(BuildContext context) {
     final list = {
       {
+        "value": "My Address",
+        "icon": FontAwesomeIcons.mapMarked,
+        'screen': rAddress
+      },
+      {
+        "value": "Account",
+        "icon": FontAwesomeIcons.userCircle,
+        'screen': rAcountInformation
+      },
+      {
         "value": "Notification",
         "icon": FontAwesomeIcons.bell,
         'screen': rNotifications
@@ -47,35 +57,29 @@ class ProfileOptionList extends StatelessWidget {
         'screen': rNotifications
       },
     };
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-          margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                spreadRadius: -5.0,
-                color: Color.fromARGB(255, 203, 203, 203),
-                offset: Offset(0, 15),
-                blurRadius: 8,
-              )
-            ],
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: Column(
-            children: [
-              ListTile(
-                // ignore: deprecated_member_use
-                leading: const Icon(
-                  // ignore: deprecated_member_use
-                  FontAwesomeIcons.mapMarked,
-                  color: Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: [
+          for (var i in list)
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    width: 2,
+                    color: Colors.grey.withOpacity(0.3),
+                  ),
                 ),
-                title: const Text(
-                  'My Address',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+              ),
+              child: ListTile(
+                leading: Icon(
+                  i["icon"] as IconData,
+                  color: Colors.black45,
+                ),
+                title: Text(
+                  i["value"].toString(),
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w500),
                 ),
                 trailing: const Icon(
                   FontAwesomeIcons.angleRight,
@@ -83,73 +87,12 @@ class ProfileOptionList extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, rAddress);
+                  Navigator.pushNamed(context, i['screen'].toString());
                 },
               ),
-              ListTile(
-                // ignore: deprecated_member_use
-                leading: const Icon(
-                  // ignore: deprecated_member_use
-                  FontAwesomeIcons.userCircle,
-                  color: Colors.grey,
-                ),
-                title: const Text(
-                  'Account',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                ),
-                trailing: const Icon(
-                  FontAwesomeIcons.angleRight,
-                  size: 15,
-                  color: Colors.grey,
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, rAcountInformation);
-                },
-              ),
-            ],
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-          margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                spreadRadius: -5.0,
-                color: Color.fromARGB(255, 203, 203, 203),
-                offset: Offset(0, 10),
-                blurRadius: 8,
-              )
-            ],
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: Column(
-            children: [
-              for (var i in list)
-                ListTile(
-                  leading: Icon(
-                    i["icon"] as IconData,
-                    color: Colors.grey,
-                  ),
-                  title: Text(
-                    i["value"].toString(),
-                    style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.w500),
-                  ),
-                  trailing: const Icon(
-                    FontAwesomeIcons.angleRight,
-                    size: 15,
-                    color: Colors.grey,
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(context, i['screen'].toString());
-                  },
-                ),
-            ],
-          ),
-        ),
-      ],
+            ),
+        ],
+      ),
     );
   }
 }
