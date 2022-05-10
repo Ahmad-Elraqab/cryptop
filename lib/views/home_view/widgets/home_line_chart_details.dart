@@ -1,11 +1,14 @@
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/models/chart_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeLineChartDetails extends StatelessWidget {
   const HomeLineChartDetails({
     Key? key,
+    this.chart,
   }) : super(key: key);
 
+  final Chart? chart;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -27,12 +30,12 @@ class HomeLineChartDetails extends StatelessWidget {
               const SizedBox(
                 width: 5.0,
               ),
-              const TextComponent(
+              TextComponent(
                 align: TextAlign.center,
                 fontSize: 14.0,
                 line: 1,
                 textColor: Colors.white,
-                title: 'BTCUSDT',
+                title: chart!.symbol,
                 weight: FontWeight.bold,
               ),
             ],
@@ -49,12 +52,12 @@ class HomeLineChartDetails extends StatelessWidget {
               const SizedBox(
                 width: 5.0,
               ),
-              const TextComponent(
+              TextComponent(
                 align: TextAlign.center,
                 fontSize: 14.0,
                 line: 1,
                 textColor: Colors.white,
-                title: '5.48 %',
+                title: '${chart!.rate} %',
                 weight: FontWeight.bold,
               ),
             ],
@@ -71,12 +74,12 @@ class HomeLineChartDetails extends StatelessWidget {
               const SizedBox(
                 width: 5.0,
               ),
-              const TextComponent(
+              TextComponent(
                 align: TextAlign.center,
                 fontSize: 14.0,
                 line: 1,
                 textColor: Colors.white,
-                title: '1M',
+                title: chart!.interval,
                 weight: FontWeight.bold,
               ),
             ],

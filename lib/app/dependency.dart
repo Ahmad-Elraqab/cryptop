@@ -1,3 +1,4 @@
+import 'package:cryptop/services/chart_service.dart';
 import 'package:cryptop/services/rest_service..dart';
 import 'package:cryptop/services/user_service.dart';
 import 'package:cryptop/viewmodels/user_viewmodel/user_viewmodel.dart';
@@ -16,4 +17,5 @@ void init() {
 
   dependency.registerLazySingleton(() => UserViewmodel());
   dependency.registerLazySingleton(() => UserService());
+  dependency.registerLazySingleton(() => ChartService());
 }

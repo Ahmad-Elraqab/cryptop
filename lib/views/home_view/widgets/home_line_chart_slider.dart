@@ -4,19 +4,21 @@ class HomeLineChartSlider extends StatelessWidget {
   const HomeLineChartSlider({
     Key? key,
     this.activeBoard,
+    this.length,
   }) : super(key: key);
 
   final int? activeBoard;
+  final int? length;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+        padding: const EdgeInsets.only(right: 15.0, left: 15.0, bottom: 15.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            for (var i = 0; i < 7; i++)
+            for (var i = 0; i < length!; i++)
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 height: i == activeBoard ? 20 : 10,

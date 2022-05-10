@@ -1,47 +1,37 @@
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/views/home_view/widgets/market_movement.dart';
 import 'package:cryptop/views/home_view/widgets/pair_board.dart';
 import 'package:cryptop/views/home_view/widgets/app_bar.dart';
-import 'package:cryptop/views/home_view/widgets/search.dart';
 import 'package:flutter/material.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
     Key? key,
-    this.searchController,
-    this.search,
-    this.opacity_,
-    this.setOpacity,
     this.activeBoard,
-    this.loading,
     this.setIndexList,
     this.activeIndexList,
+    this.data,
+    this.setIndex,
+    this.ticker_24,
   }) : super(key: key);
 
-  final TextEditingController? searchController;
-  final Function? search;
+  final Function? setIndex;
   final Function? setIndexList;
-  final Function? setOpacity;
-  final double? opacity_;
   final int? activeBoard;
   final int? activeIndexList;
-  final bool? loading;
+  final List? ticker_24;
+  final List<Chart>? data;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const HomeAppBar(),
-        // Search(searchController: searchController, search: search),
-        // const Divider(color: Colors.grey, thickness: 1),
-        GestureDetector(
-          onTap: () => setOpacity!(opacity_ == 1 ? 0 : 1),
-          child: PairBoard(
-            opacity_: opacity_!,
-            setOpacity: setOpacity!,
-            activeBoard: activeBoard!,
-            loading: loading!,
-          ),
+        PairBoard(
+          activeBoard: activeBoard!,
+          data: data,
+          setIndex: setIndex,
         ),
         Container(
           height: 50.0,
@@ -72,6 +62,7 @@ class HomeBody extends StatelessWidget {
           ),
         ),
         MarketMovment(
+          ticker_24: ticker_24,
           activeIndexList: activeIndexList,
           setIndexList: setIndexList,
         ),

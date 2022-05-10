@@ -6,8 +6,7 @@ import 'package:cryptop/app/dependency.dart' as dep;
 
 void main() {
   dep.init();
-  // final workmanager = Workmanager();
-  // workmanager.initialize(callbackDispatcher, isInDebugMode: true);
+
   runApp(const AppView());
 }
 
@@ -37,20 +36,3 @@ class _AppViewState extends State<AppView> {
     );
   }
 }
-
-// void callbackDispatcher() {
-//   final workmanager = Workmanager();
-//   workmanager.executeTask((task, inputData) async {
-//     switch (task) {
-//       case Workmanager.iOSBackgroundTask:
-//         try {
-//           var secureStorage = const FlutterSecureStorage();
-//           String? value = await secureStorage.read(key: "aKey");
-//         } catch (e) {
-//           print('object');
-//         }
-//         break;
-//     }
-//     return Future.value(true);
-//   });
-// }

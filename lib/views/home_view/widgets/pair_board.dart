@@ -1,28 +1,26 @@
-import 'dart:async';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/components/line_chart/home_line_chart.dart';
+import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_details.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 
 class PairBoard extends StatelessWidget {
   const PairBoard({
-    this.opacity_,
     this.activeBoard,
-    this.setOpacity,
     Key? key,
-    this.loading,
+    this.data,
+    this.setIndex,
   }) : super(key: key);
 
-  final double? opacity_;
-  final bool? loading;
   final int? activeBoard;
-  final Function? setOpacity;
+  final Function? setIndex;
+  final List<Chart>? data;
 
   @override
   Widget build(BuildContext context) {
-    // if (loading == true) setOpacity!(0);
     return Column(
       children: [
         Container(
@@ -53,40 +51,63 @@ class PairBoard extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          height: 200.0,
-          color: const Color.fromRGBO(55, 61, 76, 1),
-          child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 300),
-            opacity: opacity_!,
-            onEnd: () => Future.delayed(
-              Duration(milliseconds: opacity_ == 0 ? 500 : 5000),
-            ).then(
-              (value) => setOpacity!(opacity_ == 1 ? 0 : 1),
-            ),
-            child: Stack(
-              children: [
-                const HomeLineChart(),
-                const Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 24.0),
-                    child: TextComponent(
-                      align: TextAlign.center,
-                      fontSize: 16.0,
-                      line: 1,
-                      textColor: Color.fromARGB(255, 35, 136, 41),
-                      title: '47,350.89',
-                      weight: FontWeight.bold,
+        data == null
+            ? const SizedBox(
+                height: 200.0,
+                child: RiveAnimation.asset('lib/assets/loading.riv'),
+              )
+            : Container(
+                height: 200.0,
+                color: const Color.fromRGBO(55, 61, 76, 1),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: CarouselSlider.builder(
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          viewportFraction: 1,
+                          onPageChanged: (index, value) => setIndex!(index),
+                        ),
+                        itemCount: data!.length,
+                        itemBuilder: (context, y, index) {
+                          return Stack(
+                            children: [
+                              HomeLineChart(
+                                data: data![activeBoard!].candles,
+                              ),
+                              Align(
+                                alignment: Alignment.topCenter,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 24.0),
+                                  child: TextComponent(
+                                    align: TextAlign.center,
+                                    fontSize: 16.0,
+                                    line: 1,
+                                    textColor:
+                                        const Color.fromARGB(255, 35, 136, 41),
+                                    title: data![activeBoard!]
+                                        .candles![0]
+                                        .y
+                                        .toString(),
+                                    weight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              HomeLineChartDetails(chart: data![activeBoard!]),
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
+                    HomeLineChartSlider(
+                      activeBoard: activeBoard!,
+                      length: data!.length,
+                    )
+                  ],
                 ),
-                const HomeLineChartDetails(),
-                HomeLineChartSlider(activeBoard: activeBoard!)
-              ],
-            ),
-          ),
-        ),
+              ),
       ],
     );
   }

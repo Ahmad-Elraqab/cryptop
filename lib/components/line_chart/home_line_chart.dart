@@ -4,19 +4,23 @@ import 'package:flutter/material.dart';
 class HomeLineChart extends StatelessWidget {
   const HomeLineChart({
     Key? key,
-    this.padding = 50.0,
+    this.padding = 30.0,
     this.color = Colors.transparent,
+    this.data,
   }) : super(key: key);
 
   final double? padding;
   final Color? color;
+  final List<FlSpot>? data;
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       child: Container(
+        padding: const EdgeInsets.only(bottom: 10.0),
+        height: 100,
         color: color,
-        padding: EdgeInsets.all(padding!),
+        width: MediaQuery.of(context).size.width * 0.5,
         child: LineChart(
           LineChartData(
             titlesData: FlTitlesData(
@@ -40,25 +44,14 @@ class HomeLineChart extends StatelessWidget {
                 color: Colors.white,
                 isCurved: true,
                 dotData: FlDotData(
-                  checkToShowDot: (FlSpot point, LineChartBarData data) {
-                    if (point == const FlSpot(0, 1) ||
-                        point == const FlSpot(8, 20)) {
+                  checkToShowDot: (FlSpot point, LineChartBarData _data) {
+                    if (point == data![0] || point == data![data!.length - 1]) {
                       return true;
                     }
                     return false;
                   },
                 ),
-                spots: [
-                  const FlSpot(0, 1),
-                  const FlSpot(1, 3),
-                  const FlSpot(2, 10),
-                  const FlSpot(3, 7),
-                  const FlSpot(4, 12),
-                  const FlSpot(5, 13),
-                  const FlSpot(6, 17),
-                  const FlSpot(7, 15),
-                  const FlSpot(8, 20)
-                ],
+                spots: data,
               )
             ],
           ),
