@@ -1,3 +1,4 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:flutter/material.dart';
 
@@ -33,16 +34,16 @@ class SearchRow extends StatelessWidget {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
+                    children: [
                       TextComponent(
                         align: TextAlign.start,
                         fontSize: 14.0,
                         line: 1,
                         textColor: Colors.white,
-                        title: 'BTCUSDT',
+                        title: exchange_pairs[index!],
                         weight: FontWeight.bold,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.star,
                         color: Colors.white,
                         size: 20,

@@ -21,7 +21,7 @@ class _SplashViewState extends State<SplashView> {
       const Duration(seconds: 3),
       () async {
         final token = await context.read(userViewmodel).readToken();
-        print(token);
+        // print(token);
         if (token == false) {
           Navigator.pushReplacementNamed(context, rLoginScreen);
         } else {

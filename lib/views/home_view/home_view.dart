@@ -27,8 +27,6 @@ class _HomeViewState extends State<HomeView> {
           builder: (context, watch, child) {
             final data = watch(getChartList).data?.value;
             final ticker_24 = watch(get24Ticker).data?.value;
-            print(ticker_24);
-
             return HomeBody(
               data: data,
               ticker_24: ticker_24,

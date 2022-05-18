@@ -1,3 +1,4 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/custom_text_field/custom_text_field.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/views/search_view/widgets/search_row.dart';
@@ -62,7 +63,7 @@ class SearchBody extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: 50,
+            itemCount: exchange_pairs.length,
             padding: const EdgeInsets.only(top: 20.0),
             itemBuilder: (context, index) => SearchRow(
               index: index,

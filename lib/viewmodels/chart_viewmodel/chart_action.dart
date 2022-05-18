@@ -5,7 +5,7 @@ import '../../models/chart_model.dart';
 
 final chartViewmodel = ChangeNotifierProvider((ref) => ChartViewmodel());
 
-final getChartList = FutureProvider.autoDispose<List<Chart>>(
+final getChartList = FutureProvider<List<Chart>?>(
   (ref) async {
     final user = ref.watch(chartViewmodel);
 

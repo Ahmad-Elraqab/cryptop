@@ -12,11 +12,13 @@ class ProfileOptionList extends StatelessWidget {
     final list = {
       {
         "value": "My Address",
+        // ignore: deprecated_member_use
         "icon": FontAwesomeIcons.mapMarked,
         'screen': rAddress
       },
       {
         "value": "Account",
+        // ignore: deprecated_member_use
         "icon": FontAwesomeIcons.userCircle,
         'screen': rAcountInformation
       },

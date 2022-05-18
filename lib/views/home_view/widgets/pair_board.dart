@@ -54,7 +54,11 @@ class PairBoard extends StatelessWidget {
         data == null
             ? const SizedBox(
                 height: 200.0,
-                child: RiveAnimation.asset('lib/assets/loading.riv'),
+                child: Center(
+                  child: SizedBox(
+                      height: 70.0,
+                      child: RiveAnimation.asset('lib/assets/loading.riv')),
+                ),
               )
             : Container(
                 height: 200.0,
