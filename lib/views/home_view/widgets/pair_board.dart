@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/components/line_chart/home_line_chart.dart';
 import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_details.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
 
 class PairBoard extends StatelessWidget {
   const PairBoard({
@@ -52,14 +52,7 @@ class PairBoard extends StatelessWidget {
           ),
         ),
         data == null
-            ? const SizedBox(
-                height: 200.0,
-                child: Center(
-                  child: SizedBox(
-                      height: 70.0,
-                      child: RiveAnimation.asset('lib/assets/loading.riv')),
-                ),
-              )
+            ? const LoadingAnimation()
             : Container(
                 height: 200.0,
                 color: const Color.fromRGBO(55, 61, 76, 1),

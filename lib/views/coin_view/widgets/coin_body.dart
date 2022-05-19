@@ -1,5 +1,6 @@
 import 'package:candlesticks/candlesticks.dart';
 import 'package:cryptop/components/coin_details/coin_detail.dart';
+import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/components/title_header/title_header.dart';
 import 'package:cryptop/components/trade_action_button/trade_action_button.dart';
@@ -30,11 +31,13 @@ class CoinBody extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(bottom: 30.0),
           height: 300.0,
-          color: Colors.black,
+          color: Colors.transparent,
           width: MediaQuery.of(context).size.width,
-          child: Candlesticks(
-            candles: candles!,
-          ),
+          child: candles == null
+              ? const LoadingAnimation()
+              : Candlesticks(
+                  candles: candles!,
+                ),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),

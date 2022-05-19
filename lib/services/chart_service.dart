@@ -31,15 +31,20 @@ class ChartService {
     return data;
   }
 
-  Future<List<Candle>> fetchCandles(String coin, String interval) async {
+  Future<List<Candle>?> fetchCandles(String coin, String interval) async {
     final uri = Uri.parse(
-        "https://api.binance.com/api/v3/klines?symbol=${coin}&interval=$interval");
-    final res = await http.get(uri);
+        "https://api.binance.com/api/v3/klines?symbol=${coin}&interval=${interval}");
+    final json = await http.get(uri);
 
-    return (jsonDecode(res.body) as List<dynamic>)
+    if (json.body.isEmpty) {
+      return null;
+    }
+    final data = (jsonDecode(json.body) as List<dynamic>)
         .map((e) => Candle.fromJson(e))
         .toList()
         .reversed
         .toList();
+
+    return data;
   }
 }

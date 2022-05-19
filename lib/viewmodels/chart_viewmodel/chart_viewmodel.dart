@@ -16,6 +16,13 @@ class ChartViewmodel extends ChangeNotifier {
   ChartService get rest => dependency();
 
   List tickers = [];
+  List<Candle>? candles = [];
+
+  String? coin;
+  String? interval = '4h';
+
+  setCoin(value) => coin = value;
+  setInterval(value) => coin = value;
 
   Future<List<Chart>> getChartList() async {
     final chartList = await rest.getChartList(chartList: list);
@@ -57,9 +64,9 @@ class ChartViewmodel extends ChangeNotifier {
     return data;
   }
 
-  Future<List<Candle>> fetchCandles(String coin, String interval) async {
-    final list = await rest.fetchCandles(coin, interval);
+  Future<List<Candle>> fetchCandles() async {
+    candles = await rest.fetchCandles(coin!, interval!);
 
-    return list;
+    return candles!;
   }
 }
