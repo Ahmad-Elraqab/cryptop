@@ -17,7 +17,6 @@ class _CoinViewState extends State<CoinView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     context.read(chartViewmodel).setCoin(widget.data);
     super.initState();
   }
@@ -35,6 +34,7 @@ class _CoinViewState extends State<CoinView> {
               final data = watch(getKlines).data?.value;
               return CoinBody(
                 candles: data,
+                title: widget.data.toString(),
                 setTradeType: setTradeType,
               );
             },

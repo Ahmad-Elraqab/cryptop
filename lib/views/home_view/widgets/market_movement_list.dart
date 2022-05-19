@@ -42,82 +42,85 @@ class _MarketMovementListState extends State<MarketMovementList> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: _channel.stream,
-      builder: (context, snapshot) {
-        final data = context
-            .read(chartViewmodel)
-            .sort(widget.activeIndexList, snapshot.data);
-        return data.isEmpty
-            ? const Expanded(
-                child: LoadingAnimation(),
-              )
-            : Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: TextComponent(
-                            align: TextAlign.start,
-                            fontSize: 14.0,
-                            line: 1,
-                            textColor: Colors.white,
-                            title: data[index].symbol,
-                            weight: FontWeight.bold,
-                          ),
-                        ),
-                        Expanded(
-                          child: TextComponent(
-                            align: TextAlign.start,
-                            fontSize: 14.0,
-                            line: 1,
-                            textColor: Colors.white,
-                            title:
-                                double.parse(data[index].lastPrice.toString())
+    return Consumer(
+      builder: (context, watch, child) {
+        return watch(messageProvider).when(
+          loading: () => const Center(child: LoadingAnimation()),
+          error: (_, erorr) => const Text('error'),
+          data: (_data) {
+            final data = context
+                .read(chartViewmodel)
+                .sort(widget.activeIndexList, _data);
+            return data.isEmpty
+                ? const LoadingAnimation()
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: 10,
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: TextComponent(
+                                align: TextAlign.start,
+                                fontSize: 14.0,
+                                line: 1,
+                                textColor: Colors.white,
+                                title: data[index].symbol,
+                                weight: FontWeight.bold,
+                              ),
+                            ),
+                            Expanded(
+                              child: TextComponent(
+                                align: TextAlign.start,
+                                fontSize: 14.0,
+                                line: 1,
+                                textColor: Colors.white,
+                                title: double.parse(
+                                        data[index].lastPrice.toString())
                                     .toStringAsFixed(4),
-                            weight: FontWeight.bold,
-                          ),
+                                weight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 80.0,
+                              child: CustomButtom(
+                                fontSize: 14,
+                                borderColor: Colors.transparent,
+                                borderRadius: 5.0,
+                                height: null,
+                                horizontal: 8,
+                                width: 100.0,
+                                vertical: 3,
+                                buttonColor: widget.activeIndexList == 1
+                                    ? Colors.green[300]
+                                    : widget.activeIndexList == 0
+                                        ? Colors.red[300]
+                                        : Colors.yellow[700],
+                                buttonText: (NumberFormat.compact().format(
+                                      double.parse(
+                                        widget.activeIndexList == 2
+                                            ? data[index].volume.toString()
+                                            : data[index].rate.toString(),
+                                      ),
+                                    ) +
+                                    (widget.activeIndexList == 2 ? '' : ' %')),
+                                buttonTextColor: Colors.white,
+                                hasImage: false,
+                                imageUrl: '',
+                                onTap: () => {},
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 80.0,
-                          child: CustomButtom(
-                            fontSize: 14,
-                            borderColor: Colors.transparent,
-                            borderRadius: 5.0,
-                            height: null,
-                            horizontal: 8,
-                            width: 100.0,
-                            vertical: 3,
-                            buttonColor: widget.activeIndexList == 1
-                                ? Colors.green[300]
-                                : widget.activeIndexList == 0
-                                    ? Colors.red[300]
-                                    : Colors.yellow[700],
-                            buttonText: (NumberFormat.compact().format(
-                                  double.parse(
-                                    widget.activeIndexList == 2
-                                        ? data[index].volume.toString()
-                                        : data[index].rate.toString(),
-                                  ),
-                                ) +
-                                (widget.activeIndexList == 2 ? '' : ' %')),
-                            buttonTextColor: Colors.white,
-                            hasImage: false,
-                            imageUrl: '',
-                            onTap: () => {},
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
+                  );
+          },
+        );
       },
     );
   }

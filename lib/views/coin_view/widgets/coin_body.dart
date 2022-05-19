@@ -8,9 +8,11 @@ import 'package:cryptop/views/coin_view/widgets/favourite_coin.dart';
 import 'package:flutter/material.dart';
 
 class CoinBody extends StatelessWidget {
-  const CoinBody({Key? key, this.candles, this.setTradeType}) : super(key: key);
+  const CoinBody({Key? key, this.candles, this.setTradeType, this.title})
+      : super(key: key);
 
   final List<Candle>? candles;
+  final String? title;
   final Function? setTradeType;
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class CoinBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 10.0),
-        const TitleHeader(
+        TitleHeader(
           isTitle: false,
-          title: 'BTCUSDT',
+          title: title.toString(),
         ),
         const SizedBox(height: 10.0),
         const CoinDetail(),
