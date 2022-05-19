@@ -13,11 +13,6 @@ class ChartViewmodel extends ChangeNotifier {
     {'symbol': 'XRPUSDT', 'interval': '4h'}
   ];
   ChartService get rest => dependency();
-  int? activeIndexList = 0;
-  setIndexList(value) {
-    activeIndexList = value;
-    notifyListeners();
-  }
 
   List tickers = [];
 

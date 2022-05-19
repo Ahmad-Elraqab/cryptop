@@ -10,13 +10,7 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   TextEditingController searchController = TextEditingController();
-  setSearch(value) => setState(() => {
-        searchController.text = value,
-        searchController.selection = TextSelection(
-          baseOffset: value.length,
-          extentOffset: value.length,
-        )
-      });
+  setSearch() => setState(() => {});
 
   // ignore: avoid_print
   onTap(index) => setState(() => print(index));

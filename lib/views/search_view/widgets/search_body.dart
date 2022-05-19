@@ -15,6 +15,8 @@ class SearchBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = exchange_pairs.where(
+        (element) => element.startsWith(searchController!.text.toUpperCase()));
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +38,7 @@ class SearchBody extends StatelessWidget {
                 error: 'error',
                 labelText: 'Search your service',
                 lines: 1,
-                onChanged: setSearch!,
+                onChanged: (value) => setSearch!(),
                 readonly: false,
                 secure: false,
                 validate: false,
@@ -53,19 +55,20 @@ class SearchBody extends StatelessWidget {
         const SizedBox(
           height: 5.0,
         ),
-        const TextComponent(
+        TextComponent(
           align: TextAlign.start,
           fontSize: 14.0,
           line: 1,
           textColor: Colors.white,
-          title: '315 Symbols',
+          title: data.length.toString() + ' Symbols',
           weight: FontWeight.bold,
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: exchange_pairs.length,
+            itemCount: data.length,
             padding: const EdgeInsets.only(top: 20.0),
             itemBuilder: (context, index) => SearchRow(
+              data: data.toList(),
               index: index,
               onTap: onTap,
             ),

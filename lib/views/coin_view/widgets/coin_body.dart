@@ -21,11 +21,6 @@ class CoinBody extends StatelessWidget {
           isTitle: false,
           title: 'BTCUSDT',
         ),
-        const Divider(
-          color: Colors.white,
-          height: 20,
-          thickness: 2,
-        ),
         const SizedBox(height: 10.0),
         const CoinDetail(),
         const SizedBox(height: 20.0),

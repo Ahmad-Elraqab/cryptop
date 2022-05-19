@@ -7,16 +7,19 @@ class SearchRow extends StatelessWidget {
     Key? key,
     this.index,
     this.onTap,
+    this.data,
   }) : super(key: key);
+  final List? data;
   final int? index;
   final Function? onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70.0,
-      margin: const EdgeInsets.symmetric(vertical: 0.0),
-      child: InkWell(
-        onTap: () => onTap!(index!),
+    return InkWell(
+      onTap: () =>
+          Navigator.pushNamed(context, rCoin, arguments: data![index!]),
+      child: Container(
+        height: 70.0,
+        margin: const EdgeInsets.symmetric(vertical: 0.0),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           decoration: const BoxDecoration(
@@ -40,7 +43,7 @@ class SearchRow extends StatelessWidget {
                         fontSize: 14.0,
                         line: 1,
                         textColor: Colors.white,
-                        title: exchange_pairs[index!],
+                        title: data![index!],
                         weight: FontWeight.bold,
                       ),
                       const Icon(

@@ -31,7 +31,7 @@ class CustomerTextField extends StatelessWidget {
     return TextField(
       obscureText: secure!,
       readOnly: readonly!,
-      onChanged: (value) => {},
+      onChanged: (value) => onChanged!(value),
       maxLines: lines!,
       controller: controller,
       style: TextStyle(color: color!),

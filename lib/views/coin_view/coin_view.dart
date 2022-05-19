@@ -5,8 +5,9 @@ import 'package:candlesticks/candlesticks.dart';
 import 'package:flutter/material.dart';
 
 class CoinView extends StatefulWidget {
-  const CoinView({Key? key}) : super(key: key);
+  const CoinView({Key? key, this.data}) : super(key: key);
 
+  final String? data;
   @override
   State<CoinView> createState() => _CoinViewState();
 }
