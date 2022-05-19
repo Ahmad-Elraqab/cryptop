@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:candlesticks/candlesticks.dart';
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/services/chart_service.dart';
@@ -54,5 +55,11 @@ class ChartViewmodel extends ChangeNotifier {
     }
 
     return data;
+  }
+
+  Future<List<Candle>> fetchCandles(String coin, String interval) async {
+    final list = await rest.fetchCandles(coin, interval);
+
+    return list;
   }
 }

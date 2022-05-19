@@ -67,7 +67,7 @@ class RouteManager {
         builder = const SearchView();
         break;
       case rCoin:
-        builder = CoinView(data: settings.arguments as String);
+        builder = CoinView(data: settings.arguments);
         break;
       case rOrderbook:
         builder = const OrderbookView();
