@@ -34,6 +34,9 @@ class _CoinViewState extends State<CoinView> {
               final data = watch(getKlines).data?.value;
               final kline = watch(klineProvider);
               final ticker = watch(tickerProvider);
+              kline.data != null
+                  ? watch(chartViewmodel).updateCandle(kline.data!.value)
+                  : null;
               return CoinBody(
                 candles: data,
                 kline: kline,

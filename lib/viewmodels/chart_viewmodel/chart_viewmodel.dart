@@ -19,7 +19,7 @@ class ChartViewmodel extends ChangeNotifier {
   List<Candle>? candles = [];
 
   String? coin;
-  String? interval = '4h';
+  String? interval = '1m';
 
   setCoin(value) => coin = value;
   setInterval(value) => coin = value;
@@ -68,5 +68,23 @@ class ChartViewmodel extends ChangeNotifier {
     candles = await rest.fetchCandles(coin!, interval!);
 
     return candles!;
+  }
+
+  void updateCandle(value) {
+    final data = value['data']['k'];
+    final date1 = DateTime.fromMillisecondsSinceEpoch(value['data']['k']['t']);
+    final date2 = candles![0].date.toLocal();
+    final obj = Candle(
+        date: date1,
+        high: double.parse(data['h']),
+        low: double.parse(data['l']),
+        open: double.parse(data['o']),
+        close: double.parse(data['c']),
+        volume: double.parse(data['v']));
+    if (date1 == date2) {
+      candles![0] = obj;
+    } else {
+      candles!.insert(0, obj);
+    }
   }
 }

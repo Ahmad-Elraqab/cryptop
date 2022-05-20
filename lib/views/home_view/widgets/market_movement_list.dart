@@ -1,11 +1,9 @@
-import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../../components/custom_buttom/custom_button.dart';
 
 class MarketMovementList extends StatefulWidget {
