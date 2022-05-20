@@ -17,7 +17,7 @@ class ChartViewmodel extends ChangeNotifier {
 
   List tickers = [];
   List<Candle>? candles = [];
-
+  List<Chart>? chartList = [];
   String? coin;
   String? interval = '1m';
 
@@ -25,7 +25,7 @@ class ChartViewmodel extends ChangeNotifier {
   setInterval(value) => coin = value;
 
   Future<List<Chart>> getChartList() async {
-    final chartList = await rest.getChartList(chartList: list);
+    chartList = await rest.getChartList(chartList: list);
 
     return chartList!;
   }

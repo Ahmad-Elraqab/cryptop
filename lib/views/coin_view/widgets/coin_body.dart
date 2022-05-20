@@ -4,6 +4,7 @@ import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/components/title_header/title_header.dart';
 import 'package:cryptop/components/trade_action_button/trade_action_button.dart';
+import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/views/coin_view/widgets/favourite_coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,8 +17,10 @@ class CoinBody extends StatefulWidget {
     this.title,
     this.kline,
     this.ticker,
+    this.chartList,
   }) : super(key: key);
 
+  final List<Chart>? chartList;
   final List<Candle>? candles;
   final String? title;
   final AsyncValue? kline;
@@ -67,7 +70,7 @@ class _CoinBodyState extends State<CoinBody> {
             weight: FontWeight.bold,
           ),
         ),
-        const FavouriteCoins()
+        FavouriteCoins(candles: widget.chartList)
       ],
     );
   }
