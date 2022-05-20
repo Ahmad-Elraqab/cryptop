@@ -33,7 +33,7 @@ class ChartService {
 
   Future<List<Candle>?> fetchCandles(String coin, String interval) async {
     final uri = Uri.parse(
-        "https://api.binance.com/api/v3/klines?symbol=${coin}&interval=${interval}");
+        "https://api.binance.com/api/v3/klines?symbol=${coin}&interval=${interval}&limit=100");
     final json = await http.get(uri);
 
     if (json.body.isEmpty) {

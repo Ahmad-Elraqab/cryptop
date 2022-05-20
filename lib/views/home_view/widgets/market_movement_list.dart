@@ -19,27 +19,6 @@ class MarketMovementList extends StatefulWidget {
 }
 
 class _MarketMovementListState extends State<MarketMovementList> {
-  // ignore: prefer_typing_uninitialized_variables
-  var _channel;
-  var url = '';
-  @override
-  void dispose() {
-    _channel.sink.close();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    for (var item in exchange_pairs) {
-      url += item.toLowerCase() + '@ticker/';
-    }
-    _channel = WebSocketChannel.connect(
-      Uri.parse('wss://stream.binance.com:9443/stream?streams=' +
-          url.substring(0, url.length - 1)),
-    );
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer(

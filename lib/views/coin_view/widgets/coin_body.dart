@@ -6,14 +6,29 @@ import 'package:cryptop/components/title_header/title_header.dart';
 import 'package:cryptop/components/trade_action_button/trade_action_button.dart';
 import 'package:cryptop/views/coin_view/widgets/favourite_coin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CoinBody extends StatelessWidget {
-  const CoinBody({Key? key, this.candles, this.setTradeType, this.title})
-      : super(key: key);
+class CoinBody extends StatefulWidget {
+  const CoinBody({
+    Key? key,
+    this.candles,
+    this.setTradeType,
+    this.title,
+    this.kline,
+    this.ticker,
+  }) : super(key: key);
 
   final List<Candle>? candles;
   final String? title;
+  final AsyncValue? kline;
+  final AsyncValue? ticker;
   final Function? setTradeType;
+
+  @override
+  State<CoinBody> createState() => _CoinBodyState();
+}
+
+class _CoinBodyState extends State<CoinBody> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,23 +37,23 @@ class CoinBody extends StatelessWidget {
         const SizedBox(height: 10.0),
         TitleHeader(
           isTitle: false,
-          title: title.toString(),
+          title: widget.title.toString(),
         ),
         const SizedBox(height: 10.0),
-        const CoinDetail(),
+        CoinDetail(ticker: widget.ticker, kline: widget.kline),
         const SizedBox(height: 20.0),
         TradeActionButton(
-          setTradeType: setTradeType,
+          setTradeType: widget.setTradeType,
         ),
         Container(
           margin: const EdgeInsets.only(bottom: 30.0),
           height: 300.0,
           color: Colors.transparent,
           width: MediaQuery.of(context).size.width,
-          child: candles == null
+          child: widget.candles == null
               ? const LoadingAnimation()
               : Candlesticks(
-                  candles: candles!,
+                  candles: widget.candles!,
                 ),
         ),
         const Padding(

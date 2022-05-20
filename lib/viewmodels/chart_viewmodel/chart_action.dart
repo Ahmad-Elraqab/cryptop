@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:candlesticks/candlesticks.dart';
 import 'package:cryptop/app/const.dart';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_viewmodel.dart';
@@ -43,16 +44,45 @@ final messageProvider = StreamProvider<String>((ref) async* {
     url += item.toLowerCase() + '@ticker/';
   }
 
-  // Open the connection
   final channel = IOWebSocketChannel.connect(
       'wss://stream.binance.com:9443/stream?streams=' +
           url.substring(0, url.length - 1));
 
-  // Close the connection when the stream is destroyed
   ref.onDispose(() => channel.sink.close());
 
-  // Parse the value received and emit a Message instance
   await for (final value in channel.stream) {
     yield value.toString();
   }
 });
+
+final klineProvider = StreamProvider.autoDispose<dynamic>((ref) async* {
+  final user = ref.watch(chartViewmodel);
+
+  final channel = IOWebSocketChannel.connect(
+      'wss://stream.binance.com:9443/stream?streams=' +
+          user.coin!.toLowerCase() +
+          '@kline_' +
+          user.interval!.toLowerCase());
+
+  ref.onDispose(() => channel.sink.close());
+
+  await for (final value in channel.stream) {
+    yield jsonDecode(value.toString());
+  }
+});
+
+final tickerProvider = StreamProvider.autoDispose<dynamic>(
+  (ref) async* {
+    final user = ref.watch(chartViewmodel);
+
+    final channel = IOWebSocketChannel.connect(
+        'wss://stream.binance.com:9443/stream?streams=' +
+            user.coin!.toLowerCase() +
+            '@ticker');
+    ref.onDispose(() => {channel.sink.close()});
+
+    await for (final value in channel.stream) {
+      yield jsonDecode(value.toString());
+    }
+  },
+);

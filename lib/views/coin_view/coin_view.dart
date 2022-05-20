@@ -32,8 +32,12 @@ class _CoinViewState extends State<CoinView> {
           child: Consumer(
             builder: (context, watch, child) {
               final data = watch(getKlines).data?.value;
+              final kline = watch(klineProvider);
+              final ticker = watch(tickerProvider);
               return CoinBody(
                 candles: data,
+                kline: kline,
+                ticker: ticker,
                 title: widget.data.toString(),
                 setTradeType: setTradeType,
               );
