@@ -7,10 +7,10 @@ class CoinDetail extends StatelessWidget {
   const CoinDetail({
     Key? key,
     this.kline,
-    this.ticker,
+    this.tickers,
   }) : super(key: key);
   final Chart? kline;
-  final Ticker? ticker;
+  final List<Ticker>? tickers;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,8 +33,13 @@ class CoinDetail extends StatelessWidget {
                 fontSize: 22,
                 line: 1,
                 textColor: const Color.fromARGB(255, 250, 131, 125),
-                title:
-                    ticker == null ? '' : ticker!.lastPrice!.toStringAsFixed(2),
+                title: tickers == null || kline == null
+                    ? ''
+                    : tickers!
+                        .where((e) => e.symbol == kline!.symbol)
+                        .first
+                        .lastPrice!
+                        .toStringAsFixed(2),
                 weight: FontWeight.bold,
               ),
               subtitle: TextComponent(
@@ -42,8 +47,13 @@ class CoinDetail extends StatelessWidget {
                 fontSize: 16,
                 line: 1,
                 textColor: const Color.fromARGB(188, 94, 242, 212),
-                title:
-                    ticker == null ? '' : ticker!.priceChangePercent.toString(),
+                title: tickers == null || kline == null
+                    ? ''
+                    : tickers!
+                        .where((e) => e.symbol == kline!.symbol)
+                        .first
+                        .priceChangePercent
+                        .toString(),
                 weight: FontWeight.bold,
               ),
             ),

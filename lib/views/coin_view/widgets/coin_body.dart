@@ -15,7 +15,6 @@ class CoinBody extends StatefulWidget {
     this.setTradeType,
     this.title,
     this.chart,
-    this.ticker,
     this.fcharts,
     this.tickers,
   }) : super(key: key);
@@ -23,7 +22,6 @@ class CoinBody extends StatefulWidget {
   final Chart? chart;
   final List<Chart>? fcharts;
   final List<Ticker>? tickers;
-  final Ticker? ticker;
   final String? title;
   final Function? setTradeType;
 
@@ -43,7 +41,7 @@ class _CoinBodyState extends State<CoinBody> {
           title: widget.title.toString(),
         ),
         const SizedBox(height: 10.0),
-        CoinDetail(ticker: widget.ticker, kline: widget.chart),
+        CoinDetail(tickers: widget.tickers, kline: widget.chart),
         const SizedBox(height: 20.0),
         TradeActionButton(
           setTradeType: widget.setTradeType,

@@ -19,7 +19,6 @@ class _CoinViewState extends State<CoinView> {
   @override
   void initState() {
     context.read(chartViewmodel).setCoin(widget.data);
-    context.read(tickerViewmodel).setCoin(widget.data);
     super.initState();
   }
 
@@ -35,18 +34,16 @@ class _CoinViewState extends State<CoinView> {
             builder: (context, watch, child) {
               watch(klineProvider).whenData(
                   (value) => watch(chartViewmodel).updateCandle(value));
-              watch(tickerProvider).whenData(
-                  (value) => watch(tickerViewmodel).updateTicker(value));
+              watch(messageProvider).whenData(
+                  (value) => watch(tickerViewmodel).updateTickers(value));
 
               final chart = watch(getKlines).data?.value;
-              final ticker = watch(getTicker).data?.value;
               final fcharts = watch(chartViewmodel).favoriteCharts;
               final tickers = watch(tickerViewmodel).tickers;
 
               return CoinBody(
                 chart: chart,
                 fcharts: fcharts,
-                ticker: ticker,
                 tickers: tickers,
                 title: widget.data.toString(),
                 setTradeType: setTradeType,

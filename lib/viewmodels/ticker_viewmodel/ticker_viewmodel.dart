@@ -7,13 +7,6 @@ class TickerViewmodel extends ChangeNotifier {
   ChartService get rest => dependency();
 
   List<Ticker>? tickers;
-  Ticker? ticker;
-
-  String coin = '';
-  String? interval = '1m';
-
-  setCoin(value) => coin = value;
-  setInterval(value) => coin = value;
 
   getSortedTicker(index) {
     if (tickers != null)
@@ -47,20 +40,6 @@ class TickerViewmodel extends ChangeNotifier {
 
       // return a.priceChangePercent!.compareTo(b.priceChangePercent!);
 
-    }
-  }
-
-  Future<Ticker?> getTicker() async {
-    ticker = await rest.getTicker(coin);
-
-    return ticker;
-  }
-
-  void updateTicker(json) {
-    if (json != null && tickers!.isNotEmpty) {
-      ticker!.priceChangePercent = double.parse(json['data']['P']);
-      ticker!.lastPrice = double.parse(json['data']['c']);
-      ticker!.volume = double.parse(json['data']['v']);
     }
   }
 }

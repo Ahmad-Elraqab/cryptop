@@ -8,15 +8,6 @@ import 'package:web_socket_channel/io.dart';
 
 final tickerViewmodel = ChangeNotifierProvider((ref) => TickerViewmodel());
 
-final getTicker = FutureProvider.autoDispose<Ticker?>(
-  (ref) async {
-    final user = ref.watch(tickerViewmodel);
-
-    final data = await user.getTicker();
-
-    return data;
-  },
-);
 final get24Ticker = FutureProvider<List<Ticker>?>(
   (ref) async {
     final user = ref.watch(tickerViewmodel);
@@ -45,20 +36,3 @@ final messageProvider = StreamProvider<dynamic>((ref) async* {
     // user.updateTickers(jsonDecode(value.toString()));
   }
 });
-
-final tickerProvider = StreamProvider.autoDispose<dynamic>(
-  (ref) async* {
-    final user = ref.watch(tickerViewmodel);
-
-    final channel = IOWebSocketChannel.connect(
-        'wss://stream.binance.com:9443/stream?streams=' +
-            user.coin.toLowerCase() +
-            '@ticker');
-    ref.onDispose(() => {channel.sink.close()});
-
-    await for (final value in channel.stream) {
-      yield jsonDecode(value.toString());
-      // user.updateTicker(jsonDecode(value.toString()));
-    }
-  },
-);
