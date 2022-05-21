@@ -18,7 +18,8 @@ class _CoinViewState extends State<CoinView> {
 
   @override
   void initState() {
-    context.read(chartViewmodel).setCoin(widget.data);
+    context.read(chartViewmodel).coin = widget.data.toString();
+    context.read(chartViewmodel).interval = '4h';
     super.initState();
   }
 

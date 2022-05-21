@@ -1,4 +1,3 @@
-import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/models/ticker_model.dart';

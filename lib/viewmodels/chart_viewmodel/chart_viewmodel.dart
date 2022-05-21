@@ -18,10 +18,17 @@ class ChartViewmodel extends ChangeNotifier {
   List<Chart>? favoriteCharts = [];
 
   String? coin;
-  String? interval = '1m';
+  String? interval;
 
-  setCoin(value) => coin = value;
-  setInterval(value) => coin = value;
+  setCoin(value) {
+    coin = value;
+    notifyListeners();
+  }
+
+  setInterval(value) {
+    interval = value;
+    notifyListeners();
+  }
 
   Future<List<Chart>> getChartList() async {
     favoriteCharts = await rest.getChartList(chartList: list);

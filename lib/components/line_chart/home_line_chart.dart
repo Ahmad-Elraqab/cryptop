@@ -7,8 +7,10 @@ class HomeLineChart extends StatelessWidget {
     this.padding = 30.0,
     this.color = Colors.transparent,
     this.data,
+    this.height = 50,
   }) : super(key: key);
 
+  final double? height;
   final double? padding;
   final Color? color;
   final List<FlSpot>? data;
@@ -18,7 +20,7 @@ class HomeLineChart extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         padding: const EdgeInsets.only(bottom: 10.0),
-        height: 50,
+        height: height,
         color: color,
         width: MediaQuery.of(context).size.width * 0.5,
         child: LineChart(
@@ -45,7 +47,8 @@ class HomeLineChart extends StatelessWidget {
                 isCurved: true,
                 dotData: FlDotData(
                   checkToShowDot: (FlSpot point, LineChartBarData _data) {
-                    if (point == data![0] || point == data![data!.length - 1]) {
+                    if (point.x == data![0].x ||
+                        point.x == data![data!.length - 1].x && data != null) {
                       return true;
                     }
                     return false;

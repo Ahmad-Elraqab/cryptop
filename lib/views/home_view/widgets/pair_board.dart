@@ -76,6 +76,7 @@ class PairBoard extends StatelessWidget {
                           return Stack(
                             children: [
                               HomeLineChart(
+                                height: 100.0,
                                 data: data![activeBoard!]
                                     .candles!
                                     .map((e) => FlSpot(
