@@ -1,5 +1,7 @@
 import 'package:cryptop/app/const.dart';
+import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/models/ticker_model.dart';
 import 'package:flutter/material.dart';
 
 class SearchRow extends StatelessWidget {
@@ -8,12 +10,16 @@ class SearchRow extends StatelessWidget {
     this.index,
     this.onTap,
     this.data,
+    this.ticker,
   }) : super(key: key);
   final List? data;
   final int? index;
   final Function? onTap;
+  final Ticker? ticker;
   @override
   Widget build(BuildContext context) {
+    final color =
+        ticker!.priceChangePercent! < 0 ? Colors.red[300] : Colors.green[300];
     return InkWell(
       onTap: () =>
           Navigator.pushNamed(context, rCoin, arguments: data![index!]),
@@ -63,34 +69,53 @@ class SearchRow extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Row(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Image.asset('lib/assets/bitcoin.png'),
-                      const SizedBox(
-                        width: 5.0,
-                      ),
-                      const TextComponent(
+                      TextComponent(
                         align: TextAlign.start,
                         fontSize: 14.0,
                         line: 1,
+                        textColor: ticker!.priceChangePercent! == 0
+                            ? Colors.white
+                            : color,
+                        title: ticker!.lastPrice!.toString(),
+                        weight: FontWeight.bold,
+                      ),
+                      TextComponent(
+                        align: TextAlign.start,
+                        fontSize: 9.0,
+                        line: 1,
                         textColor: Colors.white,
-                        title: 'Binance',
+                        title: ticker!.volume!.toStringAsFixed(2) + ' vol',
                         weight: FontWeight.bold,
                       ),
                     ],
                   ),
-                  const TextComponent(
-                    align: TextAlign.end,
-                    fontSize: 9.0,
-                    line: 1,
-                    textColor: Colors.white,
-                    title: 'crypto',
-                    weight: FontWeight.bold,
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  SizedBox(
+                    width: 60.0,
+                    child: CustomButtom(
+                      fontSize: 14,
+                      borderColor: Colors.transparent,
+                      borderRadius: 5.0,
+                      height: null,
+                      horizontal: 8,
+                      width: 100.0,
+                      vertical: 5,
+                      buttonTextColor: Colors.white,
+                      hasImage: false,
+                      buttonColor: color,
+                      buttonText:
+                          ticker!.priceChangePercent!.toStringAsFixed(1) + '%',
+                      imageUrl: '',
+                      onTap: () => {},
+                    ),
                   ),
                 ],
               ),
