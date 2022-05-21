@@ -45,7 +45,8 @@ class HomeLineChart extends StatelessWidget {
                 isCurved: true,
                 dotData: FlDotData(
                   checkToShowDot: (FlSpot point, LineChartBarData _data) {
-                    if (point == data![0] || point == data![data!.length - 1]) {
+                    if (point.x == data![0].x ||
+                        point.x == data![data!.length - 1].x) {
                       return true;
                     }
                     return false;
