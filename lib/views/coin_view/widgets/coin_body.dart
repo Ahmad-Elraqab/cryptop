@@ -7,24 +7,24 @@ import 'package:cryptop/components/trade_action_button/trade_action_button.dart'
 import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/views/coin_view/widgets/favourite_coin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../models/ticker_model.dart';
 
 class CoinBody extends StatefulWidget {
   const CoinBody({
     Key? key,
-    this.candles,
     this.setTradeType,
     this.title,
-    this.kline,
+    this.chart,
     this.ticker,
-    this.chartList,
+    this.fcharts,
+    this.tickers,
   }) : super(key: key);
 
-  final List<Chart>? chartList;
-  final List<Candle>? candles;
+  final Chart? chart;
+  final List<Chart>? fcharts;
+  final List<Ticker>? tickers;
+  final Ticker? ticker;
   final String? title;
-  final AsyncValue? kline;
-  final AsyncValue? ticker;
   final Function? setTradeType;
 
   @override
@@ -43,7 +43,7 @@ class _CoinBodyState extends State<CoinBody> {
           title: widget.title.toString(),
         ),
         const SizedBox(height: 10.0),
-        CoinDetail(ticker: widget.ticker, kline: widget.kline),
+        CoinDetail(ticker: widget.ticker, kline: widget.chart),
         const SizedBox(height: 20.0),
         TradeActionButton(
           setTradeType: widget.setTradeType,
@@ -53,10 +53,10 @@ class _CoinBodyState extends State<CoinBody> {
           height: 300.0,
           color: Colors.transparent,
           width: MediaQuery.of(context).size.width,
-          child: widget.candles == null
+          child: widget.chart == null
               ? const LoadingAnimation()
               : Candlesticks(
-                  candles: widget.candles!,
+                  candles: widget.chart!.candles!,
                 ),
         ),
         const Padding(
@@ -70,7 +70,10 @@ class _CoinBodyState extends State<CoinBody> {
             weight: FontWeight.bold,
           ),
         ),
-        FavouriteCoins(candles: widget.chartList)
+        FavouriteCoins(
+          candles: widget.fcharts,
+          tickers: widget.tickers,
+        )
       ],
     );
   }

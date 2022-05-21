@@ -1,4 +1,5 @@
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
+import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_action.dart';
 import 'package:cryptop/views/coin_view/widgets/coin_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,6 +19,7 @@ class _CoinViewState extends State<CoinView> {
   @override
   void initState() {
     context.read(chartViewmodel).setCoin(widget.data);
+    context.read(tickerViewmodel).setCoin(widget.data);
     super.initState();
   }
 
@@ -31,18 +33,21 @@ class _CoinViewState extends State<CoinView> {
           color: const Color.fromRGBO(55, 61, 76, 1),
           child: Consumer(
             builder: (context, watch, child) {
-              final data = watch(getKlines).data?.value;
-              final kline = watch(klineProvider);
-              final ticker = watch(tickerProvider);
-              kline.data != null
-                  ? watch(chartViewmodel).updateCandle(kline.data!.value)
-                  : null;
-              final chartList = watch(chartViewmodel).chartList;
+              watch(klineProvider).whenData(
+                  (value) => watch(chartViewmodel).updateCandle(value));
+              watch(tickerProvider).whenData(
+                  (value) => watch(tickerViewmodel).updateTicker(value));
+
+              final chart = watch(getKlines).data?.value;
+              final ticker = watch(getTicker).data?.value;
+              final fcharts = watch(chartViewmodel).favoriteCharts;
+              final tickers = watch(tickerViewmodel).tickers;
+
               return CoinBody(
-                chartList: chartList,
-                candles: data,
-                kline: kline,
+                chart: chart,
+                fcharts: fcharts,
                 ticker: ticker,
+                tickers: tickers,
                 title: widget.data.toString(),
                 setTradeType: setTradeType,
               );

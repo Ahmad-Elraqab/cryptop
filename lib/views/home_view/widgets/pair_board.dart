@@ -3,8 +3,10 @@ import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/components/line_chart/home_line_chart.dart';
 import 'package:cryptop/models/chart_model.dart';
+import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_details.dart';
 import 'package:cryptop/views/home_view/widgets/home_line_chart_slider.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class PairBoard extends StatelessWidget {
@@ -13,11 +15,13 @@ class PairBoard extends StatelessWidget {
     Key? key,
     this.data,
     this.setIndex,
+    this.tickers,
   }) : super(key: key);
 
   final int? activeBoard;
   final Function? setIndex;
   final List<Chart>? data;
+  final List<Ticker>? tickers;
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +55,12 @@ class PairBoard extends StatelessWidget {
             ],
           ),
         ),
-        data == null
-            ? const LoadingAnimation()
-            : Container(
-                height: 200.0,
-                color: const Color.fromRGBO(55, 61, 76, 1),
-                child: Column(
+        Container(
+          height: 200.0,
+          color: const Color.fromRGBO(55, 61, 76, 1),
+          child: tickers == null || data == null
+              ? LoadingAnimation()
+              : Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(
@@ -72,7 +76,13 @@ class PairBoard extends StatelessWidget {
                           return Stack(
                             children: [
                               HomeLineChart(
-                                data: data![activeBoard!].candles,
+                                data: data![activeBoard!]
+                                    .candles!
+                                    .map((e) => FlSpot(
+                                        e.date.millisecondsSinceEpoch
+                                            .toDouble(),
+                                        e.close))
+                                    .toList(),
                               ),
                               Align(
                                 alignment: Alignment.topCenter,
@@ -84,15 +94,25 @@ class PairBoard extends StatelessWidget {
                                     line: 1,
                                     textColor:
                                         const Color.fromARGB(255, 35, 136, 41),
-                                    title: data![activeBoard!]
-                                        .candles![0]
-                                        .y
+                                    title: tickers!
+                                        .where((element) =>
+                                            element.symbol ==
+                                            data![activeBoard!].symbol)
+                                        .first
+                                        .lastPrice
                                         .toString(),
                                     weight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              HomeLineChartDetails(chart: data![activeBoard!]),
+                              HomeLineChartDetails(
+                                ticker: tickers!
+                                    .where((element) =>
+                                        element.symbol ==
+                                        data![activeBoard!].symbol)
+                                    .first,
+                                chart: data![activeBoard!],
+                              ),
                             ],
                           );
                         },
@@ -104,7 +124,7 @@ class PairBoard extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
+        ),
       ],
     );
   }

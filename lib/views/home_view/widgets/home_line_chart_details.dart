@@ -1,13 +1,16 @@
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/models/chart_model.dart';
+import 'package:cryptop/models/ticker_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeLineChartDetails extends StatelessWidget {
   const HomeLineChartDetails({
     Key? key,
+    this.ticker,
     this.chart,
   }) : super(key: key);
 
+  final Ticker? ticker;
   final Chart? chart;
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,7 @@ class HomeLineChartDetails extends StatelessWidget {
                 fontSize: 14.0,
                 line: 1,
                 textColor: Colors.white,
-                title: '${chart!.rate} %',
+                title: '${ticker!.priceChangePercent} %',
                 weight: FontWeight.bold,
               ),
             ],

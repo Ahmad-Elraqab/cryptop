@@ -18,7 +18,7 @@ class HomeLineChart extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         padding: const EdgeInsets.only(bottom: 10.0),
-        height: 100,
+        height: 50,
         color: color,
         width: MediaQuery.of(context).size.width * 0.5,
         child: LineChart(

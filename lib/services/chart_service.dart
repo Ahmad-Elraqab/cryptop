@@ -1,10 +1,7 @@
-import 'dart:convert';
-
-import 'package:candlesticks/candlesticks.dart';
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/chart_model.dart';
+import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/services/rest_service..dart';
-import 'package:http/http.dart' as http;
 
 class ChartService {
   RestService get rest => dependency();
@@ -12,7 +9,7 @@ class ChartService {
   Future<List<Chart>?> getChartList({chartList}) async {
     final List json =
         await rest.post('charts/chartsList', {'chartList': chartList});
-    if (json == null || json.isEmpty) return null;
+    if (json.isEmpty) return null;
 
     final data =
         json.map((e) => Chart.fromJson(e as Map<String, dynamic>)).toList();
@@ -26,24 +23,30 @@ class ChartService {
     if (json == null || json.isEmpty) return null;
 
     final data =
-        json.map((e) => Chart.fromJson(e as Map<String, dynamic>)).toList();
+        json.map((e) => Ticker.fromJson(e as Map<String, dynamic>)).toList();
 
     return data;
   }
 
-  Future<List<Candle>?> fetchCandles(String coin, String interval) async {
-    final uri = Uri.parse(
-        "https://api.binance.com/api/v3/klines?symbol=${coin}&interval=${interval}&limit=100");
-    final json = await http.get(uri);
+  Future<Chart?> fetchCandles(String coin, String interval) async {
+    final json =
+        await rest.get('charts/chart?symbol=' + coin + '&interval=' + interval);
 
-    if (json.body.isEmpty) {
+    if (json == null) {
       return null;
     }
-    final data = (jsonDecode(json.body) as List<dynamic>)
-        .map((e) => Candle.fromJson(e))
-        .toList()
-        .reversed
-        .toList();
+    final data = Chart.fromJson(json);
+
+    return data;
+  }
+
+  Future<Ticker?> getTicker(String coin) async {
+    final json = await rest.get('charts/ticker?symbol=' + coin);
+
+    if (json == null) {
+      return null;
+    }
+    final data = Ticker.fromJson(json);
 
     return data;
   }

@@ -1,6 +1,7 @@
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/models/chart_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/ticker_model.dart';
 
 class CoinDetail extends StatelessWidget {
   const CoinDetail({
@@ -8,8 +9,8 @@ class CoinDetail extends StatelessWidget {
     this.kline,
     this.ticker,
   }) : super(key: key);
-  final AsyncValue? kline;
-  final AsyncValue? ticker;
+  final Chart? kline;
+  final Ticker? ticker;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,10 +33,8 @@ class CoinDetail extends StatelessWidget {
                 fontSize: 22,
                 line: 1,
                 textColor: const Color.fromARGB(255, 250, 131, 125),
-                title: ticker!.data == null
-                    ? ''
-                    : double.parse(ticker!.data!.value['data']['c'])
-                        .toStringAsFixed(2),
+                title:
+                    ticker == null ? '' : ticker!.lastPrice!.toStringAsFixed(2),
                 weight: FontWeight.bold,
               ),
               subtitle: TextComponent(
@@ -43,9 +42,8 @@ class CoinDetail extends StatelessWidget {
                 fontSize: 16,
                 line: 1,
                 textColor: const Color.fromARGB(188, 94, 242, 212),
-                title: ticker!.data == null
-                    ? ''
-                    : ticker!.data!.value['data']['P'].toString(),
+                title:
+                    ticker == null ? '' : ticker!.priceChangePercent.toString(),
                 weight: FontWeight.bold,
               ),
             ),
@@ -55,33 +53,25 @@ class CoinDetail extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                kline!.data == null
+                kline == null
                     ? _row('......', '......')
                     : _row(
                         ('High : ' +
-                            double.parse(kline!.data!.value['data']['k']['h'])
-                                .toStringAsFixed(2)),
-                        ('Low : ' +
-                            double.parse(kline!.data!.value['data']['k']['l'])
-                                .toStringAsFixed(2))),
-                kline!.data == null
+                            kline!.candles![0].high.toStringAsFixed(2)),
+                        ('Low : ' + kline!.candles![0].low.toStringAsFixed(2))),
+                kline == null
                     ? _row('......', '......')
                     : _row(
                         ('Close : ' +
-                            double.parse(kline!.data!.value['data']['k']['c'])
-                                .toStringAsFixed(2)),
+                            kline!.candles![0].close.toStringAsFixed(2)),
                         ('Open : ' +
-                            double.parse(kline!.data!.value['data']['k']['o'])
-                                .toStringAsFixed(2))),
-                kline!.data == null
+                            kline!.candles![0].open.toStringAsFixed(2))),
+                kline == null
                     ? _row('......', '......')
                     : _row(
-                        ('V : ' +
-                            double.parse(kline!.data!.value['data']['k']['v'])
-                                .toStringAsFixed(2)),
+                        ('V : ' + kline!.candles![0].volume.toStringAsFixed(2)),
                         ('Q : ' +
-                            double.parse(kline!.data!.value['data']['k']['q'])
-                                .toStringAsFixed(2))),
+                            kline!.candles![0].volume.toStringAsFixed(2))),
               ],
             ),
           ),

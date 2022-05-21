@@ -1,5 +1,7 @@
+import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/models/chart_model.dart';
+import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/views/home_view/widgets/market_movement.dart';
 import 'package:cryptop/views/home_view/widgets/pair_board.dart';
 import 'package:cryptop/views/home_view/widgets/app_bar.dart';
@@ -16,12 +18,13 @@ class HomeBody extends StatelessWidget {
     this.ticker_24,
   }) : super(key: key);
 
+  final List<Ticker>? ticker_24;
+  final List<Chart>? data;
+
   final Function? setIndex;
   final Function? setIndexList;
   final int? activeBoard;
   final int? activeIndexList;
-  final List? ticker_24;
-  final List<Chart>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class HomeBody extends StatelessWidget {
           activeBoard: activeBoard!,
           data: data,
           setIndex: setIndex,
+          tickers: ticker_24,
         ),
         Container(
           height: 50.0,

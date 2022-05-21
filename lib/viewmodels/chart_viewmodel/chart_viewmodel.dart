@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:candlesticks/candlesticks.dart';
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/chart_model.dart';
@@ -15,9 +14,9 @@ class ChartViewmodel extends ChangeNotifier {
   ];
   ChartService get rest => dependency();
 
-  List tickers = [];
-  List<Candle>? candles = [];
-  List<Chart>? chartList = [];
+  Chart? liveChart;
+  List<Chart>? favoriteCharts = [];
+
   String? coin;
   String? interval = '1m';
 
@@ -25,55 +24,21 @@ class ChartViewmodel extends ChangeNotifier {
   setInterval(value) => coin = value;
 
   Future<List<Chart>> getChartList() async {
-    chartList = await rest.getChartList(chartList: list);
+    favoriteCharts = await rest.getChartList(chartList: list);
 
-    return chartList!;
+    return favoriteCharts!;
   }
 
-  Future<List?> get24Ticker() async {
-    tickers = await rest.get24Ticker();
+  Future<Chart> fetchCandles() async {
+    liveChart = await rest.fetchCandles(coin!, interval!);
 
-    return tickers;
-  }
-
-  List sort(index, value) {
-    final data = tickers;
-
-    if (value != null && tickers.isNotEmpty) {
-      final json = jsonDecode(value);
-      final Chart coin = data
-          .where((element) => element.symbol == json['data']['s'])
-          .toList()[0];
-
-      coin.rate = double.parse(json['data']['P']);
-      coin.lastPrice = double.parse(json['data']['c']);
-      coin.volume = double.parse(json['data']['v']);
-
-      data.sort((a, b) {
-        if (index == 0) {
-          return a.rate.compareTo(b.rate);
-        } else if (index == 1) {
-          return b.rate.compareTo(a.rate);
-        } else {
-          return b.volume.compareTo(a.volume);
-        }
-      });
-      return data;
-    }
-
-    return data;
-  }
-
-  Future<List<Candle>> fetchCandles() async {
-    candles = await rest.fetchCandles(coin!, interval!);
-
-    return candles!;
+    return liveChart!;
   }
 
   void updateCandle(value) {
     final data = value['data']['k'];
     final date1 = DateTime.fromMillisecondsSinceEpoch(value['data']['k']['t']);
-    final date2 = candles![0].date.toLocal();
+    final date2 = liveChart!.candles![0].date.toLocal();
     final obj = Candle(
         date: date1,
         high: double.parse(data['h']),
@@ -82,9 +47,9 @@ class ChartViewmodel extends ChangeNotifier {
         close: double.parse(data['c']),
         volume: double.parse(data['v']));
     if (date1 == date2) {
-      candles![0] = obj;
+      liveChart!.candles![0] = obj;
     } else {
-      candles!.insert(0, obj);
+      liveChart!.candles!.insert(0, obj);
     }
   }
 }
