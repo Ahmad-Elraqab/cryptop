@@ -1,10 +1,14 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/components/line_chart/home_line_chart.dart';
 import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/models/ticker_model.dart';
+import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
+import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_action.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FavouriteCoins extends StatelessWidget {
   const FavouriteCoins({
@@ -27,7 +31,11 @@ class FavouriteCoins extends StatelessWidget {
               children: [
                 for (int i = 0; i < candles!.length; i++)
                   InkWell(
-                    onTap: () => {},
+                    onTap: () => {
+                      context.read(chartViewmodel).setCoin(candles![i].symbol),
+                      context.read(chartViewmodel).setInterval('4h'),
+                      Navigator.popAndPushNamed(context, rCoin)
+                    },
                     child: Container(
                       margin: const EdgeInsets.all(8.0),
                       padding: const EdgeInsets.all(8.0),

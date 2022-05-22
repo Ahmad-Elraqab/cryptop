@@ -67,7 +67,7 @@ class RouteManager {
         builder = const SearchView();
         break;
       case rCoin:
-        builder = CoinView(data: settings.arguments);
+        builder = CoinView();
         break;
       case rOrderbook:
         builder = const OrderbookView();
@@ -94,17 +94,17 @@ class RouteManager {
       default:
         throw Exception('Invalid route: ${settings.name}');
     }
-
-    // return MaterialPageRoute(
-    //   builder: builder,
-    //   settings: settings,
-    // );
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => builder,
-      settings: settings,
-      transitionsBuilder: (c, anim, a2, child) =>
-          FadeTransition(opacity: anim, child: child),
-      transitionDuration: const Duration(milliseconds: 200),
-    );
+    return settings.name == rCoin
+        ? MaterialPageRoute(
+            builder: (context) => builder,
+            settings: settings,
+          )
+        : PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => builder,
+            settings: settings,
+            transitionsBuilder: (c, anim, a2, child) =>
+                FadeTransition(opacity: anim, child: child),
+            transitionDuration: Duration(milliseconds: 200),
+          );
   }
 }

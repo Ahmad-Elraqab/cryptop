@@ -3,6 +3,9 @@ import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/models/ticker_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../viewmodels/chart_viewmodel/chart_action.dart';
 
 class SearchRow extends StatelessWidget {
   const SearchRow({
@@ -18,8 +21,11 @@ class SearchRow extends StatelessWidget {
         ? Color.fromARGB(255, 255, 97, 97)
         : Color.fromARGB(255, 40, 211, 163);
     return InkWell(
-      onTap: () =>
-          Navigator.pushNamed(context, rCoin, arguments: ticker!.symbol),
+      onTap: () => {
+        context.read(chartViewmodel).setCoin(ticker!.symbol),
+        context.read(chartViewmodel).setInterval('4h'),
+        Navigator.pushNamed(context, rCoin),
+      },
       child: Container(
         height: 70.0,
         margin: const EdgeInsets.symmetric(vertical: 0.0),

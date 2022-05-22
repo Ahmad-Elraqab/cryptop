@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CoinView extends StatefulWidget {
-  const CoinView({Key? key, this.data}) : super(key: key);
+  const CoinView({Key? key}) : super(key: key);
 
-  final Object? data;
+  // final Object? data;
   @override
   State<CoinView> createState() => _CoinViewState();
 }
@@ -16,12 +16,12 @@ class _CoinViewState extends State<CoinView> {
   // ignore: avoid_print
   setTradeType(value) => setState(() => print(value));
 
-  @override
-  void initState() {
-    context.read(chartViewmodel).coin = widget.data.toString();
-    context.read(chartViewmodel).interval = '4h';
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   context.read(chartViewmodel).coin = widget.data.toString();
+  //   context.read(chartViewmodel).interval = '4h';
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _CoinViewState extends State<CoinView> {
                 chart: chart,
                 fcharts: fcharts,
                 tickers: tickers,
-                title: widget.data.toString(),
+                title: watch(chartViewmodel).coin,
                 setTradeType: setTradeType,
               );
             },

@@ -50,11 +50,17 @@ class SearchBody extends StatelessWidget {
             (a, b) => b.priceChangePercent!.compareTo(a.priceChangePercent!));
       }
     }
-    if (type == 'Spot') {
-      return tickers;
+    if (type == 'Spot' && tickers != null) {
+      return tickers!
+          .where(
+              (e) => e.symbol!.toLowerCase().startsWith(searchController!.text))
+          .toList();
     } else {
       return fav
           .map((e) => tickers!.where((v) => v.symbol == e).first)
+          .toList()
+          .where(
+              (v) => v.symbol!.toLowerCase().startsWith(searchController!.text))
           .toList();
     }
   }
