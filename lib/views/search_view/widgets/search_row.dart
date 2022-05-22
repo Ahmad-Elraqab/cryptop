@@ -7,22 +7,19 @@ import 'package:flutter/material.dart';
 class SearchRow extends StatelessWidget {
   const SearchRow({
     Key? key,
-    this.index,
-    this.onTap,
-    this.data,
     this.ticker,
+    this.favorite,
   }) : super(key: key);
-  final List? data;
-  final int? index;
-  final Function? onTap;
   final Ticker? ticker;
+  final List? favorite;
   @override
   Widget build(BuildContext context) {
-    final color =
-        ticker!.priceChangePercent! < 0 ? Colors.red[300] : Colors.green[300];
+    final color = ticker!.priceChangePercent! < 0
+        ? Color.fromARGB(255, 255, 97, 97)
+        : Color.fromARGB(255, 40, 211, 163);
     return InkWell(
       onTap: () =>
-          Navigator.pushNamed(context, rCoin, arguments: data![index!]),
+          Navigator.pushNamed(context, rCoin, arguments: ticker!.symbol),
       child: Container(
         height: 70.0,
         margin: const EdgeInsets.symmetric(vertical: 0.0),
@@ -49,12 +46,14 @@ class SearchRow extends StatelessWidget {
                         fontSize: 14.0,
                         line: 1,
                         textColor: Colors.white,
-                        title: data![index!],
+                        title: ticker!.symbol,
                         weight: FontWeight.bold,
                       ),
-                      const Icon(
+                      Icon(
                         Icons.star,
-                        color: Colors.white,
+                        color: favorite!.contains(ticker!.symbol)
+                            ? Colors.amberAccent
+                            : Colors.white,
                         size: 20,
                       )
                     ],
@@ -99,7 +98,7 @@ class SearchRow extends StatelessWidget {
                     width: 10.0,
                   ),
                   SizedBox(
-                    width: 60.0,
+                    width: 80.0,
                     child: CustomButtom(
                       fontSize: 14,
                       borderColor: Colors.transparent,

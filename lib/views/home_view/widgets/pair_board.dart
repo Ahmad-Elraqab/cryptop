@@ -25,6 +25,11 @@ class PairBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _ticker = tickers != null && data != null
+        ? tickers!
+            .where((element) => element.symbol == data![activeBoard!].symbol)
+            .first
+        : null;
     return Column(
       children: [
         Container(
@@ -93,25 +98,17 @@ class PairBoard extends StatelessWidget {
                                     align: TextAlign.center,
                                     fontSize: 16.0,
                                     line: 1,
-                                    textColor:
-                                        const Color.fromARGB(255, 35, 136, 41),
-                                    title: tickers!
-                                        .where((element) =>
-                                            element.symbol ==
-                                            data![activeBoard!].symbol)
-                                        .first
-                                        .lastPrice
-                                        .toString(),
+                                    textColor: _ticker!.priceChangePercent! < 0
+                                        ? Color.fromARGB(255, 255, 97, 97)
+                                        : const Color.fromARGB(
+                                            255, 40, 211, 163),
+                                    title: _ticker.lastPrice.toString(),
                                     weight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                               HomeLineChartDetails(
-                                ticker: tickers!
-                                    .where((element) =>
-                                        element.symbol ==
-                                        data![activeBoard!].symbol)
-                                    .first,
+                                ticker: _ticker,
                                 chart: data![activeBoard!],
                               ),
                             ],

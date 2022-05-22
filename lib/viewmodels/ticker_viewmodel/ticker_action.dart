@@ -18,12 +18,11 @@ final get24Ticker = FutureProvider<List<Ticker>?>(
   },
 );
 
-final messageProvider = StreamProvider<dynamic>((ref) async* {
+final messageProvider = StreamProvider.autoDispose<dynamic>((ref) async* {
   var url = '';
   for (var item in exchange_pairs) {
     url += item.toLowerCase() + '@ticker/';
   }
-  final user = ref.watch(tickerViewmodel);
 
   final channel = IOWebSocketChannel.connect(
       'wss://stream.binance.com:9443/stream?streams=' +

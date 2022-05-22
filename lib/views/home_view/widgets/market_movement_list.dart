@@ -65,9 +65,9 @@ class _MarketMovementListState extends State<MarketMovementList> {
                     width: 100.0,
                     vertical: 3,
                     buttonColor: widget.activeIndexList == 1
-                        ? Colors.green[300]
+                        ? Color.fromARGB(255, 40, 211, 163)
                         : widget.activeIndexList == 0
-                            ? Colors.red[300]
+                            ? Color.fromARGB(255, 255, 97, 97)
                             : Colors.yellow[700],
                     buttonText: (tickers == null
                         ? ''

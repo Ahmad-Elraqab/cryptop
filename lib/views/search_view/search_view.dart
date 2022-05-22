@@ -17,7 +17,21 @@ class _SearchViewState extends State<SearchView> {
   setSearch() => setState(() => {});
 
   // ignore: avoid_print
-  onTap(index) => setState(() => print(index));
+  String listType = 'Spot';
+  onTap(type) => setState(() => listType = type);
+
+  var filter = {'index': 0, 'value': false};
+
+  setFilter(value) => setState(() {
+        print(!(filter['value'] as bool));
+        if (value == filter['index']) {
+          filter['value'] = !(filter['value'] as bool);
+        } else {
+          filter['index'] = value;
+          filter['value'] = false;
+        }
+      });
+
   List<Ticker>? ticker_24;
 
   @override
@@ -39,6 +53,9 @@ class _SearchViewState extends State<SearchView> {
               searchController: searchController,
               setSearch: setSearch,
               onTap: onTap,
+              type: listType,
+              filter: filter,
+              setFilter: setFilter,
             ),
           );
         }),
