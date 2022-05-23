@@ -1,9 +1,12 @@
+import 'package:cryptop/viewmodels/trade_viewmodel/trade_action.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TradeView extends StatefulWidget {
-  const TradeView({Key? key}) : super(key: key);
+  const TradeView({Key? key, this.data = 'BTCUSDT'}) : super(key: key);
 
+  final String? data;
   @override
   State<TradeView> createState() => _TradeViewState();
 }
@@ -77,26 +80,30 @@ class _TradeViewState extends State<TradeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        color: const Color.fromRGBO(55, 61, 76, 1),
-        child: SingleChildScrollView(
-          child: TradeBody(
-            activeIndexList: activeIndexList,
-            limit: limit,
-            pair: pair,
-            stop: stop,
-            price: price,
-            setIndexList: setIndexList,
-            setItem: setItem,
-            setSlider: setSlider,
-            setTradeType: setTradeType,
-            slider: slider,
-            tether: tether,
-            tradeType: tradeType,
+      body: Consumer(builder: (context, watch, child) {
+        final value = watch(tradeViewmodel);
+        final value2 = watch(tradeViewmodel);
+        return Container(
+          height: MediaQuery.of(context).size.height,
+          color: const Color.fromRGBO(55, 61, 76, 1),
+          child: SingleChildScrollView(
+            child: TradeBody(
+              activeIndexList: activeIndexList,
+              limit: limit,
+              pair: pair,
+              stop: stop,
+              price: price,
+              setIndexList: setIndexList,
+              setItem: setItem,
+              setSlider: setSlider,
+              setTradeType: setTradeType,
+              slider: slider,
+              tether: tether,
+              tradeType: tradeType,
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

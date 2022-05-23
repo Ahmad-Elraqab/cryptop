@@ -8,16 +8,30 @@ class TickerViewmodel extends ChangeNotifier {
 
   List<Ticker>? tickers;
 
-  getSortedTicker(index) {
+  init() async {
+    await get24Ticker();
+    notifyListeners();
+  }
+
+  List<Ticker>? getSortedTicker(String index) {
     if (tickers != null)
       tickers!.sort((a, b) {
-        if (index == 0) {
-          return a.priceChangePercent!.compareTo(b.priceChangePercent!);
-        } else if (index == 1) {
-          return b.priceChangePercent!.compareTo(a.priceChangePercent!);
-        } else {
-          return b.volume!.compareTo(a.volume!);
+        switch (index) {
+          case 'C_UP':
+            return a.priceChangePercent!.compareTo(b.priceChangePercent!);
+          case 'C_DOWN':
+            return b.priceChangePercent!.compareTo(a.priceChangePercent!);
+          case 'V_UP':
+            return b.volume!.compareTo(a.volume!);
+          case 'V_DOWN':
+            return a.volume!.compareTo(b.volume!);
+          case 'N_UP':
+            return b.symbol!.compareTo(a.symbol!);
+          case 'N_DOWN':
+            return a.symbol!.compareTo(b.symbol!);
+          default:
         }
+        return a.symbol!.compareTo(b.symbol!);
       });
     return tickers;
   }
@@ -37,9 +51,6 @@ class TickerViewmodel extends ChangeNotifier {
       coin.priceChangePercent = double.parse(json['data']['P']);
       coin.lastPrice = double.parse(json['data']['c']);
       coin.volume = double.parse(json['data']['v']);
-
-      // return a.priceChangePercent!.compareTo(b.priceChangePercent!);
-
     }
   }
 }

@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_socket_channel/io.dart';
 import '../../models/chart_model.dart';
 
-final chartViewmodel = ChangeNotifierProvider((ref) => ChartViewmodel());
+final chartViewmodel =
+    ChangeNotifierProvider((ref) => ChartViewmodel()..init());
 
 final getChartList = FutureProvider<List<Chart>?>(
   (ref) async {

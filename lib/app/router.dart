@@ -94,17 +94,18 @@ class RouteManager {
       default:
         throw Exception('Invalid route: ${settings.name}');
     }
-    return settings.name == rCoin
-        ? MaterialPageRoute(
-            builder: (context) => builder,
-            settings: settings,
-          )
-        : PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => builder,
-            settings: settings,
-            transitionsBuilder: (c, anim, a2, child) =>
-                FadeTransition(opacity: anim, child: child),
-            transitionDuration: Duration(milliseconds: 200),
-          );
+    // return settings.name == rCoin
+    //     ? MaterialPageRoute(
+    //         builder: (context) => builder,
+    //         settings: settings,
+    //       )
+    //     :
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => builder,
+      settings: settings,
+      transitionsBuilder: (c, anim, a2, child) =>
+          FadeTransition(opacity: anim, child: child),
+      transitionDuration: Duration(milliseconds: 200),
+    );
   }
 }

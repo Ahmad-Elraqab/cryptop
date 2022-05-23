@@ -1,8 +1,8 @@
 import 'package:cryptop/models/ticker_model.dart';
+import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
 import 'package:cryptop/views/search_view/widgets/search_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../viewmodels/ticker_viewmodel/ticker_action.dart';
 
 class SearchView extends StatefulWidget {
@@ -14,34 +14,45 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   TextEditingController searchController = TextEditingController();
-  setSearch() => setState(() => {});
 
-  // ignore: avoid_print
   String listType = 'Spot';
   onTap(type) => setState(() => listType = type);
 
-  var filter = {'index': 0, 'value': false};
+  setSearch() => setState(() => {});
 
-  setFilter(value) => setState(() {
-        print(!(filter['value'] as bool));
-        if (value == filter['index']) {
-          filter['value'] = !(filter['value'] as bool);
-        } else {
-          filter['index'] = value;
-          filter['value'] = false;
-        }
-      });
+  String filter = 'C_UP';
+  setFilter(value) => setState(() => {filter = value});
 
-  List<Ticker>? ticker_24;
+  List<Ticker>? getList(List<Ticker>? ticker_24, favorite) {
+    if (listType == 'Favorite' && ticker_24 != null) {
+      return ticker_24
+          .where((e) =>
+              favorite.contains(e.symbol) &&
+              e.symbol!.toLowerCase().startsWith(searchController.text))
+          .toList();
+    } else if (listType == 'Spot' && ticker_24 != null) {
+      return ticker_24
+          .where(
+              (e) => e.symbol!.toLowerCase().startsWith(searchController.text))
+          .toList();
+    }
+    return ticker_24;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Consumer(builder: (context, watch, child) {
-          ticker_24 = watch(get24Ticker).data?.value;
-          watch(messageProvider).whenData(
-              (value) => {watch(tickerViewmodel).updateTickers(value)});
+          List<Ticker>? ticker_24 =
+              watch(tickerViewmodel).getSortedTicker(filter);
+          final favorite = context
+              .read(chartViewmodel)
+              .list
+              .map((e) => e['symbol'])
+              .toList();
+
+          final data = getList(ticker_24, favorite);
 
           return Container(
             height: MediaQuery.of(context).size.height,
@@ -49,13 +60,14 @@ class _SearchViewState extends State<SearchView> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: SearchBody(
-              tickers: ticker_24,
               searchController: searchController,
-              setSearch: setSearch,
-              onTap: onTap,
+              tickers: data,
+              favorite: favorite,
               type: listType,
               filter: filter,
+              onTap: onTap,
               setFilter: setFilter,
+              setSearch: setSearch,
             ),
           );
         }),

@@ -15,7 +15,7 @@ class ChartViewmodel extends ChangeNotifier {
   ChartService get rest => dependency();
 
   Chart? liveChart;
-  List<Chart>? favoriteCharts = [];
+  List<Chart>? favoriteCharts;
 
   String? coin;
   String? interval;
@@ -27,6 +27,11 @@ class ChartViewmodel extends ChangeNotifier {
 
   setInterval(value) {
     interval = value;
+    notifyListeners();
+  }
+
+  init() async {
+    await getChartList();
     notifyListeners();
   }
 

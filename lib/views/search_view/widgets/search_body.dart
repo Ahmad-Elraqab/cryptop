@@ -2,75 +2,36 @@ import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/custom_text_field/custom_text_field.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/models/ticker_model.dart';
-import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
 import 'package:cryptop/views/search_view/widgets/filter_buttons.dart';
 import 'package:cryptop/views/search_view/widgets/search_row.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchBody extends StatelessWidget {
-  const SearchBody({
+  SearchBody({
     Key? key,
     this.searchController,
-    this.setSearch,
     this.onTap,
     this.tickers,
     this.type,
     this.setFilter,
     this.filter,
+    this.favorite,
+    this.setSearch,
   }) : super(key: key);
 
   final TextEditingController? searchController;
-  final Function? setSearch;
-  final Function? onTap;
-  final String? type;
-  final Function? setFilter;
-  final Map? filter;
+  final String? filter;
+  final List? favorite;
   final List<Ticker>? tickers;
+  final String? type;
+  final Function? onTap;
+  final Function? setSearch;
+  final Function? setFilter;
 
-  List<Ticker>? _filter(List fav) {
-    if (filter!['index'] == 1) {
-      if (filter!['value'] == false) {
-        tickers!.sort((a, b) => a.symbol!.compareTo(b.symbol!));
-      } else {
-        tickers!.sort((a, b) => b.symbol!.compareTo(a.symbol!));
-      }
-    } else if (filter!['index'] == 2) {
-      if (filter!['value'] == false) {
-        tickers!.sort((a, b) => a.volume!.compareTo(b.volume!));
-      } else {
-        tickers!.sort((a, b) => b.volume!.compareTo(a.volume!));
-      }
-    } else if (filter!['index'] == 3) {
-      if (filter!['value'] == false) {
-        tickers!.sort(
-            (a, b) => a.priceChangePercent!.compareTo(b.priceChangePercent!));
-      } else {
-        tickers!.sort(
-            (a, b) => b.priceChangePercent!.compareTo(a.priceChangePercent!));
-      }
-    }
-    if (type == 'Spot' && tickers != null) {
-      return tickers!
-          .where(
-              (e) => e.symbol!.toLowerCase().startsWith(searchController!.text))
-          .toList();
-    } else {
-      return fav
-          .map((e) => tickers!.where((v) => v.symbol == e).first)
-          .toList()
-          .where(
-              (v) => v.symbol!.toLowerCase().startsWith(searchController!.text))
-          .toList();
-    }
-  }
+  final List<String> headers = ['Spot', 'Favorite'];
 
   @override
   Widget build(BuildContext context) {
-    final List<String> headers = ['Spot', 'Favorite'];
-    final favoriteList =
-        context.read(chartViewmodel).list.map((e) => e['symbol']).toList();
-    final list = _filter(favoriteList);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,11 +106,11 @@ class SearchBody extends StatelessWidget {
           child: tickers == null
               ? LoadingAnimation()
               : ListView.builder(
-                  itemCount: list!.length,
+                  itemCount: tickers!.length,
                   padding: const EdgeInsets.only(top: 10.0),
                   itemBuilder: (context, index) => SearchRow(
-                    ticker: list[index],
-                    favorite: favoriteList,
+                    ticker: tickers![index],
+                    favorite: favorite,
                   ),
                 ),
         )

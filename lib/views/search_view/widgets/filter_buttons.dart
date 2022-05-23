@@ -8,22 +8,23 @@ class FilterButtons extends StatelessWidget {
     this.filter,
   }) : super(key: key);
   final Function? setFilter;
-  final Map? filter;
+  final String? filter;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         InkWell(
-          onTap: () => setFilter!(1),
+          onTap: () => setFilter!(filter == 'N_UP' ? 'N_DOWN' : 'N_UP'),
           child: Row(
             children: [
               TextComponent(
                 align: TextAlign.start,
                 fontSize: 12.0,
                 line: 1,
-                textColor:
-                    filter!['index'] == 1 ? Colors.amberAccent : Colors.white70,
+                textColor: filter == 'N_UP' || filter == 'N_DOWN'
+                    ? Colors.amberAccent
+                    : Colors.white70,
                 title: 'Name',
                 weight: FontWeight.bold,
               ),
@@ -31,12 +32,15 @@ class FilterButtons extends StatelessWidget {
                 width: 5.0,
               ),
               Icon(
-                filter!['index'] == 1 && filter!['value'] == false
+                filter == 'N_UP'
                     ? Icons.keyboard_double_arrow_up_sharp
-                    : Icons.keyboard_double_arrow_down_sharp,
+                    : filter == 'N_DOWN'
+                        ? Icons.keyboard_double_arrow_down_sharp
+                        : Icons.keyboard_double_arrow_down_sharp,
                 size: 14,
-                color:
-                    filter!['index'] == 1 ? Colors.amberAccent : Colors.white70,
+                color: filter == 'N_UP' || filter == 'N_DOWN'
+                    ? Colors.amberAccent
+                    : Colors.white70,
               ),
             ],
           ),
@@ -44,14 +48,14 @@ class FilterButtons extends StatelessWidget {
         Row(
           children: [
             InkWell(
-              onTap: () => setFilter!(2),
+              onTap: () => setFilter!(filter == 'V_UP' ? 'V_DOWN' : 'V_UP'),
               child: Row(
                 children: [
                   TextComponent(
                     align: TextAlign.start,
                     fontSize: 12.0,
                     line: 1,
-                    textColor: filter!['index'] == 2
+                    textColor: filter == 'V_UP' || filter == 'V_DOWN'
                         ? Colors.amberAccent
                         : Colors.white70,
                     title: 'Vol',
@@ -61,11 +65,13 @@ class FilterButtons extends StatelessWidget {
                     width: 5.0,
                   ),
                   Icon(
-                    filter!['index'] == 2 && filter!['value'] == false
+                    filter == 'V_UP'
                         ? Icons.keyboard_double_arrow_up_sharp
-                        : Icons.keyboard_double_arrow_down_sharp,
+                        : filter == 'V_DOWN'
+                            ? Icons.keyboard_double_arrow_down_sharp
+                            : Icons.keyboard_double_arrow_down_sharp,
                     size: 14,
-                    color: filter!['index'] == 2
+                    color: filter == 'V_UP' || filter == 'V_DOWN'
                         ? Colors.amberAccent
                         : Colors.white70,
                   ),
@@ -76,14 +82,14 @@ class FilterButtons extends StatelessWidget {
               width: 20.0,
             ),
             InkWell(
-              onTap: () => setFilter!(3),
+              onTap: () => setFilter!(filter == 'C_UP' ? 'C_DOWN' : 'C_UP'),
               child: Row(
                 children: [
                   TextComponent(
                     align: TextAlign.start,
                     fontSize: 12.0,
                     line: 1,
-                    textColor: filter!['index'] == 3
+                    textColor: filter == 'C_UP' || filter == 'C_DOWN'
                         ? Colors.amberAccent
                         : Colors.white70,
                     title: '24 Change',
@@ -93,11 +99,13 @@ class FilterButtons extends StatelessWidget {
                     width: 5.0,
                   ),
                   Icon(
-                    filter!['index'] == 3 && filter!['value'] == false
+                    filter == 'C_UP'
                         ? Icons.keyboard_double_arrow_up_sharp
-                        : Icons.keyboard_double_arrow_down_sharp,
+                        : filter == 'C_DOWN'
+                            ? Icons.keyboard_double_arrow_down_sharp
+                            : Icons.keyboard_double_arrow_down_sharp,
                     size: 14,
-                    color: filter!['index'] == 3
+                    color: filter == 'C_UP' || filter == 'C_DOWN'
                         ? Colors.amberAccent
                         : Colors.white70,
                   ),

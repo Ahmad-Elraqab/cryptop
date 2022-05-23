@@ -1,5 +1,6 @@
 import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
+import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/views/home_view/widgets/market_movement_list.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MarketMovment extends StatelessWidget {
 
   final int? activeIndexList;
   final Function? setIndexList;
-  final List? ticker_24;
+  final List<Ticker>? ticker_24;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class MarketMovment extends StatelessWidget {
             ticker_24 == null
                 ? LoadingAnimation()
                 : MarketMovementList(
+                    tickers: ticker_24,
                     activeIndexList: activeIndexList,
                     setIndexList: setIndexList,
                   ),

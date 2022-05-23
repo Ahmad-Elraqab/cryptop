@@ -14,14 +14,10 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int? activeBoard = 0;
-
   setIndex(value) => setState(() => {activeBoard = value});
-
-  int? activeIndexList = 0;
   setIndexList(value) => setState(() => activeIndexList = value);
-  List<Ticker>? ticker_24;
-  List<Chart>? charts;
+  int? activeBoard = 0;
+  int? activeIndexList = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +26,14 @@ class _HomeViewState extends State<HomeView> {
         height: MediaQuery.of(context).size.height,
         child: Consumer(
           builder: (context, watch, child) {
-            charts = watch(getChartList).data?.value;
-            ticker_24 = watch(get24Ticker).data?.value;
+            List<Chart>? charts = watch(chartViewmodel).favoriteCharts;
+            List<Ticker>? ticker_24 =
+                watch(tickerViewmodel).getSortedTicker(activeIndexList == 0
+                    ? 'C_UP'
+                    : activeIndexList == 1
+                        ? 'C_DOWN'
+                        : 'V_UP');
+
             watch(messageProvider).whenData(
                 (value) => {watch(tickerViewmodel).updateTickers(value)});
 
