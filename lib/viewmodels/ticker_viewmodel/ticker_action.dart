@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cryptop/app/const.dart';
 import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_viewmodel.dart';

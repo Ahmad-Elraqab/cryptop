@@ -9,22 +9,26 @@ class CustomerTextField extends StatelessWidget {
   final bool? validate;
   final bool? readonly;
   final bool? secure;
+  final TextAlign? textAlign;
+  final TextInputType? keyboardType;
   final Color? color;
   final Color? borderColor;
 
-  const CustomerTextField(
-      {Key? key,
-      this.controller,
-      this.labelText,
-      this.error,
-      this.onChanged,
-      this.readonly,
-      this.lines,
-      this.secure = false,
-      this.validate,
-      this.color,
-      this.borderColor})
-      : super(key: key);
+  const CustomerTextField({
+    Key? key,
+    this.controller,
+    this.labelText,
+    this.error,
+    this.onChanged,
+    this.readonly,
+    this.lines,
+    this.secure = false,
+    this.validate,
+    this.color,
+    this.borderColor,
+    this.textAlign = TextAlign.start,
+    this.keyboardType = TextInputType.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,9 @@ class CustomerTextField extends StatelessWidget {
       readOnly: readonly!,
       onChanged: (value) => onChanged!(value),
       maxLines: lines!,
+      textAlign: textAlign!,
       controller: controller,
+      keyboardType: keyboardType,
       style: TextStyle(color: color!),
       textDirection: TextDirection.ltr,
       decoration: InputDecoration(

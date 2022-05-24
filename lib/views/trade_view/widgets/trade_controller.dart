@@ -11,31 +11,28 @@ class TradeController extends StatelessWidget {
     this.slider,
     this.setSlider,
     this.tradeType,
-    this.limit,
-    this.stop,
-    this.pair,
+    this.controllers,
+    this.onSubmit,
     this.price,
-    this.tether,
-    this.setItem,
   }) : super(key: key);
 
   final int? tradeType;
   final int? activeIndexList;
   final double? slider;
-  final double? limit;
-  final double? stop;
-  final double? pair;
   final double? price;
-  final double? tether;
+  final List<TextEditingController>? controllers;
+  final Function? onSubmit;
   final Function? setSlider;
-  final Function? setItem;
 
   Widget displayWidgets() {
     switch (activeIndexList) {
       case 0:
         return CustomIncrementalButton(
-          title: price == 0 ? 'Price (USDT)' : price!.toString(),
-          onClick: (value) => setItem!('price', value),
+          title: 'Price (USDT)',
+          controller: controllers![0],
+          type: 0,
+          onChange: (value) => {},
+          price: price,
         );
 
       case 1:
@@ -60,12 +57,18 @@ class TradeController extends StatelessWidget {
         return Column(
           children: [
             CustomIncrementalButton(
-              title: stop == 0 ? 'Stop (USDT)' : stop!.toString(),
-              onClick: (value) => setItem!('stop', value),
+              title: 'Stop (USDT)',
+              price: price,
+              type: 1,
+              onChange: (value) => {},
+              controller: controllers![1],
             ),
             CustomIncrementalButton(
-              title: limit == 0 ? 'Limit (USDT)' : limit!.toString(),
-              onClick: (value) => setItem!('limit', value),
+              title: 'Limit (USDT)',
+              price: price,
+              type: 0,
+              onChange: (value) => {},
+              controller: controllers![0],
             ),
           ],
         );
@@ -74,16 +77,25 @@ class TradeController extends StatelessWidget {
         return Column(
           children: [
             CustomIncrementalButton(
-              title: price == 0 ? 'Price (USDT)' : price!.toString(),
-              onClick: (value) => setItem!('price', value),
+              title: 'Price (USDT)',
+              controller: controllers![0],
+              onChange: (value) => {},
+              price: price,
+              type: 0,
             ),
             CustomIncrementalButton(
-              title: stop == 0 ? 'Stop (USDT)' : stop!.toString(),
-              onClick: (value) => setItem!('stop', value),
+              title: 'Stop (USDT)',
+              onChange: (value) => {},
+              controller: controllers![1],
+              price: price,
+              type: 1,
             ),
             CustomIncrementalButton(
-              title: limit == 0 ? 'Limit (USDT)' : limit!.toString(),
-              onClick: (value) => setItem!('limit', value),
+              title: 'Limit (USDT)',
+              price: price,
+              type: 2,
+              onChange: (value) => {},
+              controller: controllers![2],
             ),
           ],
         );
@@ -103,7 +115,9 @@ class TradeController extends StatelessWidget {
           displayWidgets(),
           TradeAmount(
             setSlider: setSlider,
+            price: price,
             slider: slider,
+            controllers: controllers,
           ),
           const SizedBox(height: 20.0),
           CustomButtom(

@@ -1,38 +1,39 @@
 import 'package:cryptop/components/coin_details/coin_detail.dart';
+import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/title_header/title_header.dart';
 import 'package:cryptop/components/trade_action_button/trade_action_button.dart';
+import 'package:cryptop/models/chart_model.dart';
+import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_controller.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_type.dart';
 import 'package:flutter/material.dart';
 
 class TradeBody extends StatelessWidget {
-  const TradeBody(
-      {Key? key,
-      this.activeIndexList,
-      this.tradeType,
-      this.slider,
-      this.limit,
-      this.stop,
-      this.price,
-      this.pair,
-      this.tether,
-      this.setIndexList,
-      this.setSlider,
-      this.setTradeType,
-      this.setItem})
-      : super(key: key);
+  const TradeBody({
+    Key? key,
+    this.activeIndexList,
+    this.tradeType,
+    this.slider,
+    this.setIndexList,
+    this.setSlider,
+    this.setTradeType,
+    this.chart,
+    this.tickers,
+    this.onSubmit,
+    this.controllers,
+    this.symbol,
+  }) : super(key: key);
+  final Chart? chart;
+  final List<Ticker>? tickers;
   final int? activeIndexList;
   final int? tradeType;
   final double? slider;
-  final double? limit;
-  final double? stop;
-  final double? price;
-  final double? pair;
-  final double? tether;
+  final String? symbol;
+  final List<TextEditingController>? controllers;
+  final Function? onSubmit;
   final Function? setIndexList;
   final Function? setSlider;
   final Function? setTradeType;
-  final Function? setItem;
   @override
   Widget build(BuildContext context) {
     final labels = ['Limit', 'Market', 'Stop Limit', 'OCO'];
@@ -43,11 +44,11 @@ class TradeBody extends StatelessWidget {
         const SizedBox(
           height: 10.0,
         ),
-        const TitleHeader(isTitle: true, title: 'BTCUSDT'),
+        TitleHeader(isTitle: true, title: chart == null ? '' : chart!.symbol),
         const SizedBox(
           height: 10.0,
         ),
-        const CoinDetail(),
+        CoinDetail(kline: chart, tickers: tickers),
         const SizedBox(
           height: 20.0,
         ),
@@ -59,18 +60,20 @@ class TradeBody extends StatelessWidget {
           activeIndexList: activeIndexList,
           setIndexList: setIndexList,
         ),
-        TradeController(
-          slider: slider,
-          activeIndexList: activeIndexList,
-          setSlider: setSlider,
-          tradeType: tradeType,
-          limit: limit,
-          stop: stop,
-          pair: pair,
-          price: price,
-          tether: tether,
-          setItem: setItem,
-        ),
+        tickers == null && chart == null
+            ? LoadingAnimation()
+            : TradeController(
+                slider: slider,
+                price: tickers!
+                    .where((e) => e.symbol == chart!.symbol)
+                    .first
+                    .lastPrice,
+                controllers: controllers,
+                activeIndexList: activeIndexList,
+                setSlider: setSlider,
+                tradeType: tradeType,
+                onSubmit: onSubmit,
+              ),
         const SizedBox(
           height: 20.0,
         ),

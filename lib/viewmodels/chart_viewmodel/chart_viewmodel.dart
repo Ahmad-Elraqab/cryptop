@@ -17,8 +17,8 @@ class ChartViewmodel extends ChangeNotifier {
   Chart? liveChart;
   List<Chart>? favoriteCharts;
 
-  String? coin;
-  String? interval;
+  String? coin = 'BTCUSDT';
+  String? interval = '4h';
 
   setCoin(value) {
     coin = value;
@@ -31,7 +31,8 @@ class ChartViewmodel extends ChangeNotifier {
   }
 
   init() async {
-    await getChartList();
+    final list = await getChartList();
+    liveChart = list.where((element) => element.symbol == 'BTCUSDT').first;
     notifyListeners();
   }
 
