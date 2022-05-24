@@ -1,7 +1,5 @@
 import 'package:cryptop/components/custom_text_field/custom_text_field.dart';
-import 'package:cryptop/viewmodels/trade_viewmodel/trade_action.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomIncrementalButton extends StatelessWidget {
@@ -31,8 +29,7 @@ class CustomIncrementalButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-              onPressed: () =>
-                  context.read(tradeViewmodel).updateField(type, '-', price),
+              onPressed: () => onChange!(controller, '-', price, type: type),
               icon: const Icon(
                 FontAwesomeIcons.minus,
                 size: 16,
@@ -46,7 +43,8 @@ class CustomIncrementalButton extends StatelessWidget {
               labelText: title,
               lines: 1,
               textAlign: TextAlign.center,
-              onChanged: (value) => onChange!(value),
+              onChanged: (value) =>
+                  onChange!(controller, '&', price, value: value, type: type),
               readonly: false,
               secure: false,
               validate: false,
@@ -54,8 +52,7 @@ class CustomIncrementalButton extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () =>
-                context.read(tradeViewmodel).updateField(type, '+', price),
+            onPressed: () => onChange!(controller, '+', price, type: type),
             icon: const Icon(
               FontAwesomeIcons.plus,
               size: 16,

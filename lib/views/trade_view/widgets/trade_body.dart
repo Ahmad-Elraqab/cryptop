@@ -22,6 +22,7 @@ class TradeBody extends StatelessWidget {
     this.onSubmit,
     this.controllers,
     this.symbol,
+    this.updateField,
   }) : super(key: key);
   final Chart? chart;
   final List<Ticker>? tickers;
@@ -31,6 +32,7 @@ class TradeBody extends StatelessWidget {
   final String? symbol;
   final List<TextEditingController>? controllers;
   final Function? onSubmit;
+  final Function? updateField;
   final Function? setIndexList;
   final Function? setSlider;
   final Function? setTradeType;
@@ -73,6 +75,7 @@ class TradeBody extends StatelessWidget {
                 setSlider: setSlider,
                 tradeType: tradeType,
                 onSubmit: onSubmit,
+                updateField: updateField,
               ),
         const SizedBox(
           height: 20.0,

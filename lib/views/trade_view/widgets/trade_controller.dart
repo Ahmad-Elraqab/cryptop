@@ -14,6 +14,7 @@ class TradeController extends StatelessWidget {
     this.controllers,
     this.onSubmit,
     this.price,
+    this.updateField,
   }) : super(key: key);
 
   final int? tradeType;
@@ -23,6 +24,7 @@ class TradeController extends StatelessWidget {
   final List<TextEditingController>? controllers;
   final Function? onSubmit;
   final Function? setSlider;
+  final Function? updateField;
 
   Widget displayWidgets() {
     switch (activeIndexList) {
@@ -31,7 +33,7 @@ class TradeController extends StatelessWidget {
           title: 'Price (USDT)',
           controller: controllers![0],
           type: 0,
-          onChange: (value) => {},
+          onChange: updateField,
           price: price,
         );
 
@@ -60,14 +62,14 @@ class TradeController extends StatelessWidget {
               title: 'Stop (USDT)',
               price: price,
               type: 1,
-              onChange: (value) => {},
+              onChange: updateField,
               controller: controllers![1],
             ),
             CustomIncrementalButton(
               title: 'Limit (USDT)',
               price: price,
               type: 0,
-              onChange: (value) => {},
+              onChange: updateField,
               controller: controllers![0],
             ),
           ],
@@ -79,13 +81,13 @@ class TradeController extends StatelessWidget {
             CustomIncrementalButton(
               title: 'Price (USDT)',
               controller: controllers![0],
-              onChange: (value) => {},
+              onChange: updateField,
               price: price,
               type: 0,
             ),
             CustomIncrementalButton(
               title: 'Stop (USDT)',
-              onChange: (value) => {},
+              onChange: updateField,
               controller: controllers![1],
               price: price,
               type: 1,
@@ -94,7 +96,7 @@ class TradeController extends StatelessWidget {
               title: 'Limit (USDT)',
               price: price,
               type: 2,
-              onChange: (value) => {},
+              onChange: updateField,
               controller: controllers![2],
             ),
           ],
@@ -118,6 +120,7 @@ class TradeController extends StatelessWidget {
             price: price,
             slider: slider,
             controllers: controllers,
+            updateField: updateField,
           ),
           const SizedBox(height: 20.0),
           CustomButtom(

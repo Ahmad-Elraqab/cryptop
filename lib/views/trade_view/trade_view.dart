@@ -1,6 +1,6 @@
+import 'dart:math';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
 import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_action.dart';
-import 'package:cryptop/viewmodels/trade_viewmodel/trade_action.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,9 +18,85 @@ class _TradeViewState extends State<TradeView> {
   int tradeType = 0;
   double slider = 0;
 
+  final List<TextEditingController> controllers =
+      List.generate(5, (i) => TextEditingController());
+
+  // test purpose...
+  final wallet = 50000;
+
   setIndexList(value) => setState(() => {activeIndexList = value, slider = 0});
-  setSlider(value) => setState(() => {slider = double.parse(value.toString())});
+
+  setSlider(value) => setState(() {
+        slider = double.parse(value.toString());
+        controllers[4].text = (value / 100 * wallet).toString();
+        controllers[3].text = ((value / 100 * wallet) /
+                context
+                    .read(tickerViewmodel)
+                    .tickers!
+                    .where((e) => e.symbol == widget.data)
+                    .first
+                    .lastPrice)
+            .toString();
+      });
+
   setTradeType(value) => setState(() => {tradeType = value});
+
+  updateField(TextEditingController controller, oper, price, {value, type}) {
+    var string;
+    var decimals;
+    var value_1;
+    var value_2;
+
+    if (controller.text.isNotEmpty) {
+      string = double.parse(controller.text).toString();
+      decimals = string.substring(string.indexOf('.') + 1, string.length);
+      value_1 = (double.parse(controller.text) + pow(10, -1 * decimals.length))
+          .toStringAsFixed(decimals.length);
+      value_2 = (double.parse(controller.text) - pow(10, -1 * decimals.length))
+          .toStringAsFixed(decimals.length);
+    }
+
+    switch (oper) {
+      case '+':
+        add(controller, value_1, type);
+        break;
+      case '-':
+        sub(controller, value_2, type);
+        break;
+      case '&':
+        break;
+      default:
+    }
+    updateCoin(type, price);
+  }
+
+  updateCoin(type, price) {
+    if (controllers[type].text.isNotEmpty) {
+      if (type == 3) {
+        controllers[4].text =
+            (price * double.parse(controllers[3].text)).toString();
+      } else if (type == 4) {
+        controllers[3].text =
+            (double.parse(controllers[type].text) / price).toString();
+      }
+    }
+  }
+
+  add(TextEditingController controller, value, type) {
+    if (controller.text.isNotEmpty) {
+      controller.text = value.toString();
+    } else {
+      controller.text = (1.0).toString();
+    }
+  }
+
+  sub(TextEditingController controller, value, type) {
+    if (controller.text.isNotEmpty && double.parse(value) > 0) {
+      controller.text = value.toString();
+    } else {
+      controller.text = (1.0).toString();
+    }
+  }
 
   onSubmit() {}
 
@@ -35,7 +111,6 @@ class _TradeViewState extends State<TradeView> {
 
         final chart = watch(chartViewmodel).liveChart;
         final tickers = watch(tickerViewmodel).tickers;
-        final controllers = watch(tradeViewmodel).controllers;
 
         return Container(
           height: MediaQuery.of(context).size.height,
@@ -53,6 +128,7 @@ class _TradeViewState extends State<TradeView> {
               setSlider: setSlider,
               setTradeType: setTradeType,
               onSubmit: onSubmit,
+              updateField: updateField,
             ),
           ),
         );

@@ -1,7 +1,5 @@
 import 'package:cryptop/components/custom_incremental_button/custom_incremental_button.dart';
-import 'package:cryptop/viewmodels/trade_viewmodel/trade_action.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
 import '../../../components/text_component/text_component.dart';
 
 class TradeAmount extends StatelessWidget {
@@ -11,9 +9,11 @@ class TradeAmount extends StatelessWidget {
     required this.slider,
     this.controllers,
     this.price,
+    this.updateField,
   }) : super(key: key);
 
   final Function? setSlider;
+  final Function? updateField;
   final double? slider;
   final double? price;
   final List<TextEditingController>? controllers;
@@ -26,9 +26,8 @@ class TradeAmount extends StatelessWidget {
           controller: controllers![3],
           type: 3,
           price: price,
-          title: 'Amount (coin})',
-          onChange: (value) =>
-              {context.read(tradeViewmodel).updateCoin(3, price)},
+          title: 'Amount (coin)',
+          onChange: updateField,
         ),
         const SizedBox(
           height: 10.0,
@@ -86,8 +85,7 @@ class TradeAmount extends StatelessWidget {
           type: 4,
           price: price,
           controller: controllers![4],
-          onChange: (value) =>
-              {context.read(tradeViewmodel).updateCoin(4, price)},
+          onChange: updateField,
         ),
       ],
     );
