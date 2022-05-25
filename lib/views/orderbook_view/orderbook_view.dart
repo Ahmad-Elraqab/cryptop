@@ -34,11 +34,6 @@ class _OrderbookViewState extends State<OrderbookView> {
                 isTitle: true,
                 title: 'Open Orders',
               ),
-              const Divider(
-                color: Colors.white,
-                height: 10.0,
-                thickness: 1,
-              ),
               const SizedBox(height: 20.0),
               OrderHeaderFilter(filter: filter),
               OrderList(

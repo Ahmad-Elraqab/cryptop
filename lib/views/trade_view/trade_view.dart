@@ -23,11 +23,15 @@ class _TradeViewState extends State<TradeView> {
   int activeIndexList = 0;
   int tradeType = 0;
   double slider = 0;
-
+  bool loading = false;
+  setLoad(value) => setState(() => loading = value);
   final List<TextEditingController> controllers =
       List.generate(5, (i) => TextEditingController());
 
   // test purpose...
+
+  // TODO// ADD NEW PROVIDER FOR VIEWS TO HOLD ITS STATES
+
   final wallet = 50000;
 
   setIndexList(value) => setState(() => {activeIndexList = value, slider = 0});
@@ -114,6 +118,8 @@ class _TradeViewState extends State<TradeView> {
         .first
         .lastPrice;
     if (_validate == true) {
+      setLoad(true);
+
       switch (activeIndexList) {
         case 0:
           data = new LimitOrder(
@@ -155,10 +161,12 @@ class _TradeViewState extends State<TradeView> {
           break;
         default:
       }
-      final order = await context.read(createOrder(data)).data?.value;
+      final order = await context.read(orderViewmodel).createOrder(data);
 
       if (order != null) {
-        print(order.symbol);
+        setLoad(false);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(snackBar('Order created successfully'));
       }
     }
   }
@@ -200,38 +208,48 @@ class _TradeViewState extends State<TradeView> {
   }
 
   @override
+  void dispose() {
+    controllers.map((e) => e.text = '');
+    slider = 0.0;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer(builder: (context, watch, child) {
-        watch(klineProvider)
-            .whenData((value) => watch(chartViewmodel).updateCandle(value));
-        watch(messageProvider)
-            .whenData((value) => watch(tickerViewmodel).updateTickers(value));
+      body: Consumer(
+        builder: (context, watch, child) {
+          watch(klineProvider)
+              .whenData((value) => watch(chartViewmodel).updateCandle(value));
+          watch(messageProvider)
+              .whenData((value) => watch(tickerViewmodel).updateTickers(value));
 
-        final chart = watch(chartViewmodel).liveChart;
-        final tickers = watch(tickerViewmodel).tickers;
+          final chart = watch(chartViewmodel).liveChart;
+          final tickers = watch(tickerViewmodel).tickers;
 
-        return Container(
-          height: MediaQuery.of(context).size.height,
-          color: const Color.fromRGBO(55, 61, 76, 1),
-          child: SingleChildScrollView(
-            child: TradeBody(
-              activeIndexList: activeIndexList,
-              chart: chart,
-              symbol: widget.data,
-              tickers: tickers,
-              slider: slider,
-              tradeType: tradeType,
-              controllers: controllers,
-              setIndexList: setIndexList,
-              setSlider: setSlider,
-              setTradeType: setTradeType,
-              onSubmit: onSubmit,
-              updateField: updateField,
+          return Container(
+            height: MediaQuery.of(context).size.height,
+            color: const Color.fromRGBO(55, 61, 76, 1),
+            child: SingleChildScrollView(
+              child: TradeBody(
+                loading: loading,
+                activeIndexList: activeIndexList,
+                chart: chart,
+                symbol: widget.data,
+                tickers: tickers,
+                slider: slider,
+                tradeType: tradeType,
+                controllers: controllers,
+                setIndexList: setIndexList,
+                setSlider: setSlider,
+                setTradeType: setTradeType,
+                onSubmit: onSubmit,
+                updateField: updateField,
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }

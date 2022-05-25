@@ -23,6 +23,7 @@ class TradeBody extends StatelessWidget {
     this.controllers,
     this.symbol,
     this.updateField,
+    this.loading,
   }) : super(key: key);
   final Chart? chart;
   final List<Ticker>? tickers;
@@ -31,6 +32,7 @@ class TradeBody extends StatelessWidget {
   final double? slider;
   final String? symbol;
   final List<TextEditingController>? controllers;
+  final bool? loading;
   final Function? onSubmit;
   final Function? updateField;
   final Function? setIndexList;
@@ -62,7 +64,7 @@ class TradeBody extends StatelessWidget {
           activeIndexList: activeIndexList,
           setIndexList: setIndexList,
         ),
-        tickers == null && chart == null
+        tickers == null && chart == null || loading == true
             ? LoadingAnimation()
             : TradeController(
                 slider: slider,
