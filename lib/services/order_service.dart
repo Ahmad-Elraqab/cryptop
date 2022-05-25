@@ -67,13 +67,13 @@ class OrderService {
     }
   }
 
-  Future<bool> closeOrder(String orderId) async {
-    final json = await rest.patch('orders/$orderId');
+  Future<Order?> closeOrder(String orderId) async {
+    final json = await rest.patch('orders/$orderId', data: {});
 
     if (json == null)
-      return false;
+      return null;
     else
-      return true;
+      return Order.fromJson(json);
   }
 
   Future<Order?> getOrder(String orderId) async {

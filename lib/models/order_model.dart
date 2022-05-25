@@ -1,4 +1,5 @@
 class Order {
+  String? id;
   String? symbol;
   double? buyPrice;
   DateTime? openDate;
@@ -10,6 +11,7 @@ class Order {
   double? rate;
 
   Order({
+    this.id,
     this.amount = 0.0,
     this.type = '',
     this.openDate,
@@ -23,6 +25,7 @@ class Order {
 
   Order.fromJson(Map<String, dynamic> json)
       : this(
+          id: json['id'],
           type: json['type'],
           amount: double.parse(json['amount'].toString()),
           openDate: DateTime.parse(json['openDate']),

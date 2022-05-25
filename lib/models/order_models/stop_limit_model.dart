@@ -11,6 +11,7 @@ class StopLimitOrder extends Order {
     stop = 0.0,
     limit = 0.0,
     isPending = true,
+    id,
     amount = 0.0,
     openDate,
     closeDate,
@@ -20,6 +21,7 @@ class StopLimitOrder extends Order {
     rate = 0.0,
     symbol,
   }) : super(
+          id: id,
           amount: amount,
           buyPrice: buyPrice,
           closeDate: closeDate,

@@ -9,6 +9,7 @@ class OCOOrder extends Order {
 
   OCOOrder({
     s_limit = 0.0,
+    id,
     stop = 0.0,
     limit = 0.0,
     isPending = true,
@@ -22,6 +23,7 @@ class OCOOrder extends Order {
     type,
     symbol,
   }) : super(
+          id: id,
           amount: amount,
           buyPrice: buyPrice,
           closeDate: closeDate,

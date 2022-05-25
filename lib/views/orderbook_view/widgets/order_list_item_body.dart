@@ -166,7 +166,7 @@ class OrderListItemBody extends StatelessWidget {
                 horizontal: 4.0,
                 vertical: 4.0,
                 imageUrl: '',
-                onTap: () => close!(),
+                onTap: () => close!(order!.id),
               ),
             ],
           ),
