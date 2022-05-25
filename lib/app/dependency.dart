@@ -1,4 +1,5 @@
 import 'package:cryptop/services/chart_service.dart';
+import 'package:cryptop/services/order_service.dart';
 import 'package:cryptop/services/rest_service..dart';
 import 'package:cryptop/services/user_service.dart';
 import 'package:cryptop/services/web_socket_serviec.dart';
@@ -19,5 +20,6 @@ void init() {
   dependency.registerLazySingleton(() => UserViewmodel());
   dependency.registerLazySingleton(() => UserService());
   dependency.registerLazySingleton(() => ChartService());
+  dependency.registerLazySingleton(() => OrderService());
   dependency.registerLazySingleton(() => WebSocketService());
 }

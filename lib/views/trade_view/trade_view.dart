@@ -1,6 +1,11 @@
 import 'dart:math';
 import 'package:cryptop/components/custom_snack_bar/custom_snack_bar.dart';
+import 'package:cryptop/models/order_model.dart';
+import 'package:cryptop/models/order_models/limit_order_model.dart';
+import 'package:cryptop/models/order_models/oco_model.dart';
+import 'package:cryptop/models/order_models/stop_limit_model.dart';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
+import 'package:cryptop/viewmodels/order_viewmodel/order_action.dart';
 import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_action.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_body.dart';
 import 'package:flutter/material.dart';
@@ -99,13 +104,62 @@ class _TradeViewState extends State<TradeView> {
     }
   }
 
-  onSubmit() {
+  onSubmit() async {
     bool _validate = validate();
-
+    Map<String, dynamic> data = {};
+    final price = context
+        .read(tickerViewmodel)
+        .tickers!
+        .where((e) => e.symbol == widget.data)
+        .first
+        .lastPrice;
     if (_validate == true) {
-      print('make order');
-    } else {
-      print('dont make order');
+      switch (activeIndexList) {
+        case 0:
+          data = new LimitOrder(
+                  type: 'limit',
+                  amount: double.parse(controllers[4].text),
+                  symbol: widget.data,
+                  buyPrice: price,
+                  limit: double.parse(controllers[0].text))
+              .toJson();
+          break;
+        case 1:
+          data = new Order(
+                  type: 'market',
+                  amount: double.parse(controllers[4].text),
+                  symbol: widget.data,
+                  buyPrice: price)
+              .toJson();
+          break;
+        case 2:
+          data = new StopLimitOrder(
+                  type: 'stopLimit',
+                  amount: double.parse(controllers[4].text),
+                  symbol: widget.data,
+                  buyPrice: price,
+                  limit: double.parse(controllers[0].text),
+                  stop: double.parse(controllers[1].text))
+              .toJson();
+          break;
+        case 3:
+          data = new OCOOrder(
+                  type: 'oco',
+                  amount: double.parse(controllers[4].text),
+                  symbol: widget.data,
+                  buyPrice: price,
+                  limit: double.parse(controllers[0].text),
+                  stop: double.parse(controllers[1].text),
+                  s_limit: double.parse(controllers[2].text))
+              .toJson();
+          break;
+        default:
+      }
+      final order = await context.read(createOrder(data)).data?.value;
+
+      if (order != null) {
+        print(order.symbol);
+      }
     }
   }
 
