@@ -12,9 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TradeView extends StatefulWidget {
-  const TradeView({Key? key, this.data = 'BTCUSDT'}) : super(key: key);
+  const TradeView({Key? key, required this.data}) : super(key: key);
 
-  final String? data;
+  final Object data;
   @override
   State<TradeView> createState() => _TradeViewState();
 }
@@ -43,7 +43,7 @@ class _TradeViewState extends State<TradeView> {
                 context
                     .read(tickerViewmodel)
                     .tickers!
-                    .where((e) => e.symbol == widget.data)
+                    .where((e) => e.symbol == (widget.data as Map)['symbol'])
                     .first
                     .lastPrice)
             .toString();
@@ -114,7 +114,7 @@ class _TradeViewState extends State<TradeView> {
     final price = context
         .read(tickerViewmodel)
         .tickers!
-        .where((e) => e.symbol == widget.data)
+        .where((e) => e.symbol == (widget.data as Map)['symbol'])
         .first
         .lastPrice;
     if (_validate == true) {
@@ -125,7 +125,7 @@ class _TradeViewState extends State<TradeView> {
           data = new LimitOrder(
                   type: 'limit',
                   amount: double.parse(controllers[4].text),
-                  symbol: widget.data,
+                  symbol: (widget.data as Map)['symbol'],
                   buyPrice: price,
                   limit: double.parse(controllers[0].text))
               .toJson();
@@ -134,7 +134,7 @@ class _TradeViewState extends State<TradeView> {
           data = new Order(
                   type: 'market',
                   amount: double.parse(controllers[4].text),
-                  symbol: widget.data,
+                  symbol: (widget.data as Map)['symbol'],
                   buyPrice: price)
               .toJson();
           break;
@@ -142,7 +142,7 @@ class _TradeViewState extends State<TradeView> {
           data = new StopLimitOrder(
                   type: 'stopLimit',
                   amount: double.parse(controllers[4].text),
-                  symbol: widget.data,
+                  symbol: (widget.data as Map)['symbol'],
                   buyPrice: price,
                   limit: double.parse(controllers[0].text),
                   stop: double.parse(controllers[1].text))
@@ -152,7 +152,7 @@ class _TradeViewState extends State<TradeView> {
           data = new OCOOrder(
                   type: 'oco',
                   amount: double.parse(controllers[4].text),
-                  symbol: widget.data,
+                  symbol: (widget.data as Map)['symbol'],
                   buyPrice: price,
                   limit: double.parse(controllers[0].text),
                   stop: double.parse(controllers[1].text),
@@ -235,7 +235,7 @@ class _TradeViewState extends State<TradeView> {
                 loading: loading,
                 activeIndexList: activeIndexList,
                 chart: chart,
-                symbol: widget.data,
+                symbol: (widget.data as Map)['symbol'],
                 tickers: tickers,
                 slider: slider,
                 tradeType: tradeType,

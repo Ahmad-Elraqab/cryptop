@@ -8,9 +8,9 @@ import 'package:cryptop/services/rest_service..dart';
 class OrderService {
   RestService get rest => dependency();
 
-  Future<List<Order>?> getOpenOrders(Map<String, dynamic> order) async {
+  Future<List<Order>?> getOpenOrders() async {
     final List json = await rest.get('orders/');
-    if (json.isEmpty) return null;
+    if (json.isEmpty) return [];
 
     final data = json.map((e) {
       if (e['type'] == 'market') {

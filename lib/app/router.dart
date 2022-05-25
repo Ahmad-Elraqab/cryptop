@@ -34,7 +34,9 @@ class RouteManager {
         builder = App(currentIndex: '0');
         break;
       case rTrade:
-        builder = const TradeView();
+        builder = TradeView(
+          data: settings.arguments!,
+        );
         break;
       case rLoginScreen:
         builder = const LoginView();

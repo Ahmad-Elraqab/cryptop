@@ -25,9 +25,9 @@ class Order {
       : this(
           type: json['type'],
           amount: double.parse(json['amount'].toString()),
-          openDate: json['openDate'],
-          closeDate: json['closeDate'],
-          buyPrice: json['buyPrice'],
+          openDate: DateTime.parse(json['openDate']),
+          closeDate: DateTime.parse(json['closeDate']),
+          buyPrice: (json['buyPrice'] + 0.0),
           isClose: json['isClose'],
           isOpen: json['isOpen'],
           rate: double.parse(json['rate'].toString()),
@@ -37,8 +37,6 @@ class Order {
   Map<String, dynamic> toJson() => {
         'type': type,
         'amount': amount,
-        'openDate': openDate,
-        'closeDate': closeDate,
         'buyPrice': buyPrice,
         'isClosed': isClose,
         'isOpen': isOpen,

@@ -48,6 +48,7 @@ class _CoinBodyState extends State<CoinBody> {
         CoinDetail(tickers: widget.tickers, kline: widget.chart),
         const SizedBox(height: 20.0),
         TradeActionButton(
+          title: widget.title,
           setTradeType: widget.setTradeType,
         ),
         Container(

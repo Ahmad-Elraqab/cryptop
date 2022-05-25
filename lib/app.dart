@@ -32,7 +32,9 @@ class _AppState extends State<App> {
       case "1":
         return const SearchView();
       case "2":
-        return const TradeView();
+        return TradeView(
+          data: {'symbol': 'BTCUSDT'},
+        );
       case "3":
         return const WalletView();
       case "4":

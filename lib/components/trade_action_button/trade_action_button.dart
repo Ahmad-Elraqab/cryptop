@@ -1,3 +1,4 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/clipper/clipper.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +6,11 @@ import 'package:flutter/material.dart';
 class TradeActionButton extends StatelessWidget {
   const TradeActionButton({
     Key? key,
+    this.title,
     this.setTradeType,
   }) : super(key: key);
 
+  final String? title;
   final Function? setTradeType;
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,8 @@ class TradeActionButton extends StatelessWidget {
               ),
               child: Center(
                 child: InkWell(
-                  onTap: () => setTradeType!(0),
+                  onTap: () => Navigator.pushNamed(context, rTrade,
+                      arguments: {'symbol': title}),
                   child: const TextComponent(
                     align: TextAlign.center,
                     fontSize: 16,
@@ -50,7 +54,8 @@ class TradeActionButton extends StatelessWidget {
               ),
               child: Center(
                 child: InkWell(
-                  onTap: () => setTradeType!(1),
+                  onTap: () => Navigator.pushNamed(context, rTrade,
+                      arguments: {'symbol': title}),
                   child: const TextComponent(
                     align: TextAlign.center,
                     fontSize: 16,

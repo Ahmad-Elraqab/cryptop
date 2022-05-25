@@ -13,3 +13,23 @@ final createOrder = FutureProvider.family<Order?, Map<String, dynamic>>(
     return result;
   },
 );
+
+final getOrders = FutureProvider.autoDispose<List<Order>?>(
+  (ref) async {
+    final order = ref.watch(orderViewmodel);
+
+    final result = await order.getOpenOrders();
+
+    return result;
+  },
+);
+
+final getHistoricalOrders = FutureProvider.autoDispose<List<Order>?>(
+  (ref) async {
+    final order = ref.watch(orderViewmodel);
+
+    final result = await order.getHistoricalOrder();
+
+    return result;
+  },
+);
