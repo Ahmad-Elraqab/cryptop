@@ -136,7 +136,7 @@ class TradeController extends StatelessWidget {
             fontSize: 14,
             hasImage: false,
             imageUrl: '',
-            onTap: () => {},
+            onTap: () => onSubmit!(),
             horizontal: 4.0,
             vertical: 10.0,
             height: 50.0,

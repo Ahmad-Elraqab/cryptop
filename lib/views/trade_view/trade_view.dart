@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cryptop/components/custom_snack_bar/custom_snack_bar.dart';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
 import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_action.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_body.dart';
@@ -98,7 +99,51 @@ class _TradeViewState extends State<TradeView> {
     }
   }
 
-  onSubmit() {}
+  onSubmit() {
+    bool _validate = validate();
+
+    if (_validate == true) {
+      print('make order');
+    } else {
+      print('dont make order');
+    }
+  }
+
+  bool validate() {
+    switch (activeIndexList) {
+      case 0:
+        if (controllers[0].text.isEmpty) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBar('fill in required fields'));
+          return false;
+        }
+        break;
+      case 2:
+        if (controllers[0].text.isEmpty || controllers[1].text.isEmpty) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBar('fill in required fields'));
+          return false;
+        }
+        break;
+      case 3:
+        if (controllers[0].text.isEmpty ||
+            controllers[1].text.isEmpty ||
+            controllers[2].text.isEmpty) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBar('fill in required fields'));
+          return false;
+        }
+        break;
+      default:
+    }
+    if (controllers[3].text.isEmpty || controllers[4].text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(snackBar('fill in required fields'));
+      return false;
+    }
+
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
