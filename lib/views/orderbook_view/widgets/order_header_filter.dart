@@ -12,8 +12,8 @@ class OrderHeaderFilter extends StatelessWidget {
   final Function? setFilter;
   @override
   Widget build(BuildContext context) {
-    final list = ['Date', 'Name', 'Change'];
-    final actionList = ['D', 'N', 'C'];
+    final list = ['Date', 'Name', 'Change', 'IsOpen'];
+    final actionList = ['D', 'N', 'C', 'P'];
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

@@ -79,6 +79,10 @@ class OrderViewmodel extends ChangeNotifier {
       case 'C_DOWN':
         orders.sort((a, b) => b.rate!.compareTo(a.rate!));
         break;
+      case 'P_UP':
+        return orders.where((e) => e.isOpen == true).toList();
+      case 'P_DOWN':
+        return orders.where((e) => e.isClose == true).toList();
       default:
     }
     return orders;

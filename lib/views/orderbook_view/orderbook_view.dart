@@ -1,11 +1,9 @@
-import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/title_header/title_header.dart';
 import 'package:cryptop/viewmodels/order_viewmodel/order_action.dart';
-import 'package:cryptop/views/orderbook_view/widgets/order_list.dart';
+import 'package:cryptop/views/orderbook_view/widgets/order_filter_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'widgets/order_header_filter.dart';
 
 class OrderbookView extends StatefulWidget {
   const OrderbookView({Key? key}) : super(key: key);
@@ -62,53 +60,19 @@ class _OrderbookViewState extends State<OrderbookView> {
                                 ),
                               ),
                             )
-                          : Expanded(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 30.0,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: orderType.length,
-                                      itemBuilder: (context, index) =>
-                                          CustomButtom(
-                                        borderColor: Colors.transparent,
-                                        borderRadius: 5.0,
-                                        buttonColor: activeIndex == index
-                                            ? Colors.amber
-                                            : const Color.fromRGBO(
-                                                55, 61, 76, 1),
-                                        buttonText: orderType[index],
-                                        buttonTextColor: Colors.white,
-                                        fontSize: 12,
-                                        hasImage: false,
-                                        horizontal: 16.0,
-                                        vertical: 4.0,
-                                        imageUrl: '',
-                                        onTap: () => setIndex(index),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  Divider(
-                                      thickness: 1,
-                                      color: Colors.white,
-                                      height: 15),
-                                  OrderHeaderFilter(
-                                      filter: filter, setFilter: setFilter),
-                                  OrderList(
-                                    orderList: watch(orderViewmodel)
-                                        .getSortedOpenOrders(
-                                            activeIndex, filter),
-                                    activeItem: activeItem,
-                                    setItem: setItem,
-                                    close: close,
-                                    track: track,
-                                  ),
-                                ],
-                              ),
-                            ),
+                          : OrderFilterAction(
+                              orderType: orderType,
+                              activeIndex: activeIndex,
+                              setIndex: setIndex,
+                              item: activeItem,
+                              setItem: setItem,
+                              orderList: watch(orderViewmodel)
+                                  .getSortedOpenOrders(activeIndex, filter),
+                              filter: filter,
+                              setFilter: setFilter,
+                              close: close,
+                              track: track,
+                            )
                 ],
               ),
             );
