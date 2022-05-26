@@ -43,11 +43,14 @@ class CustomerTextField extends StatelessWidget {
       style: TextStyle(color: color!),
       textDirection: TextDirection.ltr,
       decoration: InputDecoration(
+        hintText: labelText!,
         errorText: validate! ? error! : null,
         errorStyle: const TextStyle(color: Colors.white),
-        contentPadding: const EdgeInsets.only(left: 1, right: 1, bottom: 20.0),
-        labelText: labelText!,
-        labelStyle: TextStyle(color: color!),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 1, vertical: 10.0),
+        labelStyle: TextStyle(
+          color: color!,
+        ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: borderColor!),
         ),
