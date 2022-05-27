@@ -6,12 +6,13 @@ class LimitOrder extends Order {
   bool? isPending;
 
   LimitOrder({
-    type,
-    limit = 0.0,
-    isPending = true,
+    this.type,
+    this.limit = 0.0,
+    this.isPending = true,
     amount = 0.0,
     openDate,
     closeDate,
+    sellPrice,
     id,
     buyPrice = 0.0,
     isClose = false,
@@ -24,14 +25,11 @@ class LimitOrder extends Order {
             buyPrice: buyPrice,
             closeDate: closeDate,
             openDate: openDate,
+            sellPrice: sellPrice,
             isClose: isClose,
             isOpen: isOpen,
             rate: rate,
-            symbol: symbol) {
-    this.limit = limit;
-    this.type = type;
-    this.isPending = isPending;
-  }
+            symbol: symbol);
 
   LimitOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     this.type = json['type'];

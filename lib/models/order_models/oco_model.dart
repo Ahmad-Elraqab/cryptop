@@ -8,11 +8,12 @@ class OCOOrder extends Order {
   bool? isPending;
 
   OCOOrder({
-    s_limit = 0.0,
+    this.s_limit = 0.0,
+    this.isPending = true,
+    this.stop = 0.0,
+    this.limit = 0.0,
+    this.type,
     id,
-    stop = 0.0,
-    limit = 0.0,
-    isPending = true,
     amount = 0.0,
     openDate,
     closeDate,
@@ -20,25 +21,20 @@ class OCOOrder extends Order {
     isClose = false,
     isOpen = true,
     rate = 0.0,
-    type,
+    sellPrice,
     symbol,
   }) : super(
           id: id,
           amount: amount,
           buyPrice: buyPrice,
           closeDate: closeDate,
+          sellPrice: sellPrice,
           openDate: openDate,
           isClose: isClose,
           isOpen: isOpen,
           rate: rate,
           symbol: symbol,
-        ) {
-    this.s_limit = s_limit;
-    this.stop = stop;
-    this.type = type;
-    this.limit = limit;
-    this.isPending = isPending;
-  }
+        );
 
   OCOOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     this.type = json['type'];

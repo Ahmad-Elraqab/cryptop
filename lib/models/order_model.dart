@@ -2,6 +2,7 @@ class Order {
   String? id;
   String? symbol;
   double? buyPrice;
+  double? sellPrice;
   DateTime? openDate;
   DateTime? closeDate;
   double? amount;
@@ -12,6 +13,7 @@ class Order {
 
   Order({
     this.id,
+    this.sellPrice,
     this.amount = 0.0,
     this.type = '',
     this.openDate,
@@ -31,6 +33,7 @@ class Order {
           openDate: DateTime.parse(json['openDate']),
           closeDate: DateTime.parse(json['closeDate']),
           buyPrice: (json['buyPrice'] + 0.0),
+          sellPrice: (json['sellPrice'] + 0.0),
           isClose: json['isClose'],
           isOpen: json['isOpen'],
           rate: double.parse(json['rate'].toString()),

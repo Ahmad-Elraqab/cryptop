@@ -1,16 +1,12 @@
 import 'package:cryptop/models/order_model.dart';
 
-class StopLimitOrder extends Order {
-  double? limit;
-  double? stop;
-  bool? isPending;
-  String? type;
+class RSIOrder extends Order {
+  double? buyRSI;
+  double? sellRSI;
 
-  StopLimitOrder({
-    this.type,
-    this.stop = 0.0,
-    this.limit = 0.0,
-    this.isPending = true,
+  RSIOrder({
+    this.buyRSI,
+    this.sellRSI,
     id,
     amount = 0.0,
     openDate,
@@ -19,14 +15,14 @@ class StopLimitOrder extends Order {
     isClose = false,
     isOpen = true,
     rate = 0.0,
-    symbol,
     sellPrice,
+    symbol,
   }) : super(
           id: id,
           amount: amount,
           buyPrice: buyPrice,
-          closeDate: closeDate,
           sellPrice: sellPrice,
+          closeDate: closeDate,
           openDate: openDate,
           isClose: isClose,
           isOpen: isOpen,
@@ -34,18 +30,16 @@ class StopLimitOrder extends Order {
           symbol: symbol,
         );
 
-  StopLimitOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+  RSIOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     this.type = json['type'];
-    this.stop = double.parse(json['stop'].toString());
-    this.limit = double.parse(json['limit'].toString());
-    this.isPending = json['isPending'];
+    this.buyRSI = json['buyRSI'];
+    this.sellRSI = json['sellRSI'];
   }
 
   Map<String, dynamic> toJson() => {
         ...super.toJson(),
         'type': type,
-        'stop': stop,
-        'limit': limit,
-        'isPending': isPending,
+        'sellRSI': sellRSI,
+        'buyRSI': buyRSI,
       };
 }

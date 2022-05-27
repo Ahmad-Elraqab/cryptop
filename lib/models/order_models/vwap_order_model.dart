@@ -1,16 +1,12 @@
 import 'package:cryptop/models/order_model.dart';
 
-class StopLimitOrder extends Order {
-  double? limit;
-  double? stop;
-  bool? isPending;
-  String? type;
+class VWAPOrder extends Order {
+  double? buyVWAP;
+  double? sellVWAP;
 
-  StopLimitOrder({
-    this.type,
-    this.stop = 0.0,
-    this.limit = 0.0,
-    this.isPending = true,
+  VWAPOrder({
+    this.buyVWAP,
+    this.sellVWAP,
     id,
     amount = 0.0,
     openDate,
@@ -19,33 +15,31 @@ class StopLimitOrder extends Order {
     isClose = false,
     isOpen = true,
     rate = 0.0,
-    symbol,
     sellPrice,
+    symbol,
   }) : super(
           id: id,
           amount: amount,
           buyPrice: buyPrice,
           closeDate: closeDate,
-          sellPrice: sellPrice,
           openDate: openDate,
           isClose: isClose,
           isOpen: isOpen,
+          sellPrice: sellPrice,
           rate: rate,
           symbol: symbol,
         );
 
-  StopLimitOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+  VWAPOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     this.type = json['type'];
-    this.stop = double.parse(json['stop'].toString());
-    this.limit = double.parse(json['limit'].toString());
-    this.isPending = json['isPending'];
+    this.buyVWAP = json['buyVWAP'];
+    this.sellVWAP = json['sellVWAP'];
   }
 
   Map<String, dynamic> toJson() => {
         ...super.toJson(),
         'type': type,
-        'stop': stop,
-        'limit': limit,
-        'isPending': isPending,
+        'sellVWAP': sellVWAP,
+        'buyVWAP': buyVWAP,
       };
 }
