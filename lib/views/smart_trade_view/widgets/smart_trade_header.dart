@@ -1,6 +1,5 @@
-import 'package:cryptop/components/custom_text_field/custom_text_field.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
-import 'package:cryptop/views/smart_trade_view/widgets/smart_trade_detail.dart';
+import 'package:cryptop/views/smart_trade_view/widgets/smart_trade_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_buttom/custom_button.dart';
 
@@ -8,24 +7,17 @@ class SmartTradeHeader extends StatelessWidget {
   const SmartTradeHeader({
     Key? key,
     this.filter,
+    this.controllers,
+    this.setForm,
+    this.symbols,
   }) : super(key: key);
 
+  final Function? setForm;
   final Function? filter;
+  final List<TextEditingController>? controllers;
+  final List? symbols;
   @override
   Widget build(BuildContext context) {
-    final textField = [
-      'trade count',
-      'trade amount',
-      'trade',
-      'buy on rsi',
-      'sell on rsi',
-      'interval',
-      'start date',
-      'end date'
-    ];
-
-    final List<TextEditingController> _controller =
-        List.generate(8, (i) => TextEditingController());
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -79,75 +71,8 @@ class SmartTradeHeader extends StatelessWidget {
                   color: Color.fromARGB(255, 39, 44, 56),
                 ),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.7,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    GridView.count(
-                      crossAxisCount: 1,
-                      shrinkWrap: true,
-                      childAspectRatio: 10,
-                      mainAxisSpacing: 20.0,
-                      children: [
-                        for (int i = 0; i < textField.length; i++)
-                          CustomerTextField(
-                            borderColor: Colors.white,
-                            color: Colors.white,
-                            controller: _controller[i],
-                            error: '',
-                            labelText: textField[i],
-                            lines: 1,
-                            onChanged: () => {},
-                            readonly: false,
-                            secure: false,
-                            validate: false,
-                          ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CustomButtom(
-                          borderColor: Colors.transparent,
-                          borderRadius: 5.0,
-                          buttonColor: Colors.amber,
-                          buttonText: 'Create',
-                          buttonTextColor: Colors.white,
-                          fontSize: 12,
-                          hasImage: false,
-                          height: 30.0,
-                          horizontal: 10.0,
-                          vertical: 4.0,
-                          imageUrl: '',
-                          onTap: () => {},
-                        ),
-                        const SizedBox(width: 15.0),
-                        CustomButtom(
-                          borderColor: Colors.transparent,
-                          borderRadius: 5.0,
-                          buttonColor: Colors.grey,
-                          buttonText: 'Discard',
-                          buttonTextColor: Colors.white,
-                          fontSize: 12,
-                          hasImage: false,
-                          height: 30.0,
-                          horizontal: 10.0,
-                          vertical: 4.0,
-                          imageUrl: '',
-                          onTap: () => Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      const SmartTradeDetail(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                height: MediaQuery.of(context).size.height * 0.55,
+                child: SmartTradeBottomSheet(),
               ),
             ),
           },

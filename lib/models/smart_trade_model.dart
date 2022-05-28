@@ -1,9 +1,15 @@
 class SmartTradeModel {
   String? id;
   String? interval;
+  String? type;
   bool? isActive;
+  bool? isClose;
+  double? buyOn;
+  double? sellOn;
+  double? stopLose;
   double? amount;
   double? profit;
+  double? sellRate;
   int? numberOfTrades;
   int? numberOfSimultaneousTrades;
   List<String>? symbols;
@@ -14,6 +20,12 @@ class SmartTradeModel {
       {this.amount,
       this.endDate,
       this.id,
+      this.buyOn,
+      this.stopLose,
+      this.sellOn,
+      this.isClose,
+      this.type,
+      this.sellRate,
       this.interval,
       this.isActive,
       this.numberOfSimultaneousTrades,
@@ -24,27 +36,35 @@ class SmartTradeModel {
 
   SmartTradeModel.fromJson(Map<String, dynamic> json)
       : this(
-          amount: json['amount'],
-          endDate: json['endDate'],
+          amount: json['amount'].toDouble(),
+          sellRate: json['sellRate'].toDouble(),
+          profit: json['profit'].toDouble(),
+          sellOn: json['sellOn'].toDouble(),
+          buyOn: json['buyOn'].toDouble(),
+          stopLose: json['stopLose'].toDouble(),
+          endDate: DateTime.parse(json['endDate']),
+          startDate: DateTime.parse(json['startDate']),
           id: json['id'],
-          profit: json['profit'],
+          type: json['type'],
           interval: json['interval'],
           isActive: json['isActive'],
+          isClose: json['isClose'],
           numberOfSimultaneousTrades: json['numberOfSimultaneousTrades'],
           numberOfTrades: json['numberOfTrades'],
-          startDate: json['startDate'],
-          symbols: json['symbols'],
+          symbols: (json['symbols'] as List).map((e) => e.toString()).toList(),
         );
 
   Map<String, dynamic> toJson() => {
         'amount': amount,
-        'endDate': endDate,
         'id': id,
         'interval': interval,
-        'isActive': isActive,
         'numberOfSimultaneousTrades': numberOfSimultaneousTrades,
         'numberOfTrades': numberOfTrades,
-        'startDate': startDate,
         'symbols': symbols,
+        'sellRate': sellRate,
+        'amount': amount,
+        'buyOn': buyOn,
+        'sellOn': sellOn,
+        'type': type,
       };
 }

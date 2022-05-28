@@ -2,20 +2,21 @@ import 'package:cryptop/models/order_models/rsi_order_model.dart';
 import 'package:cryptop/models/smart_trade_model.dart';
 
 class RSIModel extends SmartTradeModel {
-  double? buyRSI;
-  double? sellRSI;
+  double? buyOn;
+  double? sellOn;
   List<RSIOrder>? orderList;
   String? type;
 
   RSIModel({
-    this.buyRSI,
-    this.sellRSI,
+    this.buyOn,
+    this.sellOn,
     this.type,
     this.orderList,
     amount,
     endDate,
     id,
     interval,
+    sellRate,
     isActive,
     numberOfSimultaneousTrades,
     numberOfTrades,
@@ -23,6 +24,7 @@ class RSIModel extends SmartTradeModel {
     symbols,
   }) : super(
           amount: amount,
+          sellRate: sellRate,
           endDate: endDate,
           id: id,
           interval: interval,
@@ -34,16 +36,16 @@ class RSIModel extends SmartTradeModel {
         );
 
   RSIModel.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    this.buyRSI = json['buyRSI'];
-    this.sellRSI = json['sellRSI'];
+    this.buyOn = json['buyOn'].toDouble();
+    this.sellOn = json['sellOn'].toDouble();
     this.type = json['type'];
     this.orderList =
         (json['orders'] as List).map((e) => RSIOrder.fromJson(e)).toList();
   }
   Map<String, dynamic> toJson() => {
         ...super.toJson(),
-        'buyRSI': buyRSI,
-        'sellRSI': sellRSI,
+        'buyOn': buyOn,
+        'sellOn': sellOn,
         'type': type,
       };
 }
