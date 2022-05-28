@@ -165,8 +165,7 @@ class _TradeViewState extends State<TradeView> {
 
       if (order != null) {
         setLoad(false);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(snackBar('Order created successfully'));
+        ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
       }
     }
   }

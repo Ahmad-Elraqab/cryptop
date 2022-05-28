@@ -28,8 +28,7 @@ class _LoginViewState extends State<LoginView> {
       if (user is User) {
         await _userViewmodel.addToken(user.token!);
 
-        ScaffoldMessenger.of(context)
-            .showSnackBar(snackBar('Logged in sucessfully!'));
+        ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
         Navigator.pushReplacementNamed(context, '/landing');
       } else {
         ScaffoldMessenger.of(context)

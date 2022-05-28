@@ -34,10 +34,9 @@ class _SmartTradeListItemBodyState extends State<SmartTradeListItemBody> {
         await context.read(toggleSmartTrade(widget.smartTrade!.id!).future);
 
     if (data != null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(snackBar('Bot toggle Successfully!'));
+      ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(snackBar('Try Again Later!'));
+      ScaffoldMessenger.of(context).showSnackBar(network_snackBar(1));
     }
     loading = false;
     setState(() {});
@@ -49,10 +48,9 @@ class _SmartTradeListItemBodyState extends State<SmartTradeListItemBody> {
         await context.read(closeSmartTrade(widget.smartTrade!.id!).future);
 
     if (data != null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(snackBar('Bot closed Successfully!'));
+      ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(snackBar('Try Again Later!'));
+      ScaffoldMessenger.of(context).showSnackBar(network_snackBar(1));
     }
     loading = false;
     setState(() {});

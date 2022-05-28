@@ -92,12 +92,10 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
       if (data != null) {
         loading = false;
         Navigator.pop(context);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(snackBar('Bot Created Successfully!'));
+        ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
         setForm(0, -1);
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(snackBar('Try Again Later!'));
+        ScaffoldMessenger.of(context).showSnackBar(network_snackBar(1));
       }
       setState(() {});
     }
