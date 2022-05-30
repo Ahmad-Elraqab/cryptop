@@ -1,26 +1,26 @@
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/models/backtest_model.dart';
 import 'package:flutter/material.dart';
 
 class BacktestListItemBody extends StatelessWidget {
   const BacktestListItemBody({
     Key? key,
     this.activeIndex,
+    this.backtest,
   }) : super(key: key);
   final int? activeIndex;
+  final BacktestModel? backtest;
   @override
   Widget build(BuildContext context) {
     final data = [
-      {'input': 'trade', 'value': '500\$'},
-      {'input': 'trade amount', 'value': '500\$'},
-      {'input': 'trade count', 'value': '20'},
-      {'input': 'buy on rsi', 'value': '30'},
-      {'input': 'sell on rsi', 'value': '70'},
-      {'input': 'interval', 'value': '1m'},
-      {'input': 'profit', 'value': '30'},
-      {'input': 'total trade count', 'value': '1250'},
-      {'input': 'total profit', 'value': '252'},
-      {'input': 'start date', 'value': '01-12-2020'},
-      {'input': 'end date', 'value': '01-12-2020'},
+      {'input': 'trade amount', 'value': (backtest!.amount.toString() + '\$')},
+      {'input': 'trade count', 'value': backtest!.numberOfTrades.toString()},
+      {'input': 'buy on', 'value': backtest!.buyOn.toString()},
+      {'input': 'sell on', 'value': backtest!.sellOn.toString()},
+      {'input': 'interval', 'value': backtest!.interval.toString()},
+      {'input': 'profit', 'value': backtest!.profit.toString()},
+      {'input': 'start date', 'value': backtest!.startDate.toString()},
+      {'input': 'end date', 'value': backtest!.endDate.toString()},
     ];
     return Row(
       children: [

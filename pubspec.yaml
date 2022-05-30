@@ -57,6 +57,8 @@ dependencies:
   web_socket_channel: ^2.2.0
   flutter_launcher_icons: ^0.9.2
   flutter_form_builder: ^7.2.1
+  date_time_picker: ^2.1.0
+  getwidget: ^2.0.5
   
   
 dev_dependencies:
