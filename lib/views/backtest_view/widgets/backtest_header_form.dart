@@ -21,7 +21,7 @@ class BacktestHeaderForm extends StatefulWidget {
 
 class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
   final List<TextEditingController> controllers =
-      List.generate(12, (i) => TextEditingController());
+      List.generate(13, (i) => TextEditingController());
 
   setForm(value, id) {
     switch (id) {
@@ -96,6 +96,7 @@ class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
   }
 
   final textField = [
+    "title",
     "symbols",
     "type",
     "interval",
@@ -127,7 +128,7 @@ class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
                 mainAxisSpacing: 10.0,
                 children: [
                   for (int i = 0; i < textField.length; i++)
-                    i == 11 || i == 10
+                    i == 12 || i == 11
                         ? DateTimePicker(
                             dateLabelText: 'start date',
                             fieldLabelText: 'start date',
@@ -156,9 +157,9 @@ class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
                           )
                         : GestureDetector(
                             onDoubleTap: () {
-                              if (i == 0) {
+                              if (i == 1) {
                                 newMethod(context, i, exchange_pairs);
-                              } else if (i == 1) {
+                              } else if (i == 2) {
                                 newMethod(context, i, [
                                   'RSI',
                                   'ZSCORE',
@@ -168,7 +169,7 @@ class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
                                   'R & S',
                                   'TREND'
                                 ]);
-                              } else if (i == 2) {
+                              } else if (i == 3) {
                                 newMethod(context, i, [
                                   '1d',
                                   '12h',
@@ -192,7 +193,7 @@ class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
                               lines: 1,
                               onChanged: (value) => {},
                               readonly:
-                                  i == 0 || i == 1 || i == 2 ? true : false,
+                                  i == 1 || i == 2 || i == 3 ? true : false,
                               secure: false,
                               validate: false,
                               keyboardType: TextInputType.number,

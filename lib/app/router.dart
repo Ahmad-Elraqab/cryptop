@@ -81,7 +81,9 @@ class RouteManager {
         builder = const BacktestView();
         break;
       case rBacktestResults:
-        builder = const BacktestResult();
+        builder = BacktestResult(
+          data: settings.arguments!,
+        );
         break;
       case rSmartTrade:
         builder = const SmartTradeView();

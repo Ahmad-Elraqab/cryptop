@@ -90,6 +90,8 @@ class PairBoard extends StatelessWidget {
                             return Stack(
                               children: [
                                 HomeLineChart(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
                                   height: 100.0,
                                   data: data![activeBoard!]
                                       .candles!

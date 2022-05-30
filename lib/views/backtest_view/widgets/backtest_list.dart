@@ -49,12 +49,12 @@ class BacktestList extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const TextComponent(
+                              TextComponent(
                                 align: TextAlign.start,
                                 fontSize: 14.0,
                                 line: 1,
                                 textColor: Colors.white,
-                                title: 'RSI',
+                                title: backtest![index].title,
                                 weight: FontWeight.bold,
                               ),
                               Transform.scale(

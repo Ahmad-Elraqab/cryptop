@@ -25,7 +25,10 @@ class BacktestBody extends StatelessWidget {
         const SizedBox(height: 30.0),
         const TitleHeader(isTitle: true, title: 'Backtest'),
         const SizedBox(height: 30.0),
-        const BacktestHeaderAction(),
+        BacktestHeaderAction(
+          selected: selected,
+          backtest: backtest,
+        ),
         const SizedBox(height: 20.0),
         Divider(
           color: Colors.white,

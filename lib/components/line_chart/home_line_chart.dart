@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 class HomeLineChart extends StatelessWidget {
   const HomeLineChart({
     Key? key,
-    this.padding = 30.0,
+    this.padding = null,
     this.color = Colors.transparent,
     this.data,
     this.height = 50,
+    this.width,
   }) : super(key: key);
 
   final double? height;
+  final double? width;
   final double? padding;
   final Color? color;
   final List<FlSpot>? data;
@@ -19,10 +21,12 @@ class HomeLineChart extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        padding: const EdgeInsets.only(bottom: 10.0),
+        padding: padding == null
+            ? const EdgeInsets.only(bottom: 10.0)
+            : EdgeInsets.all(padding!),
         height: height,
         color: color,
-        width: MediaQuery.of(context).size.width * 0.5,
+        width: width,
         child: LineChart(
           LineChartData(
             titlesData: FlTitlesData(

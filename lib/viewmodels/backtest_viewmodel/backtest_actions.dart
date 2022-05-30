@@ -18,6 +18,7 @@ final createBacktest = FutureProviderFamily<BacktestModel?, Map>(
       stopLose: double.parse(data['stop lose']),
       successfulOrders: 0,
       amount: double.parse(data['amount']),
+      title: data['title'],
       buyOn: double.parse(data['buy on']),
       sellOn: double.parse(data['sell on']),
       sellRate: double.parse(data['sell rate']),

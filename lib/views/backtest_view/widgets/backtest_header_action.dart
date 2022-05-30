@@ -1,20 +1,20 @@
+import 'package:cryptop/app/const.dart';
+import 'package:cryptop/components/custom_snack_bar/custom_snack_bar.dart';
+import 'package:cryptop/models/backtest_model.dart';
 import 'package:cryptop/views/backtest_view/widgets/backtest_header_form.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_buttom/custom_button.dart';
 
-class BacktestHeaderAction extends StatefulWidget {
+class BacktestHeaderAction extends StatelessWidget {
   const BacktestHeaderAction({
     Key? key,
-    this.filter,
+    this.backtest,
+    this.selected,
   }) : super(key: key);
 
-  final Function? filter;
+  final List<int>? selected;
+  final List<BacktestModel>? backtest;
 
-  @override
-  State<BacktestHeaderAction> createState() => _BacktestHeaderActionState();
-}
-
-class _BacktestHeaderActionState extends State<BacktestHeaderAction> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,7 +32,19 @@ class _BacktestHeaderActionState extends State<BacktestHeaderAction> {
           horizontal: 10.0,
           vertical: 4.0,
           imageUrl: '',
-          onTap: () => {},
+          onTap: () {
+            if (selected!.isEmpty || selected!.length < 2) {
+              debugPrint('hihi');
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(snackBar('select at least 2 items'));
+            } else {
+              Navigator.pushNamed(
+                context,
+                rBacktestResults,
+                arguments: {'backtest': backtest, 'selected': selected},
+              );
+            }
+          },
         ),
         const SizedBox(width: 15.0),
         CustomButtom(
@@ -60,7 +72,7 @@ class _BacktestHeaderActionState extends State<BacktestHeaderAction> {
                 color: Color.fromARGB(255, 39, 44, 56),
               ),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height * 0.8,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,

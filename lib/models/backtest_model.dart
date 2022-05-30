@@ -1,5 +1,6 @@
 class BacktestModel {
   String? id;
+  String? title;
   String? interval;
   String? type;
   bool? status;
@@ -21,6 +22,7 @@ class BacktestModel {
       {this.amount,
       this.status,
       this.endDate,
+      this.title,
       this.id,
       this.successfulOrders,
       this.failedOrders,
@@ -48,6 +50,7 @@ class BacktestModel {
           endDate: DateTime.parse(json['endDate']),
           startDate: DateTime.parse(json['startDate']),
           id: json['id'],
+          title: json['title'],
           type: json['type'],
           failedOrders: json['failedOrders'],
           successfulOrders: json['successfulOrders'],
@@ -65,6 +68,7 @@ class BacktestModel {
         'numberOfTrades': numberOfTrades,
         'symbols': symbols,
         'sellRate': sellRate,
+        'title': title,
         'amount': amount,
         'stopLose': stopLose,
         'buyOn': buyOn,
