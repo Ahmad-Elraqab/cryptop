@@ -72,7 +72,7 @@ class BacktestHeaderAction extends StatelessWidget {
                 color: Color.fromARGB(255, 39, 44, 56),
               ),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height * 0.7,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,

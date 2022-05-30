@@ -25,7 +25,7 @@ class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
 
   setForm(value, id) {
     switch (id) {
-      case 0:
+      case 1:
         if (controllers[id].text.contains(value)) {
           controllers[id].text =
               controllers[id].text.replaceAll((value + ','), '');
@@ -196,7 +196,9 @@ class _BacktestHeaderFormState extends State<BacktestHeaderForm> {
                                   i == 1 || i == 2 || i == 3 ? true : false,
                               secure: false,
                               validate: false,
-                              keyboardType: TextInputType.number,
+                              keyboardType: i == 0
+                                  ? TextInputType.text
+                                  : TextInputType.number,
                             ),
                           ),
                 ],
