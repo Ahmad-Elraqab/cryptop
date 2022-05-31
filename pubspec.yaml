@@ -47,7 +47,7 @@ dependencies:
   rive: ^0.8.4
   candlesticks: ^2.1.0
   k_chart: ^0.6.0
-  syncfusion_flutter_charts: ^20.1.47+1
+  syncfusion_flutter_charts: any
   flutter_slidable: ^1.2.0
   flip_card: ^0.6.0
   shared_preferences: ^2.0.13
@@ -59,6 +59,10 @@ dependencies:
   flutter_form_builder: ^7.2.1
   date_time_picker: ^2.1.0
   getwidget: ^2.0.5
+  syncfusion_flutter_xlsio: ^19.1.64-beta
+  path_provider: ^2.0.1
+  open_file: ^3.2.1
+  universal_html: ^2.0.8
   
   
 dev_dependencies:

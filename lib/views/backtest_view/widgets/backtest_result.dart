@@ -1,6 +1,7 @@
 import 'package:cryptop/components/line_chart/home_line_chart.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/components/title_header/title_header.dart';
+import 'package:cryptop/models/backtest_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_table/custom_table.dart';
@@ -28,7 +29,7 @@ class BacktestResult extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    for (int i = 0; i < backtest.length; i++)
+                    for (int i = 0; i < [backtest].length; i++)
                       Container(
                         margin: const EdgeInsets.only(right: 16.0),
                         child: Row(
@@ -69,10 +70,11 @@ class BacktestResult extends StatelessWidget {
               ),
               const SizedBox(height: 30.0),
               CustomTable(
-                backtest: [
-                  backtest[selected[0]],
-                  backtest[selected[1]],
-                ],
+                backtest: selected == null
+                    ? [backtest]
+                    : (selected as List<int>)
+                        .map((e) => backtest[e] as BacktestModel)
+                        .toList(),
               ),
             ],
           ),

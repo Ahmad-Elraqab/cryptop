@@ -38,8 +38,8 @@ class BacktestList extends StatelessWidget {
                   itemBuilder: (context, index) => InkWell(
                     onTap: () => setIndex!(index),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                      decoration: const BoxDecoration(
+                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                      decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(color: Colors.white, width: 1),
                         ),
@@ -81,9 +81,13 @@ class BacktestList extends StatelessWidget {
                             ],
                           ),
                           activeIndex == index
-                              ? BacktestListItemBody(
-                                  activeIndex: activeIndex,
-                                  backtest: backtest![index])
+                              ? Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 0.0),
+                                  child: BacktestListItemBody(
+                                      activeIndex: activeIndex,
+                                      backtest: backtest![index]),
+                                )
                               : const SizedBox()
                         ],
                       ),

@@ -42,57 +42,67 @@ class CustomTable extends StatelessWidget {
       },
     ];
     return Center(
-      child: DataTable(
-        horizontalMargin: 0,
-        border: const TableBorder(
-          horizontalInside: BorderSide(color: Colors.white, width: 2),
-        ),
-        columns: [
-          DataColumn(label: Text('')),
-          for (int i = 0; i < backtest!.length; i++)
-            DataColumn(
-              label: Center(
-                child: TextComponent(
-                  align: TextAlign.center,
-                  fontSize: 14.0,
-                  line: 1,
-                  textColor: Colors.white,
-                  title: backtest![i].interval,
-                  weight: FontWeight.bold,
-                ),
-              ),
-            ),
-        ],
-        rows: [
-          for (int i = 0; i < data.length; i++)
-            DataRow(
-              cells: [
-                DataCell(
-                  TextComponent(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: DataTable(
+          border: TableBorder.all(
+            color: Colors.white,
+            width: 2,
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          columnSpacing: backtest!.length == 1 ? 80 : 30,
+          columns: [
+            DataColumn(label: Text('')),
+            for (int i = 0; i < backtest!.length; i++)
+              DataColumn(
+                label: SizedBox(
+                  width: 100,
+                  child: TextComponent(
                     align: TextAlign.center,
                     fontSize: 14.0,
                     line: 1,
                     textColor: Colors.white,
-                    title: data[i]['input'].toString(),
+                    title: backtest![i].title,
                     weight: FontWeight.bold,
                   ),
                 ),
-                for (int j = 0; j < (data[i]['value'] as List).length; j++)
+              ),
+          ],
+          rows: [
+            for (int i = 0; i < data.length; i++)
+              DataRow(
+                cells: [
                   DataCell(
-                    Center(
+                    SizedBox(
+                      width: 100,
                       child: TextComponent(
-                        align: TextAlign.center,
+                        align: TextAlign.start,
                         fontSize: 14.0,
                         line: 1,
                         textColor: Colors.white,
-                        title: (data[i]['value'] as List)[j].toString(),
+                        title: data[i]['input'].toString(),
                         weight: FontWeight.bold,
                       ),
                     ),
                   ),
-              ],
-            ),
-        ],
+                  for (int j = 0; j < (data[i]['value'] as List).length; j++)
+                    DataCell(
+                      SizedBox(
+                        width: 100,
+                        child: TextComponent(
+                          align: TextAlign.center,
+                          fontSize: 14.0,
+                          line: 1,
+                          textColor: Colors.white,
+                          title: (data[i]['value'] as List)[j].toString(),
+                          weight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }

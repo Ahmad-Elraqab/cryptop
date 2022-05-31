@@ -1,10 +1,9 @@
 import 'package:cryptop/models/backtest_model.dart';
-import 'package:cryptop/models/order_models/rsi_order_model.dart';
 
 class RSIBacktestModel extends BacktestModel {
   double? buyOn;
   double? sellOn;
-  List<RSIOrder>? orderList;
+  List<Map<String, dynamic>>? orderList;
   String? type;
 
   RSIBacktestModel({
@@ -16,6 +15,7 @@ class RSIBacktestModel extends BacktestModel {
     endDate,
     id,
     interval,
+    orders,
     sellRate,
     isActive,
     numberOfSimultaneousTrades,
@@ -39,7 +39,7 @@ class RSIBacktestModel extends BacktestModel {
     this.sellOn = json['sellOn'].toDouble();
     this.type = json['type'];
     this.orderList =
-        (json['orders'] as List).map((e) => RSIOrder.fromJson(e)).toList();
+        (json['orders'] as List).map((e) => e as Map<String, dynamic>).toList();
   }
   Map<String, dynamic> toJson() => {
         ...super.toJson(),

@@ -5,7 +5,6 @@ import 'package:cryptop/components/line_chart/home_line_chart.dart';
 import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
-import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_action.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
