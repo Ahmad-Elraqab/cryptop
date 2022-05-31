@@ -29,8 +29,7 @@ class TradeActionButton extends StatelessWidget {
               ),
               child: Center(
                 child: InkWell(
-                  onTap: () => Navigator.pushNamed(context, rTrade,
-                      arguments: {'symbol': title}),
+                  onTap: () => setTradeType!(0),
                   child: const TextComponent(
                     align: TextAlign.center,
                     fontSize: 16,
@@ -54,8 +53,7 @@ class TradeActionButton extends StatelessWidget {
               ),
               child: Center(
                 child: InkWell(
-                  onTap: () => Navigator.pushNamed(context, rTrade,
-                      arguments: {'symbol': title}),
+                  onTap: () => setTradeType!(1),
                   child: const TextComponent(
                     align: TextAlign.center,
                     fontSize: 16,

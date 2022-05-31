@@ -11,7 +11,7 @@ class SmartTradeView extends StatefulWidget {
 }
 
 class _SmartTradeViewState extends State<SmartTradeView> {
-  int? activeIndex;
+  int? activeIndex = 0;
   setIndex(value) => setState(() => {activeIndex = value});
 
   final List<TextEditingController> controllers =

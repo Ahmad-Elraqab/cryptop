@@ -1,4 +1,5 @@
 import 'package:candlesticks/candlesticks.dart';
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/coin_details/coin_detail.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
@@ -47,9 +48,15 @@ class _CoinBodyState extends State<CoinBody> {
         const SizedBox(height: 10.0),
         CoinDetail(tickers: widget.tickers, kline: widget.chart),
         const SizedBox(height: 20.0),
-        TradeActionButton(
-          title: widget.title,
-          setTradeType: widget.setTradeType,
+        InkWell(
+          onTap: () => {
+            Navigator.pushNamed(context, rTrade,
+                arguments: {'symbol': widget.title.toString()})
+          },
+          child: TradeActionButton(
+            title: widget.title,
+            setTradeType: widget.setTradeType,
+          ),
         ),
         Container(
           height: 60.0,

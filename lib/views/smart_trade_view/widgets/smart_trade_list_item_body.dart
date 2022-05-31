@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SmartTradeListItemBody extends StatefulWidget {
   const SmartTradeListItemBody({
     Key? key,
-    this.activeIndex,
+    this.activeIndex = 0,
     this.setForm,
     this.controllers,
     this.smartTrade,
@@ -112,46 +112,61 @@ class _SmartTradeListItemBodyState extends State<SmartTradeListItemBody> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   for (int i = 0; i < buttons.length; i++)
-                    CustomButtom(
-                      borderColor: Colors.transparent,
-                      borderRadius: 5.0,
-                      buttonColor: i == 0 ? Colors.amber : Colors.grey,
-                      buttonText: buttons[i],
-                      buttonTextColor: Colors.white,
-                      fontSize: 12,
-                      hasImage: false,
-                      height: 30.0,
-                      horizontal: 16.0,
-                      vertical: 4.0,
-                      imageUrl: '',
-                      onTap: () {
-                        if (i == 0) {
-                          ontoggle();
-                        } else if (i == 2 &&
-                            widget.smartTrade!.isClose == false) {
-                          onclose();
-                        } else if (i == 1) {
-                          showBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => Container(
-                              padding: const EdgeInsets.all(24.0),
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(15.0),
-                                  topLeft: Radius.circular(15.0),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: CustomButtom(
+                          borderColor: Colors.transparent,
+                          borderRadius: 5.0,
+                          buttonColor:
+                              i == 0 && widget.smartTrade!.isActive == false
+                                  ? Colors.grey
+                                  : i == 0
+                                      ? Colors.amber
+                                      : Colors.grey,
+                          buttonText:
+                              i == 0 && widget.smartTrade!.isActive == false
+                                  ? 'inActive'
+                                  : buttons[i],
+                          buttonTextColor: Colors.white,
+                          fontSize: 12,
+                          hasImage: false,
+                          height: 30.0,
+                          horizontal: 0.0,
+                          vertical: 4.0,
+                          imageUrl: '',
+                          onTap: () {
+                            if (i == 0) {
+                              ontoggle();
+                            } else if (i == 2 &&
+                                widget.smartTrade!.isClose == false) {
+                              onclose();
+                            } else if (i == 1) {
+                              showBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                builder: (context) => Container(
+                                  padding: const EdgeInsets.all(24.0),
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(15.0),
+                                      topLeft: Radius.circular(15.0),
+                                    ),
+                                    color: Color.fromARGB(255, 39, 44, 56),
+                                  ),
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.55,
+                                  child: SmartTradeBottomSheet(
+                                    smartTrade: widget.smartTrade,
+                                  ),
                                 ),
-                                color: Color.fromARGB(255, 39, 44, 56),
-                              ),
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 0.55,
-                              child: SmartTradeBottomSheet(
-                                smartTrade: widget.smartTrade,
-                              ),
-                            ),
-                          );
-                        }
-                      },
+                              );
+                            }
+                          },
+                        ),
+                      ),
                     ),
                 ],
               )
