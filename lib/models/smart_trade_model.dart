@@ -1,6 +1,7 @@
 class SmartTradeModel {
   String? id;
   String? interval;
+  String? title;
   String? type;
   bool? isActive;
   bool? isClose;
@@ -10,6 +11,8 @@ class SmartTradeModel {
   double? amount;
   double? profit;
   double? sellRate;
+  int? successfulOrders;
+  int? failedOrders;
   int? numberOfTrades;
   int? numberOfSimultaneousTrades;
   List<String>? symbols;
@@ -21,10 +24,13 @@ class SmartTradeModel {
       this.endDate,
       this.id,
       this.buyOn,
+      this.title,
       this.stopLose,
       this.sellOn,
       this.isClose,
       this.type,
+      this.failedOrders,
+      this.successfulOrders,
       this.sellRate,
       this.interval,
       this.isActive,
@@ -44,6 +50,9 @@ class SmartTradeModel {
           stopLose: json['stopLose'].toDouble(),
           endDate: DateTime.parse(json['endDate']),
           startDate: DateTime.parse(json['startDate']),
+          failedOrders: json['failedOrders'],
+          successfulOrders: json['successfulOrders'],
+          title: json['title'],
           id: json['id'],
           type: json['type'],
           interval: json['interval'],
@@ -63,6 +72,7 @@ class SmartTradeModel {
         'symbols': symbols,
         'sellRate': sellRate,
         'amount': amount,
+        'stopLose': stopLose,
         'buyOn': buyOn,
         'sellOn': sellOn,
         'type': type,

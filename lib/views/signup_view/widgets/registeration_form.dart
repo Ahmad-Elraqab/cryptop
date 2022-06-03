@@ -29,7 +29,7 @@ class RegisterationForm extends StatelessWidget {
               readonly: false,
               color: Colors.white,
               lines: 1,
-              onChanged: null,
+              onChanged: (value) => {},
               controller: controllers[j],
               labelText: labels![i],
               error: context

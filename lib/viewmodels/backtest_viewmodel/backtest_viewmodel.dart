@@ -83,9 +83,16 @@ class BacktestViewmodel extends ChangeNotifier {
                 .getRangeByName(char[j] + (i + 1).toString())
                 .setText(excelRsi[j].toString());
           } else {
-            sheet
-                .getRangeByName(char[j] + (i + 1).toString())
-                .setText(obj.orderList![i - 1][excelRsi[j]].toString());
+            if (excelRsi[j] == 'startDate' || excelRsi[j] == 'endDate') {
+              sheet.getRangeByName(char[j] + (i + 1).toString()).setText(
+                  DateTime.fromMillisecondsSinceEpoch(
+                          obj.orderList![i - 1][excelRsi[j]])
+                      .toString());
+            } else {
+              sheet
+                  .getRangeByName(char[j] + (i + 1).toString())
+                  .setText(obj.orderList![i - 1][excelRsi[j]].toString());
+            }
           }
         }
       }

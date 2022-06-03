@@ -32,8 +32,8 @@ class RSIOrder extends Order {
 
   RSIOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     this.type = json['type'];
-    this.buyRSI = json['buyRSI'];
-    this.sellRSI = json['sellRSI'];
+    this.buyRSI = json['buyRSI'].toDouble();
+    this.sellRSI = json['sellRSI'].toDouble();
   }
 
   Map<String, dynamic> toJson() => {

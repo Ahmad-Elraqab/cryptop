@@ -63,6 +63,7 @@ dependencies:
   path_provider: ^2.0.1
   open_file: ^3.2.1
   universal_html: ^2.0.8
+  collection: ^1.15.0
   
   
 dev_dependencies:

@@ -21,7 +21,7 @@ class SmartTradeBottomSheet extends StatefulWidget {
 
 class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
   final List<TextEditingController> controllers =
-      List.generate(9, (i) => TextEditingController());
+      List.generate(10, (i) => TextEditingController());
 
   setForm(value, id) {
     switch (id) {
@@ -107,6 +107,7 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
     "interval",
     "buy on",
     "sell on",
+    "stop lose",
     "sell rate",
     "amount",
     "simulated trades",

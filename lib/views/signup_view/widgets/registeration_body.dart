@@ -20,36 +20,37 @@ class RegisterationBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Text(
-            'Create\nyour account',
-            style: GoogleFonts.openSans(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              'Create\nyour account',
+              style: GoogleFonts.openSans(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        const SizedBox(height: 30.0),
-        RegisterationForm(
-          labels: labels,
-          onclick: onclick,
-        ),
-        loading == true
-            ? const LoadingView()
-            : RegisterationButton(
-                onclick: onclick,
-              ),
-        const SizedBox(
-          height: 20.0,
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: _buildLogin(context),
-        ),
-      ],
+          RegisterationForm(
+            labels: labels,
+            onclick: onclick,
+          ),
+          loading == true
+              ? const LoadingView()
+              : RegisterationButton(
+                  onclick: onclick,
+                ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _buildLogin(context),
+          ),
+        ],
+      ),
     );
   }
 

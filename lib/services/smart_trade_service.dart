@@ -14,7 +14,7 @@ class SmartTradeService {
     if (json.isEmpty) return [];
 
     final data = json.map((e) {
-      if (e['type'] == 'rsi') {
+      if (e['type'].toLowerCase() == 'rsi') {
         return RSIModel.fromJson(e as Map<String, dynamic>);
       } else if (e['type'] == 'zscore') {
         return ZscoreModel.fromJson(e as Map<String, dynamic>);

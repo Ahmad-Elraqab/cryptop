@@ -1,3 +1,4 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/custom_snack_bar/custom_snack_bar.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SmartTradeListItemBody extends StatefulWidget {
   const SmartTradeListItemBody({
     Key? key,
-    this.activeIndex = 0,
+    this.activeIndex,
     this.setForm,
     this.controllers,
     this.smartTrade,
@@ -81,27 +82,35 @@ class _SmartTradeListItemBodyState extends State<SmartTradeListItemBody> {
                 mainAxisSpacing: 20.0,
                 children: [
                   for (int i = 0; i < data.length; i++)
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextComponent(
-                          align: TextAlign.start,
-                          fontSize: 9.0,
-                          line: 1,
-                          textColor: Colors.white,
-                          title: data[i]['input'].toString(),
-                          weight: FontWeight.bold,
+                    Container(
+                      padding: EdgeInsets.only(left: 4.0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          left: BorderSide(color: Colors.white, width: 2),
                         ),
-                        TextComponent(
-                          align: TextAlign.start,
-                          fontSize: 12.0,
-                          line: 1,
-                          textColor: Colors.white,
-                          title: data[i]['value'].toString(),
-                          weight: FontWeight.bold,
-                        ),
-                      ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextComponent(
+                            align: TextAlign.start,
+                            fontSize: 9.0,
+                            line: 1,
+                            textColor: Colors.white,
+                            title: data[i]['input'].toString(),
+                            weight: FontWeight.bold,
+                          ),
+                          TextComponent(
+                            align: TextAlign.start,
+                            fontSize: 12.0,
+                            line: 1,
+                            textColor: Colors.white,
+                            title: data[i]['value'].toString(),
+                            weight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
                     ),
                 ],
               ),
@@ -163,6 +172,12 @@ class _SmartTradeListItemBodyState extends State<SmartTradeListItemBody> {
                                   ),
                                 ),
                               );
+                            } else if (i == 3) {
+                              Navigator.pushNamed(context, rBacktestResults,
+                                  arguments: {
+                                    'selected': [widget.activeIndex!],
+                                    'backtest': [widget.smartTrade]
+                                  });
                             }
                           },
                         ),

@@ -97,6 +97,9 @@ class UserViewmodel extends ChangeNotifier {
   }
 
   bool validateForm(start, end) {
+    RegExp regex = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
     bool value = true;
     for (var i = start; i < end; i++) {
       if (controllers[i].text.isEmpty) {
@@ -104,6 +107,9 @@ class UserViewmodel extends ChangeNotifier {
         value = false;
       } else if (i == 6 && controllers[i - 1].text != controllers[i].text) {
         validators[i]['value'] = true;
+      } else if (regex.hasMatch(controllers[4].text) == false && start != 0) {
+        validators[4]['value'] = true;
+        value = false;
       } else {
         validators[i]['value'] = false;
       }

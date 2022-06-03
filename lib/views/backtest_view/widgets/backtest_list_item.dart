@@ -23,6 +23,9 @@ class BacktestListItemBody extends StatelessWidget {
       {'input': 'buy on', 'value': backtest!.buyOn.toString()},
       {'input': 'sell on', 'value': backtest!.sellOn.toString()},
       {'input': 'interval', 'value': backtest!.interval.toString()},
+      {'input': 'stop lose', 'value': backtest!.stopLose.toString()},
+      {'input': 'success', 'value': backtest!.successfulOrders.toString()},
+      {'input': 'fail', 'value': backtest!.failedOrders.toString()},
       {'input': 'profit', 'value': backtest!.profit!.toStringAsFixed(2)},
       {
         'input': 'start date',
@@ -101,7 +104,10 @@ class BacktestListItemBody extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       rBacktestResults,
-                      arguments: {'backtest': backtest, 'selected': null},
+                      arguments: {
+                        'backtest': [backtest],
+                        'selected': [activeIndex!]
+                      },
                     );
                   },
                 ),

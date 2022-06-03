@@ -1,4 +1,3 @@
-import 'package:cryptop/models/backtest_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../text_component/text_component.dart';
@@ -9,7 +8,7 @@ class CustomTable extends StatelessWidget {
     this.backtest,
   }) : super(key: key);
 
-  final List<BacktestModel>? backtest;
+  final List<dynamic>? backtest;
   @override
   Widget build(BuildContext context) {
     final data = [
@@ -23,6 +22,15 @@ class CustomTable extends StatelessWidget {
       },
       {'input': 'buy on', 'value': backtest!.map((e) => e.buyOn).toList()},
       {'input': 'sell on', 'value': backtest!.map((e) => e.sellOn).toList()},
+      {
+        'input': 'stop lose',
+        'value': backtest!.map((e) => e.stopLose).toList()
+      },
+      {
+        'input': 'success',
+        'value': backtest!.map((e) => e.successfulOrders).toList()
+      },
+      {'input': 'fail', 'value': backtest!.map((e) => e.failedOrders).toList()},
       {'input': 'interval', 'value': backtest!.map((e) => e.interval).toList()},
       {
         'input': 'profit',
@@ -48,9 +56,9 @@ class CustomTable extends StatelessWidget {
           border: TableBorder.all(
             color: Colors.white,
             width: 2,
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(5.0),
           ),
-          columnSpacing: backtest!.length == 1 ? 80 : 30,
+          columnSpacing: backtest!.length == 1 ? 120 : 30,
           columns: [
             DataColumn(label: Text('')),
             for (int i = 0; i < backtest!.length; i++)
@@ -73,15 +81,18 @@ class CustomTable extends StatelessWidget {
               DataRow(
                 cells: [
                   DataCell(
-                    SizedBox(
-                      width: 100,
-                      child: TextComponent(
-                        align: TextAlign.start,
-                        fontSize: 14.0,
-                        line: 1,
-                        textColor: Colors.white,
-                        title: data[i]['input'].toString(),
-                        weight: FontWeight.bold,
+                    InkWell(
+                      onTap: () => print('object'),
+                      child: SizedBox(
+                        width: 100,
+                        child: TextComponent(
+                          align: TextAlign.start,
+                          fontSize: 14.0,
+                          line: 1,
+                          textColor: Colors.white,
+                          title: data[i]['input'].toString(),
+                          weight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
