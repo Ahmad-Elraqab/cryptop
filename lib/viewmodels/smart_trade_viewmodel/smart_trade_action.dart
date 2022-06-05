@@ -65,9 +65,11 @@ final updateSmartTrade = FutureProviderFamily<SmartTradeModel?, Map>(
 
     ls.removeLast();
     final obj = SmartTradeModel(
+      title: data['title'],
       amount: double.parse(data['amount']),
       buyOn: double.parse(data['buy on']),
       sellOn: double.parse(data['sell on']),
+      stopLose: double.parse(data['stop lose']),
       sellRate: double.parse(data['sell rate']),
       interval: data['interval'],
       numberOfSimultaneousTrades: int.parse(data['simulated trades']),

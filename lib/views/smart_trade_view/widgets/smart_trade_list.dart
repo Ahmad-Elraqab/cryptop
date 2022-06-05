@@ -10,14 +10,10 @@ class SmartTradeList extends StatelessWidget {
     Key? key,
     this.setIndex,
     this.activeIndex,
-    this.setForm,
-    this.controllers,
     this.smartTradeList,
   }) : super(key: key);
 
-  final Function? setForm;
   final List<SmartTradeModel>? smartTradeList;
-  final List<TextEditingController>? controllers;
   final Function? setIndex;
   final int? activeIndex;
   @override
@@ -92,8 +88,6 @@ class SmartTradeList extends StatelessWidget {
                           activeIndex == index
                               ? SmartTradeListItemBody(
                                   activeIndex: activeIndex,
-                                  controllers: controllers,
-                                  setForm: setForm,
                                   smartTrade: smartTradeList![index],
                                 )
                               : const SizedBox()

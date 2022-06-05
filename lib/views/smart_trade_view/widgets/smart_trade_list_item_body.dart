@@ -13,14 +13,10 @@ class SmartTradeListItemBody extends StatefulWidget {
   const SmartTradeListItemBody({
     Key? key,
     this.activeIndex,
-    this.setForm,
-    this.controllers,
     this.smartTrade,
   }) : super(key: key);
   final int? activeIndex;
-  final Function? setForm;
   final SmartTradeModel? smartTrade;
-  final List<TextEditingController>? controllers;
 
   @override
   State<SmartTradeListItemBody> createState() => _SmartTradeListItemBodyState();
@@ -166,7 +162,7 @@ class _SmartTradeListItemBodyState extends State<SmartTradeListItemBody> {
                                   ),
                                   width: MediaQuery.of(context).size.width,
                                   height:
-                                      MediaQuery.of(context).size.height * 0.55,
+                                      MediaQuery.of(context).size.height * 0.6,
                                   child: SmartTradeBottomSheet(
                                     smartTrade: widget.smartTrade,
                                   ),

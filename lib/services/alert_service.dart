@@ -7,10 +7,13 @@ class AlertService {
 
   Future<List<Alert>?> getAlerts() async {
     final List json = await rest.get('alerts/');
-    if (json.isEmpty) return null;
+    if (json.isEmpty) return [];
 
-    final data =
-        json.map((e) => Alert.fromJson(e as Map<String, dynamic>)).toList();
+    final data = json
+        .map(
+          (e) => Alert.fromJson(e as Map<String, dynamic>),
+        )
+        .toList();
 
     return data;
   }

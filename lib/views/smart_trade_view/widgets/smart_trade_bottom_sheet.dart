@@ -51,18 +51,19 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
   @override
   void initState() {
     if (widget.smartTrade != null) {
-      // setForm(widget.smartTrade!.symbols, 0);
       for (var i in widget.smartTrade!.symbols!)
-        controllers[0].text += (i + ',').toString();
+        controllers[1].text += (i + ',').toString();
 
-      setForm(widget.smartTrade!.type, 1);
-      setForm(widget.smartTrade!.interval, 2);
-      setForm(widget.smartTrade!.buyOn, 3);
-      setForm(widget.smartTrade!.sellOn, 4);
-      setForm(widget.smartTrade!.sellRate, 5);
-      setForm(widget.smartTrade!.amount, 6);
-      setForm(widget.smartTrade!.numberOfSimultaneousTrades, 7);
-      setForm(widget.smartTrade!.numberOfTrades, 8);
+      setForm(widget.smartTrade!.title, 0);
+      setForm(widget.smartTrade!.type, 2);
+      setForm(widget.smartTrade!.interval, 3);
+      setForm(widget.smartTrade!.buyOn, 4);
+      setForm(widget.smartTrade!.sellOn, 5);
+      setForm(widget.smartTrade!.stopLose, 6);
+      setForm(widget.smartTrade!.sellRate, 7);
+      setForm(widget.smartTrade!.amount, 8);
+      setForm(widget.smartTrade!.numberOfSimultaneousTrades, 9);
+      setForm(widget.smartTrade!.numberOfTrades, 10);
     }
     super.initState();
   }

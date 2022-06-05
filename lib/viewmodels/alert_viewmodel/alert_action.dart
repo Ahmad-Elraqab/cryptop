@@ -4,11 +4,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final alertViewmodel = ChangeNotifierProvider((ref) => AlertViewmodel());
 
-final createOrder = FutureProvider.family<Alert?, Map<String, dynamic>>(
-  (ref, data) async {
-    final order = ref.read(alertViewmodel);
+final getAlerts = FutureProvider.autoDispose<List<Alert>?>(
+  (ref) async {
+    final alerts = ref.watch(alertViewmodel);
 
-    final result = await order.createAlert(data);
+    final result = await alerts.getAlerts();
+
+    return result;
+  },
+);
+
+final createAlerts = FutureProviderFamily<Alert?, Map<String, dynamic>>(
+  (ref, data) async {
+    final alerts = ref.watch(alertViewmodel);
+
+    final result = await alerts.createAlert(data);
+
+    return result;
+  },
+);
+
+final updateAlert = FutureProviderFamily<Alert?, Map<String, dynamic>>(
+  (ref, data) async {
+    final alerts = ref.watch(alertViewmodel);
+
+    final result = await alerts.updateAlert(data);
+
+    return result;
+  },
+);
+
+final deleteAlert = FutureProviderFamily<Alert?, String>(
+  (ref, id) async {
+    final alerts = ref.watch(alertViewmodel);
+
+    final result = await alerts.deleteAlert(id);
 
     return result;
   },

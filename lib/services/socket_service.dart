@@ -6,6 +6,7 @@ class SocketService {
   static void connectAndListen() {
     _socket = io.io(
         'http://10.0.2.2:5000',
+        // 'http://localhost:5000',
         io.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()

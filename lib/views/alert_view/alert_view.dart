@@ -1,5 +1,7 @@
+import 'package:cryptop/viewmodels/alert_viewmodel/alert_action.dart';
 import 'package:cryptop/views/alert_view/widgets/alert_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AlertView extends StatefulWidget {
   const AlertView({Key? key}) : super(key: key);
@@ -11,10 +13,6 @@ class AlertView extends StatefulWidget {
 class _AlertViewState extends State<AlertView> {
   int? activeIndex;
   setIndex(value) => setState(() => {activeIndex = value});
-  create() => {};
-  edit() => {};
-  delete() => {};
-  status() => {};
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +23,14 @@ class _AlertViewState extends State<AlertView> {
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           color: const Color.fromRGBO(55, 61, 76, 1),
-          child: AlertBody(
-            activeIndex: activeIndex,
-            create: create,
-            delete: delete,
-            edit: edit,
-            setIndex: setIndex,
-            status: status,
-          ),
+          child: Consumer(builder: (context, watch, child) {
+            final data = watch(getAlerts).data?.value;
+            return AlertBody(
+              activeIndex: activeIndex,
+              setIndex: setIndex,
+              alerts: data,
+            );
+          }),
         ),
       ),
     );

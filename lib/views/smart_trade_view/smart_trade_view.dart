@@ -14,33 +14,6 @@ class _SmartTradeViewState extends State<SmartTradeView> {
   int? activeIndex = 0;
   setIndex(value) => setState(() => {activeIndex = value});
 
-  final List<TextEditingController> controllers =
-      List.generate(9, (i) => TextEditingController());
-
-  setForm(value, id) {
-    switch (id) {
-      case 0:
-        if (controllers[id].text.contains(value)) {
-          controllers[id].text =
-              controllers[id].text.replaceAll((value + ','), '');
-        } else {
-          controllers[id].text += (value + ',');
-        }
-        break;
-      case -1:
-        for (var i in controllers) i.text = '';
-        break;
-      case 99:
-        if (controllers.any((e) => e.text.isEmpty))
-          return false;
-        else
-          return true;
-      default:
-        controllers[id].text = value;
-    }
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,10 +27,8 @@ class _SmartTradeViewState extends State<SmartTradeView> {
             builder: (context, watch, child) {
               final data = watch(getSmartTrade).data?.value;
               return SmartTradeBody(
-                controllers: controllers,
                 activeIndex: activeIndex,
                 setIndex: setIndex,
-                setForm: setForm,
                 smartTradeList: data,
               );
             },

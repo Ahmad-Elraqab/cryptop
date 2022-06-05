@@ -7,14 +7,10 @@ class SmartTradeHeader extends StatelessWidget {
   const SmartTradeHeader({
     Key? key,
     this.filter,
-    this.controllers,
-    this.setForm,
     this.symbols,
   }) : super(key: key);
 
-  final Function? setForm;
   final Function? filter;
-  final List<TextEditingController>? controllers;
   final List? symbols;
   @override
   Widget build(BuildContext context) {
@@ -71,7 +67,7 @@ class SmartTradeHeader extends StatelessWidget {
                   color: Color.fromARGB(255, 39, 44, 56),
                 ),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.55,
+                height: MediaQuery.of(context).size.height * 0.6,
                 child: SmartTradeBottomSheet(),
               ),
             ),

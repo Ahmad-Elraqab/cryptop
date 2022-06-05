@@ -8,22 +8,25 @@ class AlertViewmodel extends ChangeNotifier {
   AlertService get rest => dependency();
 
   Future<List<Alert>?> getAlerts() async {
-    final alerts = await rest.getAlerts();
+    final List<Alert>? alerts = await rest.getAlerts();
     return alerts;
   }
 
   Future<Alert?> createAlert(Map<String, dynamic> json) async {
     final alerts = await rest.createAlert(json);
+    notifyListeners();
     return alerts;
   }
 
   Future<Alert?> updateAlert(Map<String, dynamic> json) async {
     final alerts = await rest.updateAlert(json);
+    notifyListeners();
     return alerts;
   }
 
   Future<Alert?> deleteAlert(String id) async {
     final alerts = await rest.deleteAlert(id);
+    notifyListeners();
     return alerts;
   }
 }
