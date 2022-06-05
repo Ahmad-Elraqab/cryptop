@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cryptop/app/const.dart';
+import 'package:cryptop/services/socket_service.dart';
 import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,7 @@ class _SplashViewState extends State<SplashView> {
     Timer(
       const Duration(seconds: 3),
       () async {
+        SocketService.connectAndListen();
         final token = await context.read(userViewmodel).readToken();
         // print(token);
         if (token == false) {

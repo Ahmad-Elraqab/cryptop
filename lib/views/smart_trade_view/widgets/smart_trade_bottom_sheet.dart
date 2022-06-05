@@ -21,11 +21,11 @@ class SmartTradeBottomSheet extends StatefulWidget {
 
 class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
   final List<TextEditingController> controllers =
-      List.generate(10, (i) => TextEditingController());
+      List.generate(11, (i) => TextEditingController());
 
   setForm(value, id) {
     switch (id) {
-      case 0:
+      case 1:
         if (controllers[id].text.contains(value)) {
           controllers[id].text =
               controllers[id].text.replaceAll((value + ','), '');
@@ -102,6 +102,7 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
   }
 
   final textField = [
+    "title",
     "symbols",
     "type",
     "interval",
@@ -133,9 +134,9 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
                   for (int i = 0; i < textField.length; i++)
                     GestureDetector(
                       onDoubleTap: () {
-                        if (i == 0) {
+                        if (i == 1) {
                           newMethod(context, i, exchange_pairs);
-                        } else if (i == 1) {
+                        } else if (i == 2) {
                           newMethod(context, i, [
                             'RSI',
                             'ZSCORE',
@@ -145,7 +146,7 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
                             'R & S',
                             'TREND'
                           ]);
-                        } else if (i == 2) {
+                        } else if (i == 3) {
                           newMethod(context, i, [
                             '1d',
                             '12h',
@@ -168,10 +169,11 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
                         labelText: textField[i],
                         lines: 1,
                         onChanged: (value) => {},
-                        readonly: i == 0 || i == 1 || i == 2 ? true : false,
+                        readonly: i == 1 || i == 2 || i == 3 ? true : false,
                         secure: false,
                         validate: false,
-                        keyboardType: TextInputType.number,
+                        keyboardType:
+                            i == 0 ? TextInputType.text : TextInputType.number,
                       ),
                     ),
                 ],

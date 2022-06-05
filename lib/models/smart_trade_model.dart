@@ -72,6 +72,7 @@ class SmartTradeModel {
         'symbols': symbols,
         'sellRate': sellRate,
         'amount': amount,
+        'title': title,
         'stopLose': stopLose,
         'buyOn': buyOn,
         'sellOn': sellOn,

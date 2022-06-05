@@ -53,12 +53,14 @@ class SmartTradeList extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    const TextComponent(
+                                    TextComponent(
                                       align: TextAlign.start,
                                       fontSize: 14.0,
                                       line: 1,
                                       textColor: Colors.white,
-                                      title: 'BTCUSDT',
+                                      title: smartTradeList![index]
+                                          .title
+                                          .toString(),
                                       weight: FontWeight.bold,
                                     ),
                                     activeIndex == index
@@ -66,10 +68,16 @@ class SmartTradeList extends StatelessWidget {
                                         : CustomButtom(
                                             borderColor: Colors.transparent,
                                             borderRadius: 5.0,
-                                            buttonColor: index == 4
+                                            buttonColor: smartTradeList![index]
+                                                        .isActive ==
+                                                    false
                                                 ? Colors.grey
                                                 : Colors.amber,
-                                            buttonText: 'Active',
+                                            buttonText: smartTradeList![index]
+                                                        .isActive ==
+                                                    false
+                                                ? 'inActive'
+                                                : 'Active',
                                             buttonTextColor: Colors.white,
                                             fontSize: 12,
                                             hasImage: false,

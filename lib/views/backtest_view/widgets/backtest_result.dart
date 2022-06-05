@@ -15,7 +15,6 @@ class BacktestResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backtest = (data as Map)['backtest'];
-    final selected = (data as Map)['selected'];
 
     print(this.data);
     return Scaffold(
@@ -35,7 +34,7 @@ class BacktestResult extends StatelessWidget {
               const SizedBox(height: 30.0),
               Row(
                 children: [
-                  ...(selected as List<int>)
+                  ...(backtest)
                       .map(
                         (e) => Expanded(
                           child: Column(
@@ -44,15 +43,15 @@ class BacktestResult extends StatelessWidget {
                                 chartData: [
                                   ChartData(
                                     'winners',
-                                    (backtest[e]).successfulOrders!.toDouble(),
+                                    e.successfulOrders!.toDouble(),
                                   ),
                                   ChartData(
                                     'losers',
-                                    (backtest[e]).failedOrders!.toDouble(),
+                                    e.failedOrders!.toDouble(),
                                   ),
                                   ChartData(
                                     'Trades',
-                                    backtest[e].orderList.length!.toDouble(),
+                                    e.orderList.length!.toDouble(),
                                   ),
                                 ],
                               ),
@@ -61,7 +60,7 @@ class BacktestResult extends StatelessWidget {
                                 fontSize: 14.0,
                                 line: 1,
                                 textColor: Colors.white,
-                                title: backtest[e].title,
+                                title: e.title,
                                 weight: FontWeight.bold,
                               ),
                             ],
@@ -73,9 +72,7 @@ class BacktestResult extends StatelessWidget {
               ),
               const SizedBox(height: 30.0),
               CustomTable(
-                backtest: selected == null
-                    ? [backtest]
-                    : (selected).map((e) => backtest[e]).toList(),
+                backtest: backtest.map((e) => e).toList(),
               ),
               backtest[0] is SmartTradeModel
                   ? SingleChildScrollView(
