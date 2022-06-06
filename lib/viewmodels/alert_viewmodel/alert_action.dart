@@ -34,6 +34,16 @@ final updateAlert = FutureProviderFamily<Alert?, Map<String, dynamic>>(
   },
 );
 
+final toggleAlert = FutureProviderFamily<Alert?, String>(
+  (ref, id) async {
+    final alerts = ref.watch(alertViewmodel);
+
+    final result = await alerts.toggleAlert(id);
+
+    return result;
+  },
+);
+
 final deleteAlert = FutureProviderFamily<Alert?, String>(
   (ref, id) async {
     final alerts = ref.watch(alertViewmodel);

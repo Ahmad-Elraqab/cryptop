@@ -1,9 +1,13 @@
+import 'package:cryptop/app/dependency.dart';
+import 'package:cryptop/services/notification_service.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class SocketService {
   static late io.Socket _socket;
+  static NotificationService get notify => dependency();
 
-  static void connectAndListen() {
+  static void connectAndListen() async {
+    await notify.initNotification();
     _socket = io.io(
         'http://10.0.2.2:5000',
         // 'http://localhost:5000',
@@ -15,8 +19,9 @@ class SocketService {
 
     _socket.connect();
 
-    _socket.on('message', (data) {
-      print(data);
+    _socket.on('message', (data) async {
+      print(data['title']);
+      await notify.showNotification(data['title'], data['msg']);
     });
 
     _socket.on('users', (data) {

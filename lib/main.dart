@@ -1,4 +1,5 @@
 import 'package:cryptop/app/const.dart';
+import 'package:cryptop/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptop/app/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,11 @@ import 'package:cryptop/app/dependency.dart' as dep;
 
 void main() {
   dep.init();
+  // to ensure all the widgets are initialized.
+  WidgetsFlutterBinding.ensureInitialized();
 
+  // to initialize the notificationservice.
+  // NotificationService().initNotification();
   runApp(const AppView());
 }
 

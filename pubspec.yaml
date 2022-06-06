@@ -64,6 +64,7 @@ dependencies:
   open_file: ^3.2.1
   universal_html: ^2.0.8
   collection: ^1.15.0
+  flutter_local_notifications: ^9.5.3+1
   
   
 dev_dependencies:

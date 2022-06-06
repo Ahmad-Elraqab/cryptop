@@ -1,6 +1,7 @@
 import 'package:cryptop/services/alert_service.dart';
 import 'package:cryptop/services/backtest_service.dart';
 import 'package:cryptop/services/chart_service.dart';
+import 'package:cryptop/services/notification_service.dart';
 import 'package:cryptop/services/order_service.dart';
 import 'package:cryptop/services/rest_service..dart';
 import 'package:cryptop/services/smart_trade_service.dart';
@@ -21,6 +22,7 @@ void init() {
   );
 
   dependency.registerLazySingleton(() => UserViewmodel());
+  dependency.registerLazySingleton(() => NotificationService());
   dependency.registerLazySingleton(() => AlertService());
   dependency.registerLazySingleton(() => UserService());
   dependency.registerLazySingleton(() => BacktestService());

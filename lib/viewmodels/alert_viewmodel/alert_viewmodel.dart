@@ -29,4 +29,10 @@ class AlertViewmodel extends ChangeNotifier {
     notifyListeners();
     return alerts;
   }
+
+  Future<Alert?> toggleAlert(String id) async {
+    final alerts = await rest.toggleAlert(id);
+    notifyListeners();
+    return alerts;
+  }
 }

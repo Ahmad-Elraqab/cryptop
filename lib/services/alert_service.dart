@@ -46,4 +46,13 @@ class AlertService {
 
     return data;
   }
+
+  Future<Alert?> toggleAlert(String id) async {
+    final json = await rest.patch('alerts/toggle/$id', data: {});
+    if (json.isEmpty) return null;
+
+    final data = Alert.fromJson(json as Map<String, dynamic>);
+
+    return data;
+  }
 }

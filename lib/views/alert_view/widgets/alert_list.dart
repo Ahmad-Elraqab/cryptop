@@ -65,6 +65,34 @@ class AlertList extends StatelessWidget {
                           borderColor: Colors.transparent,
                           borderRadius: 5.0,
                           buttonColor: Colors.grey,
+                          buttonText: 'Toggle',
+                          buttonTextColor: Colors.white,
+                          fontSize: 12,
+                          hasImage: false,
+                          height: 30.0,
+                          horizontal: 20.0,
+                          vertical: 4.0,
+                          imageUrl: '',
+                          onTap: () async {
+                            final data = await context.read(
+                                toggleAlert(alerts![index].id.toString())
+                                    .future);
+                            if (data != null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(network_snackBar(0));
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(network_snackBar(1));
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 20.0),
+                      Expanded(
+                        child: CustomButtom(
+                          borderColor: Colors.transparent,
+                          borderRadius: 5.0,
+                          buttonColor: Colors.grey,
                           buttonText: 'Delete',
                           buttonTextColor: Colors.white,
                           fontSize: 12,
@@ -104,6 +132,7 @@ class AlertList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
+                    flex: 3,
                     child: TextComponent(
                       align: TextAlign.start,
                       fontSize: 14.0,
@@ -115,7 +144,7 @@ class AlertList extends StatelessWidget {
                   ),
                   dot(),
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: TextComponent(
                       align: TextAlign.start,
                       fontSize: 14.0,
@@ -127,31 +156,39 @@ class AlertList extends StatelessWidget {
                   ),
                   dot(),
                   Expanded(
+                    flex: 2,
                     child: TextComponent(
                       align: TextAlign.start,
                       fontSize: 14.0,
                       line: 1,
                       textColor: Colors.white,
-                      title: alerts![index].value.toString(),
+                      title: alerts![index].value == 0.0
+                          ? "vwap value"
+                          : alerts![index].value.toString(),
                       weight: FontWeight.bold,
                     ),
                   ),
-                  CustomButtom(
-                    borderColor: Colors.transparent,
-                    borderRadius: 5.0,
-                    buttonColor: alerts![index].status == false
-                        ? Colors.grey
-                        : Colors.amber,
-                    buttonText:
-                        alerts![index].status == false ? 'inActive' : 'Active',
-                    buttonTextColor: Colors.white,
-                    fontSize: 12,
-                    hasImage: false,
-                    height: 30.0,
-                    horizontal: 10.0,
-                    vertical: 4.0,
-                    imageUrl: '',
-                    onTap: () => {},
+                  dot(),
+                  Expanded(
+                    flex: 3,
+                    child: CustomButtom(
+                      borderColor: Colors.transparent,
+                      borderRadius: 5.0,
+                      buttonColor: alerts![index].status == false
+                          ? Colors.grey
+                          : Colors.amber,
+                      buttonText: alerts![index].status == false
+                          ? 'inActive'
+                          : 'Active',
+                      buttonTextColor: Colors.white,
+                      fontSize: 12,
+                      hasImage: false,
+                      height: 30.0,
+                      horizontal: 10.0,
+                      vertical: 4.0,
+                      imageUrl: '',
+                      onTap: () => {},
+                    ),
                   ),
                 ],
               ),
@@ -166,8 +203,8 @@ class AlertList extends StatelessWidget {
     return Expanded(
       child: Center(
         child: Container(
-          height: 10,
-          width: 10,
+          height: 5,
+          width: 5,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
             color: Colors.white,

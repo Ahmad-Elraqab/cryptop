@@ -42,6 +42,9 @@ class _AlertBottomSheetState extends State<AlertBottomSheet> {
         for (var i in _controller) i.text = '';
         break;
       case 99:
+        if (_controller[0].text.isNotEmpty &&
+            (_controller[1].text.contains('vwap >') ||
+                _controller[1].text.contains('vwap <'))) return true;
         if (_controller.any((e) => e.text.isEmpty))
           return false;
         else
@@ -63,7 +66,8 @@ class _AlertBottomSheetState extends State<AlertBottomSheet> {
       Map<String, dynamic> form = Alert(
         symbol: _controller[0].text,
         type: _controller[1].text,
-        value: double.parse(_controller[2].text),
+        value: double.parse(
+            _controller[2].text.isEmpty ? "0" : _controller[2].text),
       ).toJson();
 
       final data;
@@ -117,34 +121,38 @@ class _AlertBottomSheetState extends State<AlertBottomSheet> {
                   mainAxisSpacing: 20.0,
                   children: [
                     for (int i = 0; i < textField.length; i++)
-                      GestureDetector(
-                        onDoubleTap: () {
-                          if (i == 0) {
-                            newMethod(context, i, exchange_pairs);
-                          } else if (i == 1) {
-                            newMethod(context, i, [
-                              'price >',
-                              'price <',
-                              'rsi >',
-                              'rsi <',
-                              'vwap >',
-                              'vwap <',
-                            ]);
-                          }
-                        },
-                        child: CustomerTextField(
-                          borderColor: Colors.white,
-                          color: Colors.white,
-                          controller: _controller[i],
-                          error: '',
-                          labelText: textField[i],
-                          lines: 1,
-                          onChanged: (value) => {},
-                          readonly: i == 2 ? false : true,
-                          secure: false,
-                          validate: false,
-                        ),
-                      ),
+                      (_controller[1].text.contains('vwap >') ||
+                                  _controller[1].text.contains('vwap <')) &&
+                              i == 2
+                          ? SizedBox()
+                          : GestureDetector(
+                              onDoubleTap: () {
+                                if (i == 0) {
+                                  newMethod(context, i, exchange_pairs);
+                                } else if (i == 1) {
+                                  newMethod(context, i, [
+                                    'price >',
+                                    'price <',
+                                    'rsi >',
+                                    'rsi <',
+                                    'vwap >',
+                                    'vwap <',
+                                  ]);
+                                }
+                              },
+                              child: CustomerTextField(
+                                borderColor: Colors.white,
+                                color: Colors.white,
+                                controller: _controller[i],
+                                error: '',
+                                labelText: textField[i],
+                                lines: 1,
+                                onChanged: (value) => {},
+                                readonly: i == 2 ? false : true,
+                                secure: false,
+                                validate: false,
+                              ),
+                            ),
                   ],
                 ),
                 Row(
