@@ -13,8 +13,12 @@ class OrderViewmodel extends ChangeNotifier {
     return _order;
   }
 
-  Future<Order?> closeOrder(String orderId) async {
-    final Order? _order = await rest.closeOrder(orderId);
+  Future<Order?> closeOrder(Order obj) async {
+    final data = {
+      'symbol': obj.symbol,
+      'qAmount': obj.qAmount,
+    };
+    final Order? _order = await rest.closeOrder(obj.id!, data);
 
     orders!.removeWhere((element) => element.id == _order!.id);
 

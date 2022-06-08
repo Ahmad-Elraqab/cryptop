@@ -34,7 +34,7 @@ final getHistoricalOrders = FutureProvider.autoDispose<List<Order>?>(
   },
 );
 
-final closeOrder = FutureProvider.autoDispose.family<Order?, String>(
+final closeOrder = FutureProvider.autoDispose.family<Order?, Order>(
   (ref, data) async {
     final order = ref.watch(orderViewmodel);
 

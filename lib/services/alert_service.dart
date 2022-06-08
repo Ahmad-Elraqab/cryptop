@@ -29,7 +29,6 @@ class AlertService {
   }
 
   Future<Alert?> createAlert(Map<String, dynamic> _json) async {
-    final id = _json['id'];
     final json = await rest.post('alerts/', _json);
     if (json.isEmpty) return null;
 

@@ -9,12 +9,12 @@ class SocketService {
   static void connectAndListen() async {
     await notify.initNotification();
     _socket = io.io(
-        'http://10.0.2.2:5000',
-        // 'http://localhost:5000',
+        // 'http://localhost:5000/user',
+        'http://10.0.2.2:5000/user',
+        // 'https://cryptop-sys.herokuapp.com/user',
         io.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()
-            .setQuery({'userName': 'ahmad'})
             .build());
 
     _socket.connect();
@@ -24,9 +24,9 @@ class SocketService {
       await notify.showNotification(data['title'], data['msg']);
     });
 
-    _socket.on('users', (data) {
-      var users = (data as List<dynamic>).map((e) => e.toString()).toList();
-    });
+    // _socket.on('users', (data) {
+    //   var users = (data as List<dynamic>).map((e) => e.toString()).toList();
+    // });
   }
 
   static void dispose() {

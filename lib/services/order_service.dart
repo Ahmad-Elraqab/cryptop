@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/order_model.dart';
 import 'package:cryptop/models/order_models/limit_order_model.dart';
 import 'package:cryptop/models/order_models/oco_model.dart';
 import 'package:cryptop/models/order_models/stop_limit_model.dart';
 import 'package:cryptop/services/rest_service..dart';
+import 'package:http/http.dart' as http;
 
 class OrderService {
   RestService get rest => dependency();
@@ -67,8 +70,15 @@ class OrderService {
     }
   }
 
-  Future<Order?> closeOrder(String orderId) async {
-    final json = await rest.patch('orders/$orderId', data: {});
+  Future<Order?> closeOrder(String orderId, Map<String, dynamic> data) async {
+    final price = await http.get(Uri.parse(
+        'https://api1.binance.com/api/v3/ticker/24hr?symbol=' +
+            data['symbol']));
+
+    final priceJson = double.parse(jsonDecode(price.body)['lastPrice']);
+
+    data['amount'] = priceJson;
+    final json = await rest.patch('orders/$orderId', data: data);
 
     if (json == null)
       return null;

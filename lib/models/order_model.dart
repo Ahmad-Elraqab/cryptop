@@ -6,9 +6,11 @@ class Order {
   DateTime? openDate;
   DateTime? closeDate;
   double? amount;
+  double? qAmount;
   bool? isOpen;
   bool? isClose;
   String? type;
+  String? op;
   double? rate;
 
   Order({
@@ -16,6 +18,8 @@ class Order {
     this.sellPrice,
     this.amount = 0.0,
     this.type = '',
+    this.op,
+    this.qAmount,
     this.openDate,
     this.closeDate,
     this.buyPrice = 0.0,
@@ -28,7 +32,9 @@ class Order {
   Order.fromJson(Map<String, dynamic> json)
       : this(
           id: json['id'],
+          op: json['op'],
           type: json['type'],
+          qAmount: double.parse(json['qAmount'].toString()),
           amount: double.parse(json['amount'].toString()),
           openDate: DateTime.parse(json['openDate']),
           closeDate: DateTime.parse(json['closeDate']),
@@ -42,6 +48,8 @@ class Order {
 
   Map<String, dynamic> toJson() => {
         'type': type,
+        'op': op,
+        'qAmount': qAmount,
         'amount': amount,
         'buyPrice': buyPrice,
         'isClosed': isClose,

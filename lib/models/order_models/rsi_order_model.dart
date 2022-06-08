@@ -17,8 +17,12 @@ class RSIOrder extends Order {
     rate = 0.0,
     sellPrice,
     symbol,
+    op,
+    qAmount,
   }) : super(
           id: id,
+          op: op,
+          qAmount: qAmount,
           amount: amount,
           buyPrice: buyPrice,
           sellPrice: sellPrice,

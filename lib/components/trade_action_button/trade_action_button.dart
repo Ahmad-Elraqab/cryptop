@@ -1,4 +1,3 @@
-import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/clipper/clipper.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:flutter/material.dart';

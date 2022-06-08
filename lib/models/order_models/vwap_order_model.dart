@@ -17,9 +17,13 @@ class VWAPOrder extends Order {
     rate = 0.0,
     sellPrice,
     symbol,
+    op,
+    qAmount,
   }) : super(
           id: id,
           amount: amount,
+          op: op,
+          qAmount: qAmount,
           buyPrice: buyPrice,
           closeDate: closeDate,
           openDate: openDate,

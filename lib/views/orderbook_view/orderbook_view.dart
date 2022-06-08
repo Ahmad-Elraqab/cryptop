@@ -25,7 +25,10 @@ class _OrderbookViewState extends State<OrderbookView> {
   final orderType = ['All', 'Market', 'Limit', 'Stop Lose', 'OCO'];
 
   track() => {};
-  close(id) async => {await context.read(closeOrder(id))};
+  close(order) async {
+    await context.read(closeOrder(order));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

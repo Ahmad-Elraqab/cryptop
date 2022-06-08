@@ -28,10 +28,6 @@ class _TradeViewState extends State<TradeView> {
   final List<TextEditingController> controllers =
       List.generate(5, (i) => TextEditingController());
 
-  // test purpose...
-
-  // TODO// ADD NEW PROVIDER FOR VIEWS TO HOLD ITS STATES
-
   final wallet = 50000;
 
   setIndexList(value) => setState(() => {activeIndexList = value, slider = 0});
@@ -124,6 +120,8 @@ class _TradeViewState extends State<TradeView> {
         case 0:
           data = new LimitOrder(
                   type: 'limit',
+                  op: tradeType == 0 ? 'buy' : 'sell',
+                  qAmount: double.parse(controllers[3].text),
                   amount: double.parse(controllers[4].text),
                   symbol: (widget.data as Map)['symbol'],
                   buyPrice: price,
@@ -133,6 +131,8 @@ class _TradeViewState extends State<TradeView> {
         case 1:
           data = new Order(
                   type: 'market',
+                  op: tradeType == 0 ? 'buy' : 'sell',
+                  qAmount: double.parse(controllers[3].text),
                   amount: double.parse(controllers[4].text),
                   symbol: (widget.data as Map)['symbol'],
                   buyPrice: price)
@@ -141,6 +141,8 @@ class _TradeViewState extends State<TradeView> {
         case 2:
           data = new StopLimitOrder(
                   type: 'stopLimit',
+                  op: tradeType == 0 ? 'buy' : 'sell',
+                  qAmount: double.parse(controllers[3].text),
                   amount: double.parse(controllers[4].text),
                   symbol: (widget.data as Map)['symbol'],
                   buyPrice: price,
@@ -151,6 +153,8 @@ class _TradeViewState extends State<TradeView> {
         case 3:
           data = new OCOOrder(
                   type: 'oco',
+                  op: tradeType == 0 ? 'buy' : 'sell',
+                  qAmount: double.parse(controllers[3].text),
                   amount: double.parse(controllers[4].text),
                   symbol: (widget.data as Map)['symbol'],
                   buyPrice: price,
@@ -164,6 +168,8 @@ class _TradeViewState extends State<TradeView> {
       final order = await context.read(orderViewmodel).createOrder(data);
 
       if (order != null) {
+        slider = 0.0;
+        controllers.forEach((e) => e.text = '');
         setLoad(false);
         ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
       }

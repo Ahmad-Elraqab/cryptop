@@ -69,7 +69,6 @@ class BacktestModel {
         'symbols': symbols,
         'sellRate': sellRate,
         'title': title,
-        'amount': amount,
         'stopLose': stopLose,
         'buyOn': buyOn,
         'sellOn': sellOn,
