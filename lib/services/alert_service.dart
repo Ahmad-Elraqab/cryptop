@@ -1,9 +1,9 @@
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/alert_model.dart';
-import 'package:cryptop/services/rest_service..dart';
+import 'package:cryptop/services/alert_rest_service.dart';
 
 class AlertService {
-  RestService get rest => dependency();
+  AlertRestService get rest => dependency();
 
   Future<List<Alert>?> getAlerts() async {
     final List json = await rest.get('alerts/');

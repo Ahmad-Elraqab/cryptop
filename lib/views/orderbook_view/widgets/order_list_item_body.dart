@@ -5,6 +5,7 @@ import 'package:cryptop/models/order_models/limit_order_model.dart';
 import 'package:cryptop/models/order_models/oco_model.dart';
 import 'package:cryptop/models/order_models/stop_limit_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class OrderListItemBody extends StatelessWidget {
   const OrderListItemBody({
@@ -66,117 +67,55 @@ class OrderListItemBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = [
-      'start date',
-      'end date',
+      'symbol',
       'amount',
-      'rate',
-      'buy price',
-      'type'
+      'quantity',
+      'price',
+      'trade type',
+      'type',
+      'start date',
     ];
     final values = [
-      order!.openDate,
-      order!.closeDate,
+      order!.symbol,
       order!.amount,
-      order!.rate,
-      order!.buyPrice,
-      order!.type
+      order!.qAmount,
+      order!.price,
+      order!.op,
+      order!.type,
+      order!.date,
     ];
     return Row(
       children: [
         Expanded(
           flex: 8,
-          child: GridView.count(
-            crossAxisCount: 3,
+          child: ListView.builder(
             shrinkWrap: true,
-            childAspectRatio: 3,
-            mainAxisSpacing: 20.0,
-            children: [
-              for (int i = 0; i < data.length; i++)
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextComponent(
-                      align: TextAlign.start,
-                      fontSize: 9.0,
-                      line: 1,
-                      textColor: Colors.white,
-                      title: data[i].toString(),
-                      weight: FontWeight.bold,
-                    ),
-                    TextComponent(
-                      align: TextAlign.start,
-                      fontSize: 12.0,
-                      line: 1,
-                      textColor: Colors.white,
-                      title: values[i].toString(),
-                      weight: FontWeight.bold,
-                    ),
-                  ],
+            itemCount: data.length,
+            itemBuilder: (context, index) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextComponent(
+                  align: TextAlign.start,
+                  fontSize: 9.0,
+                  line: 1,
+                  textColor: Colors.white,
+                  title: data[index].toString(),
+                  weight: FontWeight.bold,
                 ),
-              ...buildTypeItem(),
-            ],
+                TextComponent(
+                  align: TextAlign.start,
+                  fontSize: 12.0,
+                  line: 1,
+                  textColor: Colors.white,
+                  title: values[index].toString(),
+                  weight: FontWeight.bold,
+                ),
+              ],
+            ),
+            // ...buildTypeItem(),
           ),
         ),
-        Expanded(
-          flex: 2,
-          child: Column(
-            children: [
-              CustomButtom(
-                borderColor: Colors.transparent,
-                borderRadius: 5.0,
-                buttonColor: activeIndex == 4
-                    ? const Color.fromARGB(255, 250, 131, 125)
-                    : const Color.fromARGB(188, 94, 242, 212),
-                buttonText: order!.rate.toString(),
-                buttonTextColor: Colors.white,
-                fontSize: 12,
-                hasImage: false,
-                height: 30.0,
-                horizontal: 4.0,
-                vertical: 4.0,
-                imageUrl: '',
-                onTap: () => {},
-              ),
-              const SizedBox(height: 5.0),
-              order!.isOpen == false
-                  ? SizedBox()
-                  : Column(
-                      children: [
-                        CustomButtom(
-                          borderColor: Colors.transparent,
-                          borderRadius: 5.0,
-                          buttonColor: Colors.amberAccent[400],
-                          buttonText: 'Track',
-                          buttonTextColor: Colors.white,
-                          fontSize: 12,
-                          hasImage: false,
-                          height: 30.0,
-                          horizontal: 4.0,
-                          vertical: 4.0,
-                          imageUrl: '',
-                          onTap: () => track!(),
-                        ),
-                        const SizedBox(height: 5.0),
-                        CustomButtom(
-                          borderColor: Colors.transparent,
-                          borderRadius: 5.0,
-                          buttonColor: Colors.amberAccent[400],
-                          buttonText: 'Close',
-                          buttonTextColor: Colors.white,
-                          fontSize: 12,
-                          hasImage: false,
-                          height: 30.0,
-                          horizontal: 4.0,
-                          vertical: 4.0,
-                          imageUrl: '',
-                          onTap: () => close!(order!),
-                        ),
-                      ],
-                    ),
-            ],
-          ),
-        )
       ],
     );
   }

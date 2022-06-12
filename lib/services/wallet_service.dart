@@ -1,13 +1,16 @@
 import 'package:cryptop/app/dependency.dart';
+import 'package:cryptop/models/wallet_model.dart';
 import 'package:cryptop/services/rest_service..dart';
 
 class WalletService {
   RestService get rest => dependency();
 
-  Future getWallet() async {
-    final wallet = await rest.get('wallet/');
+  Future<Wallet?> getWallet() async {
+    final json = await rest.get('wallet/');
 
-    return wallet;
+    if (json == null) return null;
+
+    return Wallet.fromJson(json);
   }
 
   Future setWallet(Map<String, dynamic> data) async {

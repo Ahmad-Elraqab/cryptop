@@ -11,7 +11,7 @@ class SocketService {
     _socket = io.io(
         // 'http://localhost:5000/user',
         'http://10.0.2.2:5000/user',
-        // 'https://cryptop-sys.herokuapp.com/user',
+        // 'https://alert-sys.herokuapp.com/user',
         io.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()

@@ -1,21 +1,17 @@
 import 'package:cryptop/models/order_model.dart';
 
 class VWAPOrder extends Order {
-  double? buyVWAP;
-  double? sellVWAP;
+  double? vwap;
 
   VWAPOrder({
-    this.buyVWAP,
-    this.sellVWAP,
+    this.vwap,
     id,
     amount = 0.0,
-    openDate,
-    closeDate,
-    buyPrice = 0.0,
-    isClose = false,
-    isOpen = true,
-    rate = 0.0,
-    sellPrice,
+    date,
+    status,
+    type,
+    price,
+    pending,
     symbol,
     op,
     qAmount,
@@ -23,27 +19,21 @@ class VWAPOrder extends Order {
           id: id,
           amount: amount,
           op: op,
+          type: type,
+          price: price,
+          status: status,
+          pending: pending,
           qAmount: qAmount,
-          buyPrice: buyPrice,
-          closeDate: closeDate,
-          openDate: openDate,
-          isClose: isClose,
-          isOpen: isOpen,
-          sellPrice: sellPrice,
-          rate: rate,
+          date: date,
           symbol: symbol,
         );
 
   VWAPOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    this.type = json['type'];
-    this.buyVWAP = json['buyVWAP'];
-    this.sellVWAP = json['sellVWAP'];
+    this.vwap = json['vwap'];
   }
 
   Map<String, dynamic> toJson() => {
         ...super.toJson(),
-        'type': type,
-        'sellVWAP': sellVWAP,
-        'buyVWAP': buyVWAP,
+        'vwap': vwap,
       };
 }

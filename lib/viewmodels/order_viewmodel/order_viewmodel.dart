@@ -72,21 +72,21 @@ class OrderViewmodel extends ChangeNotifier {
         orders.sort((a, b) => b.symbol!.compareTo(a.symbol!));
         break;
       case 'D_UP':
-        orders.sort((a, b) => a.openDate!.compareTo(b.openDate!));
+        orders.sort((a, b) => a.date!.compareTo(b.date!));
         break;
       case 'D_DOWN':
-        orders.sort((a, b) => b.openDate!.compareTo(a.openDate!));
+        orders.sort((a, b) => b.date!.compareTo(a.date!));
         break;
-      case 'C_UP':
-        orders.sort((a, b) => a.rate!.compareTo(b.rate!));
+      case 'A_DOWN':
+        orders.sort((a, b) => b.amount!.compareTo(a.amount!));
         break;
-      case 'C_DOWN':
-        orders.sort((a, b) => b.rate!.compareTo(a.rate!));
+      case 'A_UP':
+        orders.sort((a, b) => a.amount!.compareTo(b.amount!));
         break;
       case 'P_UP':
-        return orders.where((e) => e.isOpen == true).toList();
+        return orders.where((e) => e.pending == true).toList();
       case 'P_DOWN':
-        return orders.where((e) => e.isClose == true).toList();
+        return orders.where((e) => e.pending == false).toList();
       default:
     }
     return orders;

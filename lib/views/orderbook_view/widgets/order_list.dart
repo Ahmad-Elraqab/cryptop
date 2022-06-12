@@ -54,31 +54,28 @@ class OrderList extends StatelessWidget {
                             title: orderList![index].symbol,
                             weight: FontWeight.bold,
                           ),
-                          activeItem == index
-                              ? const SizedBox()
-                              : Container(
-                                  width: 70.0,
-                                  child: CustomButtom(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 5.0,
-                                    buttonColor: index == 4
-                                        ? const Color.fromARGB(
-                                            255, 250, 131, 125)
-                                        : const Color.fromARGB(
-                                            188, 94, 242, 212),
-                                    buttonText:
-                                        orderList![index].rate.toString() + '%',
-                                    buttonTextColor: Colors.white,
-                                    fontSize: 12,
-                                    hasImage: false,
-                                    height: 30.0,
-                                    horizontal: 10.0,
-                                    width: 70.0,
-                                    vertical: 4.0,
-                                    imageUrl: '',
-                                    onTap: () => {},
-                                  ),
-                                ),
+                          Container(
+                            width: 70.0,
+                            child: CustomButtom(
+                              borderColor: Colors.transparent,
+                              borderRadius: 5.0,
+                              buttonColor: orderList![index].op == 'sell'
+                                  ? const Color.fromARGB(255, 250, 131, 125)
+                                  : const Color.fromARGB(188, 94, 242, 212),
+                              buttonText: orderList![index].op == 'sell'
+                                  ? 'sell'
+                                  : 'buy',
+                              buttonTextColor: Colors.white,
+                              fontSize: 12,
+                              hasImage: false,
+                              height: 30.0,
+                              horizontal: 10.0,
+                              width: 70.0,
+                              vertical: 4.0,
+                              imageUrl: '',
+                              onTap: () => {},
+                            ),
+                          ),
                         ],
                       ),
                       activeItem == index

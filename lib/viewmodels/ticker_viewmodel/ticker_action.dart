@@ -32,7 +32,7 @@ final messageProvider = StreamProvider.autoDispose<dynamic>((ref) async* {
         print('object'),
         channel.sink.close(),
       });
-
+  print('daasdads');
   await for (final value in channel.stream) {
     yield jsonDecode(value.toString());
     // user.updateTickers(jsonDecode(value.toString()));

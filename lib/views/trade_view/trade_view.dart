@@ -124,7 +124,9 @@ class _TradeViewState extends State<TradeView> {
                   qAmount: double.parse(controllers[3].text),
                   amount: double.parse(controllers[4].text),
                   symbol: (widget.data as Map)['symbol'],
-                  buyPrice: price,
+                  price: price,
+                  status: 'pending',
+                  pending: true,
                   limit: double.parse(controllers[0].text))
               .toJson();
           break;
@@ -132,20 +134,24 @@ class _TradeViewState extends State<TradeView> {
           data = new Order(
                   type: 'market',
                   op: tradeType == 0 ? 'buy' : 'sell',
+                  pending: false,
                   qAmount: double.parse(controllers[3].text),
                   amount: double.parse(controllers[4].text),
+                  status: 'succeed',
                   symbol: (widget.data as Map)['symbol'],
-                  buyPrice: price)
+                  price: price)
               .toJson();
           break;
         case 2:
           data = new StopLimitOrder(
                   type: 'stopLimit',
                   op: tradeType == 0 ? 'buy' : 'sell',
+                  pending: true,
                   qAmount: double.parse(controllers[3].text),
+                  status: 'pending',
                   amount: double.parse(controllers[4].text),
                   symbol: (widget.data as Map)['symbol'],
-                  buyPrice: price,
+                  price: price,
                   limit: double.parse(controllers[0].text),
                   stop: double.parse(controllers[1].text))
               .toJson();
@@ -154,10 +160,12 @@ class _TradeViewState extends State<TradeView> {
           data = new OCOOrder(
                   type: 'oco',
                   op: tradeType == 0 ? 'buy' : 'sell',
+                  pending: true,
+                  status: 'pending',
                   qAmount: double.parse(controllers[3].text),
                   amount: double.parse(controllers[4].text),
                   symbol: (widget.data as Map)['symbol'],
-                  buyPrice: price,
+                  price: price,
                   limit: double.parse(controllers[0].text),
                   stop: double.parse(controllers[1].text),
                   s_limit: double.parse(controllers[2].text))
@@ -165,13 +173,20 @@ class _TradeViewState extends State<TradeView> {
           break;
         default:
       }
-      final order = await context.read(orderViewmodel).createOrder(data);
+      final order = await context.read(createOrder(data).future);
 
       if (order != null) {
         slider = 0.0;
         controllers.forEach((e) => e.text = '');
         setLoad(false);
         ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
+      } else {
+        slider = 0.0;
+        controllers.forEach((e) => e.text = '');
+        setLoad(false);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar(tradeType == 0
+            ? 'Invalid usdt amount'
+            : 'Invalid ' + (widget.data as Map)['symbol'] + ' amount'));
       }
     }
   }

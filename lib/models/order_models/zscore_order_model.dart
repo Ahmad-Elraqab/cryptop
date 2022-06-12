@@ -1,49 +1,39 @@
 import 'package:cryptop/models/order_model.dart';
 
 class ZscoreOrder extends Order {
-  double? buyZscore;
-  double? sellZscore;
+  double? zscore;
 
   ZscoreOrder({
-    this.buyZscore,
-    this.sellZscore,
+    this.zscore,
     id,
     amount = 0.0,
-    openDate,
-    closeDate,
-    buyPrice = 0.0,
-    isClose = false,
-    isOpen = true,
+    type,
+    price,
+    pending,
+    date,
     op,
+    status,
     qAmount,
-    rate = 0.0,
-    sellPrice,
     symbol,
   }) : super(
           id: id,
-          op: op,
-          qAmount: qAmount,
           amount: amount,
-          buyPrice: buyPrice,
-          sellPrice: sellPrice,
-          closeDate: closeDate,
-          openDate: openDate,
-          isClose: isClose,
-          isOpen: isOpen,
-          rate: rate,
+          status: status,
+          op: op,
+          type: type,
+          price: price,
+          pending: pending,
+          qAmount: qAmount,
+          date: date,
           symbol: symbol,
         );
 
   ZscoreOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    this.type = json['type'];
-    this.buyZscore = json['buyZscore'];
-    this.sellZscore = json['sellZscore'];
+    this.zscore = json['zscore'];
   }
 
   Map<String, dynamic> toJson() => {
         ...super.toJson(),
-        'type': type,
-        'sellZscore': sellZscore,
-        'buyZscore': buyZscore,
+        'zscore': zscore,
       };
 }

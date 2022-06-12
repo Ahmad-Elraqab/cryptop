@@ -16,13 +16,20 @@ class CircularChart extends StatelessWidget {
     //   ChartData('Others', 52, const Color.fromRGBO(255, 189, 57, 1))
     // ];
     return SfCircularChart(
+      legend: Legend(
+        isVisible: true,
+        overflowMode: LegendItemOverflowMode.scroll,
+        textStyle: TextStyle(color: Colors.white),
+      ),
+      tooltipBehavior: TooltipBehavior(enable: true),
       series: <CircularSeries>[
         DoughnutSeries<ChartData, String>(
-          dataSource: chartData!.map((e) => e as ChartData).toList(),
+          dataSource: chartData?.map((e) => e as ChartData).toList(),
           xValueMapper: (ChartData data, _) => data.x,
           yValueMapper: (ChartData data, _) => data.y,
           explode: true,
           explodeAll: false,
+          enableTooltip: true,
           innerRadius: '80%',
           dataLabelSettings: const DataLabelSettings(
             labelPosition: ChartDataLabelPosition.outside,

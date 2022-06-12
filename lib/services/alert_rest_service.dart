@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RestService {
+class AlertRestService {
   final String _baseUrl;
-  const RestService({baseUrl}) : _baseUrl = baseUrl;
+  const AlertRestService({baseUrl}) : _baseUrl = baseUrl;
 
   // Send a GET request to retrieve data from a REST server
   Future<Object> readToken() async {

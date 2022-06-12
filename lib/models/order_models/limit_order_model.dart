@@ -1,46 +1,37 @@
 import 'package:cryptop/models/order_model.dart';
 
 class LimitOrder extends Order {
-  String? type;
   double? limit;
-  bool? isPending;
 
   LimitOrder({
-    this.type,
     this.limit = 0.0,
-    this.isPending = true,
     amount = 0.0,
-    openDate,
-    closeDate,
-    sellPrice,
     id,
     op,
+    date,
+    status,
     qAmount,
-    buyPrice = 0.0,
-    isClose = false,
-    isOpen = true,
-    rate = 0.0,
+    pending,
+    price,
+    type,
     symbol,
   }) : super(
-            id: id,
-            amount: amount,
-            buyPrice: buyPrice,
-            closeDate: closeDate,
-            op: op,
-            qAmount: qAmount,
-            openDate: openDate,
-            sellPrice: sellPrice,
-            isClose: isClose,
-            isOpen: isOpen,
-            rate: rate,
-            symbol: symbol);
+          id: id,
+          amount: amount,
+          op: op,
+          status: status,
+          type: type,
+          price: price,
+          pending: pending,
+          qAmount: qAmount,
+          date: date,
+          symbol: symbol,
+        );
 
   LimitOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    this.type = json['type'];
     this.limit = double.parse(json['limit'].toString());
-    this.isPending = json['isPending'];
   }
 
   Map<String, dynamic> toJson() =>
-      {...super.toJson(), 'type': type, 'limit': limit, 'isPending': isPending};
+      {...super.toJson(), 'type': type, 'limit': limit};
 }

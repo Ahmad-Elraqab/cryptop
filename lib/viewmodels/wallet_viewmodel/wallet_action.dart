@@ -6,7 +6,7 @@ final walletViewmodel = ChangeNotifierProvider((ref) => WalletViewmodel());
 
 final getWallet = FutureProvider.autoDispose<Wallet?>(
   (ref) async {
-    final wallet = ref.watch(walletViewmodel);
+    final wallet = ref.read(walletViewmodel);
 
     final result = await wallet.getWallet();
 

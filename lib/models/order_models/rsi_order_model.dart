@@ -1,49 +1,39 @@
 import 'package:cryptop/models/order_model.dart';
 
 class RSIOrder extends Order {
-  double? buyRSI;
-  double? sellRSI;
+  double? rsi;
 
   RSIOrder({
-    this.buyRSI,
-    this.sellRSI,
+    this.rsi,
     id,
     amount = 0.0,
-    openDate,
-    closeDate,
-    buyPrice = 0.0,
-    isClose = false,
-    isOpen = true,
-    rate = 0.0,
-    sellPrice,
+    date,
+    type,
+    status,
+    pending,
+    price,
     symbol,
     op,
     qAmount,
   }) : super(
           id: id,
-          op: op,
-          qAmount: qAmount,
           amount: amount,
-          buyPrice: buyPrice,
-          sellPrice: sellPrice,
-          closeDate: closeDate,
-          openDate: openDate,
-          isClose: isClose,
-          isOpen: isOpen,
-          rate: rate,
+          op: op,
+          status: status,
+          type: type,
+          price: price,
+          pending: pending,
+          qAmount: qAmount,
+          date: date,
           symbol: symbol,
         );
 
   RSIOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    this.type = json['type'];
-    this.buyRSI = json['buyRSI'].toDouble();
-    this.sellRSI = json['sellRSI'].toDouble();
+    this.rsi = json['rsi'];
   }
 
   Map<String, dynamic> toJson() => {
         ...super.toJson(),
-        'type': type,
-        'sellRSI': sellRSI,
-        'buyRSI': buyRSI,
+        'rsi': rsi,
       };
 }

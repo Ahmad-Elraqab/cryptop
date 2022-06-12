@@ -16,4 +16,13 @@ class WalletViewmodel extends ChangeNotifier {
     final wallet = await rest.setWallet(data);
     return wallet;
   }
+
+  void updateWallet(String symbol, price) {
+    if (wallet != null) {
+      var w = wallet!.coins!.firstWhere(
+          (element) => element.symbol == symbol.replaceAll('USDT', ''));
+      w.currentPrice = double.parse(price);
+      w.profit = (w.currentPrice! - w.buyPrice!) / w.buyPrice! * 100;
+    }
+  }
 }

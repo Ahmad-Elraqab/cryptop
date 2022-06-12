@@ -1,12 +1,14 @@
 import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
+import 'package:cryptop/models/wallet_model.dart';
 import 'package:flutter/material.dart';
 
 class WalletDetail extends StatelessWidget {
   const WalletDetail({
     Key? key,
+    this.wallet,
   }) : super(key: key);
-
+  final Wallet? wallet;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -38,7 +40,7 @@ class WalletDetail extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: wallet?.coins?.length,
               shrinkWrap: true,
               itemBuilder: (context, index) => Container(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -53,59 +55,105 @@ class WalletDetail extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TextComponent(
-                      align: TextAlign.start,
-                      fontSize: 14.0,
-                      line: 1,
-                      textColor: Colors.white,
-                      title: 'BTCUSDT',
-                      weight: FontWeight.bold,
+                    Expanded(
+                      flex: 1,
+                      child: TextComponent(
+                        align: TextAlign.start,
+                        fontSize: 12.0,
+                        line: 1,
+                        textColor: Colors.white,
+                        title: (wallet?.coins?[index] as Coin).symbol,
+                        weight: FontWeight.bold,
+                      ),
                     ),
                     Container(
-                      height: 10.0,
-                      width: 10.0,
+                      height: 5.0,
+                      width: 5.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
-                    const TextComponent(
-                      align: TextAlign.start,
-                      fontSize: 14.0,
-                      line: 1,
-                      textColor: Colors.white,
-                      title: '25',
-                      weight: FontWeight.bold,
+                    Expanded(
+                      flex: 2,
+                      child: TextComponent(
+                        align: TextAlign.center,
+                        fontSize: 12.0,
+                        line: 2,
+                        textColor: Colors.white,
+                        title: (wallet?.coins?[index] as Coin)
+                            .qAmount!
+                            .toStringAsFixed(4),
+                        weight: FontWeight.bold,
+                      ),
                     ),
                     Container(
-                      height: 10.0,
-                      width: 10.0,
+                      height: 5.0,
+                      width: 5.0,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
-                    const TextComponent(
-                      align: TextAlign.start,
-                      fontSize: 14.0,
-                      line: 1,
-                      textColor: Colors.white,
-                      title: '106,451.15',
-                      weight: FontWeight.bold,
+                    Expanded(
+                      flex: 2,
+                      child: TextComponent(
+                        align: TextAlign.center,
+                        fontSize: 12.0,
+                        line: 1,
+                        textColor: Colors.white,
+                        title: (wallet?.coins?[index] as Coin)
+                                .amount!
+                                .toStringAsFixed(2) +
+                            '\$',
+                        weight: FontWeight.bold,
+                      ),
                     ),
-                    CustomButtom(
-                      borderColor: Colors.transparent,
-                      borderRadius: 5.0,
-                      buttonColor: const Color.fromARGB(255, 250, 131, 125),
-                      buttonText: '9.45%',
-                      buttonTextColor: Colors.white,
-                      fontSize: 14.0,
-                      hasImage: false,
-                      height: 30.0,
-                      horizontal: 20.0,
-                      vertical: 4.0,
-                      imageUrl: '',
-                      onTap: () => {},
+                    Container(
+                      height: 5.0,
+                      width: 5.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: TextComponent(
+                        align: TextAlign.center,
+                        fontSize: 12.0,
+                        line: 1,
+                        textColor: Colors.white,
+                        title: (wallet?.coins?[index] as Coin)
+                                .currentPrice!
+                                .toStringAsFixed(2) +
+                            '\$',
+                        weight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      height: 5.0,
+                      width: 5.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: TextComponent(
+                        align: TextAlign.center,
+                        fontSize: 12.0,
+                        line: 1,
+                        textColor: Colors.white,
+                        title: (wallet?.coins?[index] as Coin).profit!.isFinite
+                            ? (wallet?.coins?[index] as Coin)
+                                    .profit!
+                                    .toStringAsFixed(2) +
+                                '%'
+                            : '',
+                        weight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
