@@ -7,6 +7,7 @@ import 'package:cryptop/models/order_models/stop_limit_model.dart';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
 import 'package:cryptop/viewmodels/order_viewmodel/order_action.dart';
 import 'package:cryptop/viewmodels/ticker_viewmodel/ticker_action.dart';
+import 'package:cryptop/viewmodels/wallet_viewmodel/wallet_action.dart';
 import 'package:cryptop/views/trade_view/widgets/trade_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +29,7 @@ class _TradeViewState extends State<TradeView> {
   final List<TextEditingController> controllers =
       List.generate(5, (i) => TextEditingController());
 
-  final wallet = 50000;
+  double wallet = 0.0;
 
   setIndexList(value) => setState(() => {activeIndexList = value, slider = 0});
 
@@ -236,6 +237,11 @@ class _TradeViewState extends State<TradeView> {
 
   @override
   Widget build(BuildContext context) {
+    context.read(getWallet.future).then((val) => {
+          wallet = val!.coins!
+              .firstWhere((element) => element.symbol == 'USDT')
+              .amount!
+        });
     return Scaffold(
       body: Consumer(
         builder: (context, watch, child) {
