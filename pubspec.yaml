@@ -65,6 +65,7 @@ dependencies:
   universal_html: ^2.0.8
   collection: ^1.15.0
   flutter_local_notifications: ^9.5.3+1
+  guard_runner: ^0.0.2
   
   
 dev_dependencies:

@@ -2,6 +2,7 @@ import 'package:cryptop/app/const.dart';
 import 'package:cryptop/views/account_information_view/account_information_view.dart';
 import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
 import 'package:cryptop/views/address_view/address_view.dart';
+import 'package:cryptop/views/admin_views/user_list_view/user_list_view.dart';
 import 'package:cryptop/views/alert_view/alert_view.dart';
 import 'package:cryptop/views/backtest_view/backtest_view.dart';
 import 'package:cryptop/views/backtest_view/widgets/backtest_result.dart';
@@ -23,10 +24,48 @@ import '../app.dart';
 import '../views/login_view/login_view.dart';
 
 class RouteManager {
+  static final initRoutes = [
+    rSplash,
+    rLoginScreen,
+    rRegisterScreen,
+    rLanding,
+    rInti,
+  ];
+  static final routes = [
+    rTrade,
+    rProfileScreen,
+    rAcountInformation,
+    rAcountPassword,
+    rNotifications,
+    rLanguages,
+    rAddress,
+    rPayment,
+    rSearch,
+    rCoin,
+    rOrderbook,
+    rWallet,
+    rBacktest,
+    rBacktestResults,
+    rSmartTrade,
+    rAlert,
+    rSubscriptions
+  ];
+  static final adminRoutes = [
+    rUserListScreen,
+  ];
+  static String? role = '*';
+  static void setup(user) {
+    debugPrint(user);
+    role = user;
+  }
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     Widget builder;
 
     switch (settings.name) {
+      case rInti:
+        builder = const SplashView();
+        break;
       case rSplash:
         builder = const SplashView();
         break;
@@ -46,6 +85,9 @@ class RouteManager {
         break;
       case rProfileScreen:
         builder = const ProfileView();
+        break;
+      case rUserListScreen:
+        builder = const UserListView();
         break;
       case rAcountInformation:
         builder = const AccountInformationView();
@@ -98,18 +140,61 @@ class RouteManager {
       default:
         throw Exception('Invalid route: ${settings.name}');
     }
-    // return settings.name == rCoin
-    //     ? MaterialPageRoute(
-    //         builder: (context) => builder,
-    //         settings: settings,
-    //       )
-    //     :
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => builder,
-      settings: settings,
-      transitionsBuilder: (c, anim, a2, child) =>
-          FadeTransition(opacity: anim, child: child),
-      transitionDuration: Duration(milliseconds: 200),
+    print(role);
+    print(settings.name);
+    switch (role) {
+      case '*':
+        if (initRoutes.contains(settings.name)) {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => builder,
+            settings: settings,
+            transitionsBuilder: (c, anim, a2, child) =>
+                FadeTransition(opacity: anim, child: child),
+            transitionDuration: Duration(milliseconds: 200),
+          );
+        }
+        break;
+      case 'trader':
+        if (routes.contains(settings.name) ||
+            initRoutes.contains(settings.name)) {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => builder,
+            settings: settings,
+            transitionsBuilder: (c, anim, a2, child) =>
+                FadeTransition(opacity: anim, child: child),
+            transitionDuration: Duration(milliseconds: 200),
+          );
+        }
+        break;
+      case 'admin':
+        if (routes.contains(settings.name) ||
+            initRoutes.contains(settings.name) ||
+            adminRoutes.contains(settings.name)) {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => builder,
+            settings: settings,
+            transitionsBuilder: (c, anim, a2, child) =>
+                FadeTransition(opacity: anim, child: child),
+            transitionDuration: Duration(milliseconds: 200),
+          );
+        }
+        break;
+      default:
+    }
+    return MaterialPageRoute(
+      builder: (context) => UnauthorizedPage(),
+    );
+  }
+}
+
+class UnauthorizedPage extends StatelessWidget {
+  const UnauthorizedPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Unauthorized access')),
+      body: Center(child: Text('you do not access this page...')),
     );
   }
 }

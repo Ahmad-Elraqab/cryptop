@@ -38,8 +38,6 @@ class OrderFilterAction extends StatelessWidget {
             orderList: orderList,
             activeItem: item,
             setItem: setItem,
-            close: close,
-            track: track,
           ),
         ],
       ),

@@ -22,4 +22,13 @@ class UserService {
     final _user = User.fromJson(json);
     return _user;
   }
+
+  Future<List<User>?> getAllUsers() async {
+    final List json = await rest.get('users/all');
+    if (json.length == 0) return null;
+
+    final _user = json.map((e) => User.fromJson(e)).toList();
+
+    return _user;
+  }
 }

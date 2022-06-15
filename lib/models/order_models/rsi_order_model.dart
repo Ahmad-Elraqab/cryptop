@@ -29,7 +29,7 @@ class RSIOrder extends Order {
         );
 
   RSIOrder.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    this.rsi = json['rsi'];
+    this.rsi = double.parse(json['rsi'].toString());
   }
 
   Map<String, dynamic> toJson() => {

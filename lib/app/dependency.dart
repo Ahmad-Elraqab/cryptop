@@ -20,7 +20,8 @@ void init() {
         //baseUrl: 'http://127.0.0.1:3000/cryptop/api'),
         baseUrl: 'http://10.0.2.2:3000/cryptop/api'),
     // baseUrl: 'https://cryptop-sys.herokuapp.com/cryptop/api'),
-    // () => RestService(baseUrl: 'http://localhost:3000/cryptop/api'),
+    // () => RestService(
+    // baseUrl: 'http://localhost:3000/cryptop/api'),
   );
   dependency.registerLazySingleton<AlertRestService>(
     () => const AlertRestService(

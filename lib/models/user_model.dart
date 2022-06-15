@@ -6,6 +6,7 @@ class User {
   String? password;
   String? username;
   String? secretKey;
+  String? type;
   String? token;
 
   User({
@@ -13,6 +14,7 @@ class User {
     this.password,
     this.gender,
     this.phoneNumber,
+    this.type,
     this.token,
     this.name,
     this.secretKey,
@@ -25,7 +27,7 @@ class User {
           name: json['name'],
           password: json['password'],
           username: json['username'],
-          gender: json['gender'],
+          type: json['type'],
           secretKey: json['secretKey'],
           phoneNumber: json['phone_number'],
           token: json['token'],
@@ -35,6 +37,7 @@ class User {
         'name': name,
         'email': email,
         'gender': gender,
+        'type': type,
         'password': password,
         'phone_number': phoneNumber,
         'secret_key': secretKey,

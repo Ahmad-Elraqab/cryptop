@@ -1,6 +1,8 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/models/chart_model.dart';
 import 'package:cryptop/models/ticker_model.dart';
 import 'package:cryptop/viewmodels/chart_viewmodel/chart_action.dart';
+import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:cryptop/views/home_view/widgets/home_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +24,13 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: context.read(userViewmodel).hasPremission()
+          ? FloatingActionButton(
+              backgroundColor: Colors.white,
+              onPressed: () => Navigator.pushNamed(context, rUserListScreen),
+              child: SizedBox(
+                  height: 30, child: Image.asset('lib/assets/dashboard.png')))
+          : SizedBox(),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Consumer(

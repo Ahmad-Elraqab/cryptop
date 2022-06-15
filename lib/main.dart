@@ -6,11 +6,8 @@ import 'package:cryptop/app/dependency.dart' as dep;
 
 void main() {
   dep.init();
-  // to ensure all the widgets are initialized.
+  RouteManager.setup("*");
   WidgetsFlutterBinding.ensureInitialized();
-
-  // to initialize the notificationservice.
-  // NotificationService().initNotification();
   runApp(const AppView());
 }
 
@@ -35,7 +32,7 @@ class _AppViewState extends State<AppView> {
           ),
         ),
         onGenerateRoute: RouteManager.generateRoute,
-        initialRoute: rSplash,
+        initialRoute: rInti,
       ),
     );
   }

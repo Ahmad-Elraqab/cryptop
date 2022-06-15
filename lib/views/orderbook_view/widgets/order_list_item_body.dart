@@ -1,24 +1,16 @@
-import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/models/order_model.dart';
 import 'package:cryptop/models/order_models/limit_order_model.dart';
 import 'package:cryptop/models/order_models/oco_model.dart';
 import 'package:cryptop/models/order_models/stop_limit_model.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class OrderListItemBody extends StatelessWidget {
   const OrderListItemBody({
     Key? key,
-    this.activeIndex,
-    this.close,
-    this.track,
     this.order,
   }) : super(key: key);
   final Order? order;
-  final int? activeIndex;
-  final Function? close;
-  final Function? track;
 
   List<Widget> buildTypeItem() {
     var data = [];
@@ -90,6 +82,7 @@ class OrderListItemBody extends StatelessWidget {
           flex: 8,
           child: ListView.builder(
             shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: data.length,
             itemBuilder: (context, index) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:cryptop/app/dependency.dart';
+import 'package:cryptop/app/router.dart';
 import 'package:cryptop/models/user_model.dart';
 import 'package:cryptop/services/user_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,12 +28,22 @@ class UserViewmodel extends ChangeNotifier {
     {'value': false, 'message': 'repeat password'},
   ];
 
+  bool hasPremission() {
+    if (RouteManager.role == 'admin') return true;
+
+    return false;
+  }
+
   Future readToken() async {
     _storage = await SharedPreferences.getInstance();
 
     final token = _storage!.get('token');
+    final u = jsonDecode(_storage!.get('user').toString());
 
     if (token == null) return false;
+
+    user = User.fromJson(u);
+    RouteManager.setup(user!.type);
     return token;
   }
 
@@ -41,10 +53,14 @@ class UserViewmodel extends ChangeNotifier {
     await _storage!.remove('token');
   }
 
-  Future<void> addToken(String token) async {
+  Future<void> addToken(u) async {
+    RouteManager.setup(u!.type);
+
     _storage = await SharedPreferences.getInstance();
 
-    await _storage!.setString('token', token);
+    print(u!.type);
+    await _storage!.setString('token', u!.token!);
+    await _storage!.setString('user', jsonEncode(u!.toJson()));
   }
 
   Future<void> logout() async {
@@ -53,27 +69,36 @@ class UserViewmodel extends ChangeNotifier {
 
   Future<User?> login() async {
     load = true;
-    final value = await rest.login(
+    final u = await rest.login(
         email: controllers[0].text, password: controllers[1].text);
-    resetForm();
-    load = false;
-    return value;
+    if (u is User) {
+      user = u;
+      await addToken(u);
+      resetForm();
+      load = false;
+    }
+
+    return user;
   }
 
   Future<User?> signup() async {
     load = true;
-    Map<String, dynamic>? user = User(
+    Map<String, dynamic>? _user = User(
             name: controllers[2].text + ' ' + controllers[3].text,
             email: controllers[4].text,
             password: controllers[5].text)
         .toJson();
 
-    final value = await rest.registerUser(data: user);
-    resetForm();
-    load = false;
-    user = null;
+    final u = await rest.registerUser(data: _user);
+    if (u is User) {
+      user = u;
+      await addToken(u);
+      resetForm();
+      load = false;
+      _user = null;
+    }
 
-    return value;
+    return user;
   }
 
   setCheckbox(value) {
@@ -94,6 +119,11 @@ class UserViewmodel extends ChangeNotifier {
     }
     checkbox = false;
     notifyListeners();
+  }
+
+  Future<List<User>?> getAllUsers() async {
+    final List<User>? list = await rest.getAllUsers();
+    return list;
   }
 
   bool validateForm(start, end) {
