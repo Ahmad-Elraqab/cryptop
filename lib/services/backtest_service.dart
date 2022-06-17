@@ -16,9 +16,9 @@ class BacktestService {
     final data = json.map((e) {
       if (e['type'].toLowerCase() == 'rsi') {
         return RSIBacktestModel.fromJson(e as Map<String, dynamic>);
-      } else if (e['type'] == 'zscore') {
+      } else if (e['type'].toLowerCase() == 'zscore') {
         return ZscoreBacktestModel.fromJson(e as Map<String, dynamic>);
-      } else if (e['type'] == 'vwap') {
+      } else if (e['type'].toLowerCase() == 'vwap') {
         return VWAPBacktestModel.fromJson(e as Map<String, dynamic>);
       } else {
         return BacktestModel.fromJson(e as Map<String, dynamic>);

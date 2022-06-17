@@ -8,6 +8,10 @@ class User {
   String? secretKey;
   String? type;
   String? token;
+  int? orders;
+  int? smartTrades;
+  int? backtests;
+  int? alerts;
 
   User({
     this.email,
@@ -15,6 +19,10 @@ class User {
     this.gender,
     this.phoneNumber,
     this.type,
+    this.orders,
+    this.smartTrades,
+    this.backtests,
+    this.alerts,
     this.token,
     this.name,
     this.secretKey,
@@ -31,6 +39,10 @@ class User {
           secretKey: json['secretKey'],
           phoneNumber: json['phone_number'],
           token: json['token'],
+          orders: json['orders'].length,
+          smartTrades: json['smartTrades'].length,
+          backtests: json['backtests'].length,
+          alerts: json['alerts'].length,
         );
 
   Map<String, dynamic> toJson() => {

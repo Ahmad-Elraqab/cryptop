@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:cryptop/app/const.dart';
-import 'package:cryptop/app/router.dart';
 import 'package:cryptop/services/socket_service.dart';
 import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:flutter/material.dart';

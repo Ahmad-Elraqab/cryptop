@@ -27,7 +27,7 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButton: context.read(userViewmodel).hasPremission()
           ? FloatingActionButton(
               backgroundColor: Colors.white,
-              onPressed: () => Navigator.pushNamed(context, rUserListScreen),
+              onPressed: () => Navigator.pushNamed(context, rDashboard),
               child: SizedBox(
                   height: 30, child: Image.asset('lib/assets/dashboard.png')))
           : SizedBox(),

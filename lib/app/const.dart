@@ -22,6 +22,8 @@ const rBacktestResults = "/backtest_results";
 const rSmartTrade = "/smart_trade";
 const rAlert = "/alerts";
 const rSubscriptions = "/subscription";
+const rDashboard = "/dashboard";
+const rUserView = "/userView";
 
 // ignore: constant_identifier_names
 const exchange_pairs = [

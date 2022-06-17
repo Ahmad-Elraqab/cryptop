@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userViewmodel = ChangeNotifierProvider((ref) => UserViewmodel());
 
-final getUsersAction = FutureProvider<List<User>?>(
+final getUsersAction = FutureProvider.autoDispose<List<User>?>(
   (ref) async {
     final user = ref.watch(userViewmodel);
 

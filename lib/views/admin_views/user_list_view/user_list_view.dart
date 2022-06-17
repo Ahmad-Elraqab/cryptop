@@ -1,3 +1,4 @@
+import 'package:cryptop/app/const.dart';
 import 'package:cryptop/components/custom_buttom/custom_button.dart';
 import 'package:cryptop/components/loading_animation/loading_animation.dart';
 import 'package:cryptop/components/text_component/text_component.dart';
@@ -67,7 +68,9 @@ class _UserListViewState extends State<UserListView> {
                                     horizontal: 20,
                                     imageUrl: '',
                                     height: 30,
-                                    onTap: () => {},
+                                    onTap: () => Navigator.pushNamed(
+                                        context, rUserView,
+                                        arguments: {'user': data[index]}),
                                   )
                                 ],
                               ),

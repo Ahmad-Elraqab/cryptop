@@ -75,8 +75,8 @@ class UserViewmodel extends ChangeNotifier {
       user = u;
       await addToken(u);
       resetForm();
-      load = false;
     }
+    load = false;
 
     return user;
   }
@@ -94,9 +94,9 @@ class UserViewmodel extends ChangeNotifier {
       user = u;
       await addToken(u);
       resetForm();
-      load = false;
       _user = null;
     }
+    load = false;
 
     return user;
   }

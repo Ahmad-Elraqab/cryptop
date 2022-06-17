@@ -2,7 +2,9 @@ import 'package:cryptop/app/const.dart';
 import 'package:cryptop/views/account_information_view/account_information_view.dart';
 import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
 import 'package:cryptop/views/address_view/address_view.dart';
+import 'package:cryptop/views/admin_views/dashboard_view/dashboard_view.dart';
 import 'package:cryptop/views/admin_views/user_list_view/user_list_view.dart';
+import 'package:cryptop/views/admin_views/user_view/user_view.dart';
 import 'package:cryptop/views/alert_view/alert_view.dart';
 import 'package:cryptop/views/backtest_view/backtest_view.dart';
 import 'package:cryptop/views/backtest_view/widgets/backtest_result.dart';
@@ -52,6 +54,8 @@ class RouteManager {
   ];
   static final adminRoutes = [
     rUserListScreen,
+    rUserView,
+    rDashboard,
   ];
   static String? role = '*';
   static void setup(user) {
@@ -135,6 +139,14 @@ class RouteManager {
         break;
       case rSubscriptions:
         builder = const SubscriptionView();
+        break;
+      case rDashboard:
+        builder = const DashboardView();
+        break;
+      case rUserView:
+        builder = UserView(
+          data: settings.arguments!,
+        );
         break;
 
       default:
