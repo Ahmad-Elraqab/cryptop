@@ -31,4 +31,19 @@ class UserService {
 
     return _user;
   }
+
+  Future<User?> toggleUser({Map<String, dynamic>? data}) async {
+    final json = await rest.patch(
+      'users/user_status?id=' +
+          data!['id'] +
+          '&active=' +
+          data['active'].toString(),
+      data: {},
+    );
+    if (json.length == 0) return null;
+
+    final _user = User.fromJson(json);
+
+    return _user;
+  }
 }

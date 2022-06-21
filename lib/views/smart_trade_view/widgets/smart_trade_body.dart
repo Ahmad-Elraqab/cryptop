@@ -10,7 +10,9 @@ class SmartTradeBody extends StatelessWidget {
     this.activeIndex,
     this.setIndex,
     this.smartTradeList,
+    this.dataType,
   }) : super(key: key);
+  final List? dataType;
   final List<SmartTradeModel>? smartTradeList;
   final int? activeIndex;
   final Function? setIndex;
@@ -26,7 +28,7 @@ class SmartTradeBody extends StatelessWidget {
           title: 'Smart Trade List',
         ),
         const SizedBox(height: 20.0),
-        SmartTradeHeader(),
+        SmartTradeHeader(dataType: dataType),
         SmartTradeList(
           activeIndex: activeIndex,
           setIndex: setIndex,

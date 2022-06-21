@@ -15,7 +15,7 @@ class _DashboardViewState extends State<DashboardView> {
   Widget build(BuildContext context) {
     final routes = [
       rUserListScreen,
-      rUserListScreen,
+      rSmartTradeAdmin,
       rUserListScreen,
       rUserListScreen,
     ];

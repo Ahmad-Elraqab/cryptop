@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/smart_trade_model.dart';
 import 'package:cryptop/models/smart_trade_models/rsi_smart_trade_model.dart';
@@ -64,6 +66,26 @@ class SmartTradeService {
     }
   }
 
+  Future getSmartTradeAdmin() async {
+    final json = await rest.get('cryptop/admin');
+
+    if (json == null) {
+      return null;
+    } else {
+      return (json as List).map((e) => e).toList();
+    }
+  }
+
+  Future getSmartTradeType() async {
+    final json = await rest.get('cryptop/');
+
+    if (json == null) {
+      return null;
+    } else {
+      return (json as List).map((e) => e).toList();
+    }
+  }
+
   Future<SmartTradeModel?> toggleSmartTrade(String id) async {
     final json = await rest.patch('smart_trade/toggle/$id', data: {});
 
@@ -71,6 +93,17 @@ class SmartTradeService {
       return null;
     } else {
       return SmartTradeModel.fromJson(json);
+    }
+  }
+
+  Future toggleSmartTradeAdmin(String id, bool status) async {
+    final json = await rest
+        .patch('cryptop/?id=$id&status=${status.toString()}', data: {});
+
+    if (json == null) {
+      return null;
+    } else {
+      return json;
     }
   }
 }

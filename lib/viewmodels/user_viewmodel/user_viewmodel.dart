@@ -51,6 +51,7 @@ class UserViewmodel extends ChangeNotifier {
     _storage = await SharedPreferences.getInstance();
 
     await _storage!.remove('token');
+    await _storage!.remove('user');
   }
 
   Future<void> addToken(u) async {
@@ -75,10 +76,11 @@ class UserViewmodel extends ChangeNotifier {
       user = u;
       await addToken(u);
       resetForm();
+      load = false;
+      return user;
     }
     load = false;
-
-    return user;
+    return null;
   }
 
   Future<User?> signup() async {
@@ -95,10 +97,12 @@ class UserViewmodel extends ChangeNotifier {
       await addToken(u);
       resetForm();
       _user = null;
+      load = false;
+      return user;
     }
     load = false;
 
-    return user;
+    return null;
   }
 
   setCheckbox(value) {
@@ -124,6 +128,12 @@ class UserViewmodel extends ChangeNotifier {
   Future<List<User>?> getAllUsers() async {
     final List<User>? list = await rest.getAllUsers();
     return list;
+  }
+
+  Future<User?> toggleUser(String id, bool active) async {
+    final User? user =
+        await rest.toggleUser(data: {'id': id, 'active': !active});
+    return user;
   }
 
   bool validateForm(start, end) {

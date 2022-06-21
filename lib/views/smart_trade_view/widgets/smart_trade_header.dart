@@ -8,7 +8,9 @@ class SmartTradeHeader extends StatelessWidget {
     Key? key,
     this.filter,
     this.symbols,
+    this.dataType,
   }) : super(key: key);
+  final List? dataType;
 
   final Function? filter;
   final List? symbols;
@@ -68,7 +70,8 @@ class SmartTradeHeader extends StatelessWidget {
                 ),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.6,
-                child: SmartTradeBottomSheet(),
+                child: SmartTradeBottomSheet(
+                    dataType: dataType!.map((e) => e['type']).toList()),
               ),
             ),
           },

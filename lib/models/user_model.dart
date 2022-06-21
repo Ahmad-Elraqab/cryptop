@@ -1,4 +1,5 @@
 class User {
+  String? id;
   String? name;
   String? gender;
   String? phoneNumber;
@@ -8,10 +9,11 @@ class User {
   String? secretKey;
   String? type;
   String? token;
-  int? orders;
-  int? smartTrades;
-  int? backtests;
-  int? alerts;
+  bool? isActive;
+  List<String>? orders;
+  List<String>? smartTrades;
+  List<String>? backtests;
+  List<String>? alerts;
 
   User({
     this.email,
@@ -23,6 +25,8 @@ class User {
     this.smartTrades,
     this.backtests,
     this.alerts,
+    this.id,
+    this.isActive,
     this.token,
     this.name,
     this.secretKey,
@@ -31,6 +35,8 @@ class User {
 
   User.fromJson(Map<String, dynamic> json)
       : this(
+          id: json['id'],
+          isActive: json['isActive'],
           email: json['email'],
           name: json['name'],
           password: json['password'],
@@ -39,13 +45,17 @@ class User {
           secretKey: json['secretKey'],
           phoneNumber: json['phone_number'],
           token: json['token'],
-          orders: json['orders'].length,
-          smartTrades: json['smartTrades'].length,
-          backtests: json['backtests'].length,
-          alerts: json['alerts'].length,
+          orders: (json['orders'] as List).map((e) => e as String).toList(),
+          smartTrades:
+              (json['smartTrades'] as List).map((e) => e as String).toList(),
+          backtests:
+              (json['backtests'] as List).map((e) => e as String).toList(),
+          alerts: (json['alerts'] as List).map((e) => e as String).toList(),
         );
 
   Map<String, dynamic> toJson() => {
+        'id': id,
+        'isActive': isActive,
         'name': name,
         'email': email,
         'gender': gender,
@@ -54,5 +64,9 @@ class User {
         'phone_number': phoneNumber,
         'secret_key': secretKey,
         'username': username,
+        'orders': orders,
+        'alerts': alerts,
+        'backtests': backtests,
+        'smartTrades': smartTrades,
       };
 }

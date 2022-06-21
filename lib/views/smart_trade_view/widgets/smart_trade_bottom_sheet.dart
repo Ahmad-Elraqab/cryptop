@@ -11,9 +11,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../components/custom_snack_bar/custom_snack_bar.dart';
 
 class SmartTradeBottomSheet extends StatefulWidget {
-  const SmartTradeBottomSheet({Key? key, this.smartTrade}) : super(key: key);
+  const SmartTradeBottomSheet(
+      {Key? key,
+      this.smartTrade,
+      this.dataType = const [
+        'RSI',
+        'ZSCORE',
+        'VWAP',
+        'WHALE SPLASH',
+        'PUMP CATCHER',
+        'R & S',
+        'TREND'
+      ]})
+      : super(key: key);
 
   final SmartTradeModel? smartTrade;
+  final List? dataType;
 
   @override
   State<SmartTradeBottomSheet> createState() => _SmartTradeBottomSheetState();
@@ -138,15 +151,7 @@ class _SmartTradeBottomSheetState extends State<SmartTradeBottomSheet> {
                         if (i == 1) {
                           newMethod(context, i, exchange_pairs);
                         } else if (i == 2) {
-                          newMethod(context, i, [
-                            'RSI',
-                            'ZSCORE',
-                            'VWAP',
-                            'WHALE SPLASH',
-                            'PUMP CATCHER',
-                            'R & S',
-                            'TREND'
-                          ]);
+                          newMethod(context, i, widget.dataType!);
                         } else if (i == 3) {
                           newMethod(context, i, [
                             '1d',

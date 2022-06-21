@@ -26,7 +26,9 @@ class _SmartTradeViewState extends State<SmartTradeView> {
           child: Consumer(
             builder: (context, watch, child) {
               final data = watch(getSmartTrade).data?.value;
+              final dataType = watch(getSmartTradeType).data?.value;
               return SmartTradeBody(
+                dataType: dataType,
                 activeIndex: activeIndex,
                 setIndex: setIndex,
                 smartTradeList: data,

@@ -33,8 +33,23 @@ class SmartTradeViewmodel extends ChangeNotifier {
     return _st;
   }
 
+  Future toggleSmartTradeAdmin(id, status) async {
+    final _st = await rest.toggleSmartTradeAdmin(id, status);
+    return _st;
+  }
+
   Future<List<SmartTradeModel>?> getSmartTrade() async {
     final List<SmartTradeModel>? _st = await rest.getSmartTrade();
+    return _st;
+  }
+
+  Future getSmartTradeAdmin() async {
+    final _st = await rest.getSmartTradeAdmin();
+    return _st;
+  }
+
+  Future getSmartTradeType() async {
+    final _st = await rest.getSmartTradeType();
     return _st;
   }
 }

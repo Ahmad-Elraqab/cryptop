@@ -83,3 +83,29 @@ final updateSmartTrade = FutureProviderFamily<SmartTradeModel?, Map>(
     return result;
   },
 );
+
+final getSmartTradeAdmin = FutureProvider.autoDispose((ref) async {
+  final st = ref.watch(smartTradeViewmodel);
+
+  final result = await st.getSmartTradeAdmin();
+
+  return result;
+});
+
+final getSmartTradeType = FutureProvider.autoDispose((ref) async {
+  final st = ref.watch(smartTradeViewmodel);
+
+  final result = await st.getSmartTradeType();
+
+  return result;
+});
+
+final toggleSmartTradeAdmin = FutureProviderFamily<dynamic, Map>(
+  (ref, data) async {
+    final st = ref.watch(smartTradeViewmodel);
+
+    final result = await st.toggleSmartTradeAdmin(data['id'], data['status']);
+
+    return result;
+  },
+);

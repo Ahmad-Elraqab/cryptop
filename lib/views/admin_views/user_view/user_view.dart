@@ -1,8 +1,10 @@
-import 'package:cryptop/components/title_header/title_header.dart';
+import 'package:cryptop/components/custom_snack_bar/custom_snack_bar.dart';
+import 'package:cryptop/viewmodels/user_viewmodel/user_action.dart';
 import 'package:cryptop/views/admin_views/user_view/widgets/opaque_image.dart';
 import 'package:cryptop/views/admin_views/user_view/widgets/profile_info_big_card.dart';
 import 'package:cryptop/views/admin_views/user_view/widgets/profile_info_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../models/user_model.dart';
 
 class UserView extends StatefulWidget {
@@ -15,6 +17,17 @@ class UserView extends StatefulWidget {
 }
 
 class _UserViewState extends State<UserView> {
+  onToggle() async {
+    final isToggle =
+        await context.read(toggleUser((widget.data as Map)['user']).future);
+
+    if (isToggle is User) {
+      ScaffoldMessenger.of(context).showSnackBar(network_snackBar(0));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(network_snackBar(1));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     const Color blueColor = Colors.amber;
@@ -27,10 +40,10 @@ class _UserViewState extends State<UserView> {
       {'title': 'Phone number', 'value': user.phoneNumber.toString()},
       {'title': 'Type', 'value': user.type.toString()},
       {'title': 'Username', 'value': user.username.toString()},
-      {'title': 'Alerts', 'value': user.alerts.toString()},
-      {'title': 'SmartTrades', 'value': user.smartTrades.toString()},
-      {'title': 'Backtests', 'value': user.backtests.toString()},
-      {'title': 'Orders', 'value': user.orders.toString()},
+      {'title': 'Alerts', 'value': user.alerts!.length.toString()},
+      {'title': 'SmartTrades', 'value': user.smartTrades!.length.toString()},
+      {'title': 'Backtests', 'value': user.backtests!.length.toString()},
+      {'title': 'Orders', 'value': user.orders!.length.toString()},
     ];
     return Scaffold(
       body: Stack(
@@ -83,7 +96,7 @@ class _UserViewState extends State<UserView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  ProfileInfoCard(firstText: "Toggle", onTap: () => {}),
+                  ProfileInfoCard(firstText: "Toggle", onTap: onToggle),
                   ProfileInfoCard(firstText: "Close", onTap: () => {}),
                   ProfileInfoCard(firstText: "Edit", onTap: () => {}),
                 ],

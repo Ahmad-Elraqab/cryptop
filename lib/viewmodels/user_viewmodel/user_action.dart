@@ -13,3 +13,13 @@ final getUsersAction = FutureProvider.autoDispose<List<User>?>(
     return result;
   },
 );
+
+final toggleUser = FutureProviderFamily<User?, User?>(
+  (ref, data) async {
+    final user = ref.watch(userViewmodel);
+
+    final result = await user.toggleUser(data!.id!, data.isActive!);
+
+    return result;
+  },
+);
