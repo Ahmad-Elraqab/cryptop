@@ -70,6 +70,23 @@ class OrderService {
     }
   }
 
+  Future<Order?> createOrderAdmin(Map<String, dynamic> order) async {
+    final json = await rest.post('orders/create/admin', order);
+    if (json == null) return null;
+
+    if (json['type'] == 'market') {
+      return Order.fromJson(json as Map<String, dynamic>);
+    } else if (json['type'] == 'limit') {
+      return LimitOrder.fromJson(json as Map<String, dynamic>);
+    } else if (json['type'] == 'oco') {
+      return OCOOrder.fromJson(json as Map<String, dynamic>);
+    } else if (json['type'] == 'stopLimit') {
+      return StopLimitOrder.fromJson(json as Map<String, dynamic>);
+    } else {
+      return Order.fromJson(json as Map<String, dynamic>);
+    }
+  }
+
   Future<Order?> closeOrder(String orderId, Map<String, dynamic> data) async {
     final price = await http.get(Uri.parse(
         'https://api1.binance.com/api/v3/ticker/24hr?symbol=' +

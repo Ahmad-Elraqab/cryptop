@@ -24,6 +24,7 @@ const rAlert = "/alerts";
 const rSubscriptions = "/subscription";
 const rDashboard = "/dashboard";
 const rSmartTradeAdmin = "/smartTradeAdmin";
+const rSystemWallet = "/systemWallet";
 const rUserView = "/userView";
 
 // ignore: constant_identifier_names

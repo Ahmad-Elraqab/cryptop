@@ -16,14 +16,10 @@ class _DashboardViewState extends State<DashboardView> {
     final routes = [
       rUserListScreen,
       rSmartTradeAdmin,
-      rUserListScreen,
-      rUserListScreen,
     ];
     final routesName = [
       'Users Controller',
       'SmartTrade Controller',
-      'Subscriptions Controller',
-      'System Wallet',
     ];
     return Scaffold(
       body: Container(
@@ -43,8 +39,8 @@ class _DashboardViewState extends State<DashboardView> {
                   child: Card(
                     color: Color.fromARGB(185, 86, 92, 107),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.white60)),
                     elevation: 11,
                     shadowColor: Color.fromARGB(195, 87, 93, 109),
                     child: Center(

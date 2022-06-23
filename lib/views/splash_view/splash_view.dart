@@ -20,12 +20,12 @@ class _SplashViewState extends State<SplashView> {
     Timer(
       const Duration(seconds: 3),
       () async {
-        SocketService.connectAndListen();
         final token = await context.read(userViewmodel).readToken();
         // print(token);
         if (token == false) {
           Navigator.pushReplacementNamed(context, rLoginScreen);
         } else {
+          SocketService.connectAndListen();
           Navigator.pushReplacementNamed(context, rLanding);
         }
       },

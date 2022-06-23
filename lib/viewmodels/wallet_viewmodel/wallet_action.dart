@@ -14,6 +14,16 @@ final getWallet = FutureProvider.autoDispose<Wallet?>(
   },
 );
 
+final getWallets = FutureProvider.autoDispose<List<Wallet>?>(
+  (ref) async {
+    final wallet = ref.read(walletViewmodel);
+
+    final result = await wallet.getWallets();
+
+    return result;
+  },
+);
+
 final setWallet = FutureProviderFamily<Wallet?, Map<String, dynamic>>(
   (ref, data) async {
     final wallet = ref.watch(walletViewmodel);

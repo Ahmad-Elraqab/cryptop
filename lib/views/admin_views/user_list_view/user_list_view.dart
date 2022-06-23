@@ -57,21 +57,44 @@ class _UserListViewState extends State<UserListView> {
                                     title: data[index].name,
                                     weight: FontWeight.w800,
                                   ),
-                                  CustomButtom(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 5,
-                                    buttonColor: Colors.blueGrey,
-                                    buttonText: 'View',
-                                    buttonTextColor: Colors.white,
-                                    fontSize: 12,
-                                    hasImage: false,
-                                    horizontal: 20,
-                                    imageUrl: '',
-                                    height: 30,
-                                    onTap: () => Navigator.pushNamed(
-                                        context, rUserView,
-                                        arguments: {'user': data[index]}),
-                                  )
+                                  Row(
+                                    children: [
+                                      CustomButtom(
+                                        borderColor: Colors.transparent,
+                                        borderRadius: 5,
+                                        buttonColor: Colors.blueGrey,
+                                        buttonText: 'Wallet',
+                                        buttonTextColor: Colors.white,
+                                        fontSize: 12,
+                                        hasImage: false,
+                                        horizontal: 20,
+                                        imageUrl: '',
+                                        height: 30,
+                                        onTap: () => Navigator.pushNamed(
+                                            context, rSystemWallet, arguments: {
+                                          'wallet': data[index].wallet
+                                        }),
+                                      ),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      CustomButtom(
+                                        borderColor: Colors.transparent,
+                                        borderRadius: 5,
+                                        buttonColor: Colors.blueGrey,
+                                        buttonText: 'View',
+                                        buttonTextColor: Colors.white,
+                                        fontSize: 12,
+                                        hasImage: false,
+                                        horizontal: 20,
+                                        imageUrl: '',
+                                        height: 30,
+                                        onTap: () => Navigator.pushNamed(
+                                            context, rUserView,
+                                            arguments: {'user': data[index]}),
+                                      )
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),

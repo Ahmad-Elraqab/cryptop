@@ -14,6 +14,16 @@ final createOrder = FutureProvider.family<Order?, Map<String, dynamic>>(
   },
 );
 
+final createOrderAdmin = FutureProvider.family<Order?, Map<String, dynamic>>(
+  (ref, data) async {
+    final order = ref.watch(orderViewmodel);
+
+    final result = await order.createOrderAdmin(data);
+
+    return result;
+  },
+);
+
 final getOrders = FutureProvider.autoDispose<List<Order>?>(
   (ref) async {
     final order = ref.watch(orderViewmodel);

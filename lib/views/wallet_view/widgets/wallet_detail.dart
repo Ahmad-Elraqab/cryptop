@@ -7,8 +7,10 @@ class WalletDetail extends StatelessWidget {
   const WalletDetail({
     Key? key,
     this.wallet,
+    this.onSell,
   }) : super(key: key);
   final Wallet? wallet;
+  final Function? onSell;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -124,10 +126,12 @@ class WalletDetail extends StatelessWidget {
                         fontSize: 12.0,
                         line: 1,
                         textColor: Colors.white,
-                        title: (wallet?.coins?[index] as Coin)
-                                .currentPrice!
-                                .toStringAsFixed(2) +
-                            '\$',
+                        title: (wallet?.coins?[index] as Coin).profit!.isFinite
+                            ? (wallet?.coins?[index] as Coin)
+                                    .profit!
+                                    .toStringAsFixed(2) +
+                                '%'
+                            : '',
                         weight: FontWeight.bold,
                       ),
                     ),
@@ -141,18 +145,21 @@ class WalletDetail extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 2,
-                      child: TextComponent(
-                        align: TextAlign.center,
-                        fontSize: 12.0,
-                        line: 1,
-                        textColor: Colors.white,
-                        title: (wallet?.coins?[index] as Coin).profit!.isFinite
-                            ? (wallet?.coins?[index] as Coin)
-                                    .profit!
-                                    .toStringAsFixed(2) +
-                                '%'
-                            : '',
-                        weight: FontWeight.bold,
+                      child: CustomButtom(
+                        borderColor: Colors.transparent,
+                        borderRadius: 5,
+                        buttonColor: Colors.amberAccent[400],
+                        buttonText: 'Sell',
+                        buttonTextColor: Colors.white,
+                        fontSize: 12,
+                        hasImage: false,
+                        height: 30,
+                        onTap: () => onSell!(
+                          (wallet?.coins?[index] as Coin).symbol,
+                          (wallet?.coins?[index] as Coin).qAmount,
+                          (wallet?.id),
+                        ),
+                        imageUrl: '',
                       ),
                     ),
                   ],

@@ -6,6 +6,7 @@ class Wallet {
 
   Wallet.fromJson(Map<String, dynamic> json)
       : this(
+          id: json['_id'],
           coins: (json['pairs'] as Map)
               .keys
               .map((e) => Coin.fromJson(json['pairs'][e]))

@@ -4,6 +4,7 @@ import 'package:cryptop/views/account_passwrod_view/account_password_view.dart';
 import 'package:cryptop/views/address_view/address_view.dart';
 import 'package:cryptop/views/admin_views/dashboard_view/dashboard_view.dart';
 import 'package:cryptop/views/admin_views/smart_trade_admin_view/smart_trade_admin_view.dart';
+import 'package:cryptop/views/admin_views/system_wallet_view/system_wallet_view.dart';
 import 'package:cryptop/views/admin_views/user_list_view/user_list_view.dart';
 import 'package:cryptop/views/admin_views/user_view/user_view.dart';
 import 'package:cryptop/views/alert_view/alert_view.dart';
@@ -58,6 +59,7 @@ class RouteManager {
     rUserView,
     rDashboard,
     rSmartTradeAdmin,
+    rSystemWallet,
   ];
   static String? role = '*';
   static void setup(user) {
@@ -88,6 +90,11 @@ class RouteManager {
         break;
       case rSmartTradeAdmin:
         builder = const SmartTradeAdminView();
+        break;
+      case rSystemWallet:
+        builder = SystemWalletView(
+          data: settings.arguments!,
+        );
         break;
       case rRegisterScreen:
         builder = const RegisterScreen();

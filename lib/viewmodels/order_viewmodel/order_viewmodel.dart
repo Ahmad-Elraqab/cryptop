@@ -13,6 +13,11 @@ class OrderViewmodel extends ChangeNotifier {
     return _order;
   }
 
+  Future<Order?> createOrderAdmin(Map<String, dynamic> order) async {
+    final Order? _order = await rest.createOrderAdmin(order);
+    return _order;
+  }
+
   Future<Order?> closeOrder(Order obj) async {
     final data = {
       'symbol': obj.symbol,

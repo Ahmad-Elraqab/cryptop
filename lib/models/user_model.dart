@@ -1,3 +1,5 @@
+import 'package:cryptop/models/wallet_model.dart';
+
 class User {
   String? id;
   String? name;
@@ -9,6 +11,7 @@ class User {
   String? secretKey;
   String? type;
   String? token;
+  Wallet? wallet;
   bool? isActive;
   List<String>? orders;
   List<String>? smartTrades;
@@ -22,6 +25,7 @@ class User {
     this.phoneNumber,
     this.type,
     this.orders,
+    this.wallet,
     this.smartTrades,
     this.backtests,
     this.alerts,
@@ -42,6 +46,8 @@ class User {
           password: json['password'],
           username: json['username'],
           type: json['type'],
+          wallet:
+              json['wallet'] == null ? null : Wallet.fromJson(json['wallet']),
           secretKey: json['secretKey'],
           phoneNumber: json['phone_number'],
           token: json['token'],

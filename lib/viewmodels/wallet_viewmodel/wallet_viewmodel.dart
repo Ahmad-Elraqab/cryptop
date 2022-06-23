@@ -12,6 +12,11 @@ class WalletViewmodel extends ChangeNotifier {
     return wallet;
   }
 
+  Future<List<Wallet>?> getWallets() async {
+    final wallets = await rest.getWallets();
+    return wallets;
+  }
+
   Future<Wallet?> setWallet(Map<String, dynamic> data) async {
     final wallet = await rest.setWallet(data);
     return wallet;

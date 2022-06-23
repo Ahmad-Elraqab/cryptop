@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/app/router.dart';
 import 'package:cryptop/models/user_model.dart';
+import 'package:cryptop/services/socket_service.dart';
 import 'package:cryptop/services/user_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +45,8 @@ class UserViewmodel extends ChangeNotifier {
 
     user = User.fromJson(u);
     RouteManager.setup(user!.type);
+    SocketService.connectAndListen();
+
     return token;
   }
 
@@ -62,9 +65,11 @@ class UserViewmodel extends ChangeNotifier {
     print(u!.type);
     await _storage!.setString('token', u!.token!);
     await _storage!.setString('user', jsonEncode(u!.toJson()));
+    SocketService.connectAndListen();
   }
 
   Future<void> logout() async {
+    SocketService.dispose();
     await deleteToken();
   }
 

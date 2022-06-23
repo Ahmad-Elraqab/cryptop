@@ -13,6 +13,14 @@ class WalletService {
     return Wallet.fromJson(json);
   }
 
+  Future<List<Wallet>?> getWallets() async {
+    final List? json = await rest.get('wallet/admin');
+
+    if (json == null) return null;
+
+    return json.map((e) => Wallet.fromJson(e)).toList();
+  }
+
   Future setWallet(Map<String, dynamic> data) async {
     final wallet = await rest.patch('wallet/', data: data);
 
