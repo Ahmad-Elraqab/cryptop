@@ -1,10 +1,9 @@
 import 'package:cryptop/models/backtest_model.dart';
-import 'package:cryptop/models/order_models/vwap_order_model.dart';
 
 class VWAPBacktestModel extends BacktestModel {
   double? buyOn;
   double? sellOn;
-  List<VWAPOrder>? orderList;
+  List<Map<String, dynamic>>? orderList;
   String? type;
 
   VWAPBacktestModel({
@@ -39,7 +38,7 @@ class VWAPBacktestModel extends BacktestModel {
     this.sellOn = json['sellOn'].toDouble();
     this.type = json['type'];
     this.orderList =
-        (json['orders'] as List).map((e) => VWAPOrder.fromJson(e)).toList();
+        (json['orders'] as List).map((e) => e as Map<String, dynamic>).toList();
   }
   Map<String, dynamic> toJson() => {
         ...super.toJson(),

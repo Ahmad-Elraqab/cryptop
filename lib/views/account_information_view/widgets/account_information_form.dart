@@ -11,16 +11,8 @@ class AccountInformationForm extends StatelessWidget {
   final bool? editable;
   @override
   Widget build(BuildContext context) {
-    const labels = [
-      'First Name',
-      'Last Name',
-      'Username',
-      'Gender',
-      'Phone Number',
-      'Email'
-    ];
+    const labels = ['Name', 'Username', 'Gender', 'Phone Number', 'Email'];
     const validators = [
-      {'value': false, 'message': ''},
       {'value': false, 'message': ''},
       {'value': false, 'message': ''},
       {'value': false, 'message': ''},

@@ -152,6 +152,7 @@ class UserViewmodel extends ChangeNotifier {
         value = false;
       } else if (i == 6 && controllers[i - 1].text != controllers[i].text) {
         validators[i]['value'] = true;
+        value = false;
       } else if (regex.hasMatch(controllers[4].text) == false && start != 0) {
         validators[4]['value'] = true;
         value = false;

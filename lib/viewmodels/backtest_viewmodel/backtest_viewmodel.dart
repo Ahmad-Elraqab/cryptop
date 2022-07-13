@@ -1,6 +1,7 @@
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/backtest_model.dart';
 import 'package:cryptop/models/backtest_models/rsi_backtest_model.dart';
+import 'package:cryptop/models/backtest_models/vwap_backtest_model.dart';
 import 'package:cryptop/services/backtest_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
@@ -19,16 +20,28 @@ class BacktestViewmodel extends ChangeNotifier {
   List<BacktestModel>? _st;
 
   List excelRsi = [
-    'id',
+    'type',
     'symbol',
-    'startDate',
-    'endDate',
+    'date',
+    'qAmount',
     'amount',
-    'isSell',
-    'buyPrice',
-    'sellPrice',
-    'rate',
-    'profitAfter'
+    'op',
+    'interval',
+    'price',
+    'rsi',
+    'status'
+  ];
+  List excelVwap = [
+    'type',
+    'symbol',
+    'date',
+    'qAmount',
+    'amount',
+    'op',
+    'interval',
+    'price',
+    'vwap',
+    'status'
   ];
   final char = [
     'A',
@@ -73,32 +86,38 @@ class BacktestViewmodel extends ChangeNotifier {
     final Workbook workbook = Workbook();
     final Worksheet sheet = workbook.worksheets[0];
     List<int> bytes = workbook.saveAsStream();
+    var obj;
+    var excel;
     if (_st![index] is RSIBacktestModel) {
-      final obj = (_st![index] as RSIBacktestModel);
+      obj = _st![index] as RSIBacktestModel;
+      excel = excelRsi;
+    } else {
+      obj = _st![index] as VWAPBacktestModel;
+      excel = excelVwap;
+    }
 
-      for (var i = 0; i < obj.orderList!.length + 1; i++) {
-        for (var j = 0; j < excelRsi.length; j++) {
-          if (i == 0) {
+    for (var i = 0; i < obj.orderList!.length + 1; i++) {
+      for (var j = 0; j < excel.length; j++) {
+        if (i == 0) {
+          sheet
+              .getRangeByName(char[j] + (i + 1).toString())
+              .setText(excel[j].toString());
+        } else {
+          if (excel[j] == 'date' || excel[j] == 'date') {
+            sheet.getRangeByName(char[j] + (i + 1).toString()).setText(
+                DateTime.fromMillisecondsSinceEpoch(
+                        obj.orderList![i - 1][excel[j]])
+                    .toString());
+          } else {
             sheet
                 .getRangeByName(char[j] + (i + 1).toString())
-                .setText(excelRsi[j].toString());
-          } else {
-            if (excelRsi[j] == 'startDate' || excelRsi[j] == 'endDate') {
-              sheet.getRangeByName(char[j] + (i + 1).toString()).setText(
-                  DateTime.fromMillisecondsSinceEpoch(
-                          obj.orderList![i - 1][excelRsi[j]])
-                      .toString());
-            } else {
-              sheet
-                  .getRangeByName(char[j] + (i + 1).toString())
-                  .setText(obj.orderList![i - 1][excelRsi[j]].toString());
-            }
+                .setText(obj.orderList![i - 1][excel[j]].toString());
           }
         }
       }
-      bytes = workbook.saveAsStream();
-      workbook.dispose();
     }
+    bytes = workbook.saveAsStream();
+    workbook.dispose();
     if (kIsWeb) {
       AnchorElement(
           href:
