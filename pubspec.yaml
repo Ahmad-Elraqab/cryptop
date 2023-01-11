@@ -50,7 +50,7 @@ dependencies:
   syncfusion_flutter_charts: any
   flutter_slidable: ^1.2.0
   flip_card: ^0.6.0
-  shared_preferences: any
+  shared_preferences: ^2.0.15
   carousel_slider: ^4.1.1
   intl: ^0.17.0
   socket_io_client: ^1.0.2
