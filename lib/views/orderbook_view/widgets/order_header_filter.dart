@@ -43,10 +43,10 @@ class OrderHeaderFilter extends StatelessWidget {
                     ),
                     Icon(
                       filter == (actionList[i] + '_UP')
-                          ? Icons.keyboard_double_arrow_up_sharp
+                          ? Icons.arrow_upward_sharp
                           : filter == (actionList[i] + '_DOWN')
-                              ? Icons.keyboard_double_arrow_down_sharp
-                              : Icons.keyboard_double_arrow_down_sharp,
+                              ? Icons.arrow_downward_sharp
+                              : Icons.arrow_downward_sharp,
                       size: 9,
                       color: filter == (actionList[i] + '_UP') ||
                               filter == (actionList[i] + '_DOWN')

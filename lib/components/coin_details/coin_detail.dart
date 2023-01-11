@@ -1,6 +1,7 @@
 import 'package:cryptop/components/text_component/text_component.dart';
 import 'package:cryptop/models/chart_model.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../models/ticker_model.dart';
 
 class CoinDetail extends StatelessWidget {
@@ -24,7 +25,7 @@ class CoinDetail extends StatelessWidget {
               contentPadding: const EdgeInsets.all(0.0),
               horizontalTitleGap: 0.0,
               trailing: const Icon(
-                Icons.percent_outlined,
+                FontAwesomeIcons.percent,
                 color: Color.fromARGB(188, 94, 242, 212),
                 size: 55.0,
               ),

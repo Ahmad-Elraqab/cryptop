@@ -19,7 +19,7 @@ void init() {
     () => const RestService(
         // baseUrl: 'http://127.0.0.1:3000/cryptop/api'),
         // baseUrl: 'http://10.0.2.2:3000/cryptop/api'),
-        baseUrl: 'https://cryptop-sys.herokuapp.com/cryptop/api'),
+        baseUrl: 'https://cryptop-service.onrender.com/cryptop/api'),
     // () => RestService(
     // baseUrl: 'http://localhost:3000/cryptop/api'),
   );
@@ -27,7 +27,7 @@ void init() {
     () => const AlertRestService(
         // baseUrl: 'http://localhost:3000/cryptop/api'),
         // baseUrl: 'http://10.0.2.2:3000/cryptop/api'),
-        baseUrl: 'https://cryptop-sys.herokuapp.com/cryptop/api'),
+        baseUrl: 'https://cryptop-service.onrender.com/cryptop/api'),
     // () => RestService(baseUrl: 'http://localhost:5000'),
   );
 

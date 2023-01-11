@@ -18,7 +18,7 @@ class HomeAppBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           InkWell(
-            onTap: () => Scaffold.of(context).openDrawer(),
+            onTap: Scaffold.of(context).openDrawer,
             child: SizedBox(
               height: 24.0,
               child: Image.asset(

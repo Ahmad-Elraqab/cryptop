@@ -15,7 +15,7 @@ class SocketService {
     socket = io.io(
         // 'http://localhost:5000/user',
         // 'http://10.0.2.2:5000/user',
-        'https://alert-sys.herokuapp.com/user',
+        'https://cryptop-alert-service.onrender.com/cryptop/api/user',
         io.OptionBuilder()
             .setTransports(['websocket'])
             .setExtraHeaders({'token': token})

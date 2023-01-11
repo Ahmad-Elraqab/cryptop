@@ -5,6 +5,7 @@ import 'package:cryptop/views/admin_views/user_view/widgets/profile_info_big_car
 import 'package:cryptop/views/admin_views/user_view/widgets/profile_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../models/user_model.dart';
 
 class UserView extends StatefulWidget {
@@ -75,7 +76,7 @@ class _UserViewState extends State<UserView> {
                           firstText: _data[i]['value'].toString(),
                           secondText: _data[i]['title'].toString(),
                           icon: Icon(
-                            Icons.abc,
+                            FontAwesomeIcons.accessibleIcon,
                             size: 16,
                             color: blueColor,
                           ),

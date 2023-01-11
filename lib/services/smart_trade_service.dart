@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cryptop/app/dependency.dart';
 import 'package:cryptop/models/smart_trade_model.dart';
 import 'package:cryptop/models/smart_trade_models/rsi_smart_trade_model.dart';

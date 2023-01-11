@@ -45,6 +45,7 @@ class _SmartTradeAdminViewState extends State<SmartTradeAdminView> {
                                     'id': data[index]['val'],
                                     'status': val
                                   }).future);
+                                  // ignore: unnecessary_null_comparison
                                   if (res == null) {
                                     data[index]['status'] = val.toString();
                                     ScaffoldMessenger.of(context)

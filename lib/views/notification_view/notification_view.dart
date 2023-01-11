@@ -9,12 +9,16 @@ class NotificationView extends StatefulWidget {
 }
 
 class _NotificationViewState extends State<NotificationView> {
+  // ignore: unused_field
   bool _switch = false;
   setSwitch(value) => setState(() => {_switch = value});
+  // ignore: unused_field
   bool _switch2 = false;
   setSwitch2(value) => setState(() => {_switch2 = value});
+  // ignore: unused_field
   bool _switch3 = false;
   setSwitch3(value) => setState(() => {_switch3 = value});
+  // ignore: unused_field
   bool _switch4 = false;
   setSwitch4(value) => setState(() => {_switch4 = value});
   @override

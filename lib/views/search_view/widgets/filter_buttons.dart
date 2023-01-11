@@ -33,10 +33,10 @@ class FilterButtons extends StatelessWidget {
               ),
               Icon(
                 filter == 'N_UP'
-                    ? Icons.keyboard_double_arrow_up_sharp
+                    ? Icons.arrow_upward_sharp
                     : filter == 'N_DOWN'
-                        ? Icons.keyboard_double_arrow_down_sharp
-                        : Icons.keyboard_double_arrow_down_sharp,
+                        ? Icons.arrow_downward_sharp
+                        : Icons.arrow_downward_sharp,
                 size: 14,
                 color: filter == 'N_UP' || filter == 'N_DOWN'
                     ? Colors.amberAccent
@@ -66,10 +66,10 @@ class FilterButtons extends StatelessWidget {
                   ),
                   Icon(
                     filter == 'V_UP'
-                        ? Icons.keyboard_double_arrow_up_sharp
+                        ? Icons.arrow_upward_sharp
                         : filter == 'V_DOWN'
-                            ? Icons.keyboard_double_arrow_down_sharp
-                            : Icons.keyboard_double_arrow_down_sharp,
+                            ? Icons.arrow_downward_sharp
+                            : Icons.arrow_downward_sharp,
                     size: 14,
                     color: filter == 'V_UP' || filter == 'V_DOWN'
                         ? Colors.amberAccent
@@ -100,10 +100,10 @@ class FilterButtons extends StatelessWidget {
                   ),
                   Icon(
                     filter == 'C_UP'
-                        ? Icons.keyboard_double_arrow_up_sharp
+                        ? Icons.arrow_upward_sharp
                         : filter == 'C_DOWN'
-                            ? Icons.keyboard_double_arrow_down_sharp
-                            : Icons.keyboard_double_arrow_down_sharp,
+                            ? Icons.arrow_downward_sharp
+                            : Icons.arrow_downward_sharp,
                     size: 14,
                     color: filter == 'C_UP' || filter == 'C_DOWN'
                         ? Colors.amberAccent
