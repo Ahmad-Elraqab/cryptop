@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class NarrowAppBar extends StatelessWidget with PreferredSizeWidget {
+class NarrowAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget leading, trailing;
 
   NarrowAppBar({Key? key, required this.leading, required this.trailing})
