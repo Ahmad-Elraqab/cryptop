@@ -32,7 +32,7 @@ void init() {
   );
 
   dependency.registerLazySingleton(() => UserViewmodel());
-  dependency.registerLazySingleton(() => NotificationService());
+  // dependency.registerLazySingleton(() => NotificationService());
   dependency.registerLazySingleton(() => AlertService());
   dependency.registerLazySingleton(() => WalletService());
   dependency.registerLazySingleton(() => UserService());
