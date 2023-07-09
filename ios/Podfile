@@ -1,12 +1,16 @@
-# Next line contains target platform settings
-platform :ios, '8.0'
-# Use dynamic Frameworks
-use_frameworks!
+# It's good practice to include the Pod source in your Podfile
+source 'https://github.com/CocoaPods/Specs.git'
 
-# Target name
-target 'cryptop' do
-  # List of target dependencies
-  pod 'ObjectiveSugar', '~> 1.1'
-  pod 'ORStackView', '~> 3.0'
-  pod 'RxSwift', '~> 2.6'
-end
+# specify platform and target OS version
+platform :ios, '7.0'
+
+# this would be the relative path of your app, whatever that may be
+xcodeproj 'SimplePubSub/SimplePubSub.xcodeproj'
+
+# this is the relative location of your workspace, I prefer to explicity 
+# indicate this, though it is not always required. Feel free to use whatever
+# name for your workspace that you would like.
+workspace 'Examples.xcworkspace'
+
+# here we include the wonderful new PubNub pod
+pod 'PubNub', '~> 4.0'
