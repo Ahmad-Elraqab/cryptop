@@ -45,7 +45,7 @@ class UserViewmodel extends ChangeNotifier {
 
     user = User.fromJson(u);
     RouteManager.setup(user!.type);
-    SocketService.connectAndListen();
+    // SocketService.connectAndListen();
 
     return token;
   }
@@ -65,11 +65,11 @@ class UserViewmodel extends ChangeNotifier {
     print(u!.type);
     await _storage!.setString('token', u!.token!);
     await _storage!.setString('user', jsonEncode(u!.toJson()));
-    SocketService.connectAndListen();
+    // SocketService.connectAndListen();
   }
 
   Future<void> logout() async {
-    SocketService.dispose();
+    // SocketService.dispose();
     await deleteToken();
   }
 

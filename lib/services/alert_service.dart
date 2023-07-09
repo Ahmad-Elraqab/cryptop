@@ -20,7 +20,7 @@ class AlertService {
   }
 
   Future<Alert?> updateAlert(Map<String, dynamic> _json) async {
-    SocketService.socket.emit('update', _json);
+    // SocketService.socket.emit('update', _json);
 
     // final id = _json['id'];
     // final json = await rest.patch('alerts/$id', data: _json);
@@ -32,7 +32,7 @@ class AlertService {
   }
 
   Future<Alert?> createAlert(Map<String, dynamic> _json) async {
-    SocketService.socket.emit('add', _json);
+    // SocketService.socket.emit('add', _json);
     // final json = await rest.post('alerts/', _json);
     // if (json.isEmpty) return null;
 
@@ -42,7 +42,7 @@ class AlertService {
   }
 
   Future<Alert?> deleteAlert(String id) async {
-    SocketService.socket.emit('delete', id);
+    // SocketService.socket.emit('delete', id);
 
     // final json = await rest.delete('alerts/$id');
     // if (json.isEmpty) return null;
@@ -53,7 +53,7 @@ class AlertService {
   }
 
   Future<Alert?> toggleAlert(String id) async {
-    SocketService.socket.emit('toggle', id);
+    // SocketService.socket.emit('toggle', id);
 
     // final json = await rest.patch('alerts/toggle/$id', data: {});
     // if (json.isEmpty) return null;

@@ -25,7 +25,7 @@ class _SplashViewState extends State<SplashView> {
         if (token == false) {
           Navigator.pushReplacementNamed(context, rLoginScreen);
         } else {
-          SocketService.connectAndListen();
+          // SocketService.connectAndListen();
           Navigator.pushReplacementNamed(context, rLanding);
         }
       },
