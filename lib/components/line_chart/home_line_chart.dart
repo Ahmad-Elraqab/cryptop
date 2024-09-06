@@ -58,7 +58,7 @@ class HomeLineChart extends StatelessWidget {
                     return false;
                   },
                 ),
-                spots: data,
+                spots: data!,
               )
             ],
           ),

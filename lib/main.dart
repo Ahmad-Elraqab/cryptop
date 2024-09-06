@@ -26,9 +26,9 @@ class _AppViewState extends State<AppView> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Colors.pink,
-          backgroundColor: const Color.fromRGBO(55, 61, 76, 1),
+          scaffoldBackgroundColor: const Color.fromRGBO(55, 61, 76, 1),
           textTheme: const TextTheme(
-            bodyText1: TextStyle(color: Colors.black),
+            bodyLarge: TextStyle(color: Colors.white),
           ),
         ),
         onGenerateRoute: RouteManager.generateRoute,

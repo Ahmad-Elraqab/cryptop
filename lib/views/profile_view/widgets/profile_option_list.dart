@@ -77,17 +77,19 @@ class ProfileOptionList extends StatelessWidget {
             child: ListTile(
               leading: Icon(
                 i["icon"] as IconData,
-                color: Colors.black45,
+                color: Colors.white,
               ),
               title: Text(
                 i["value"].toString(),
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
               ),
               trailing: const Icon(
                 FontAwesomeIcons.angleRight,
                 size: 15,
-                color: Colors.grey,
+                color: Colors.white,
               ),
               onTap: () {
                 Navigator.pushNamed(context, i['screen'].toString());
